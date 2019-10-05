@@ -103,4 +103,21 @@ public class Tablero {
             }
         }
     }
+
+    public int lineasCompletas (Pieza piezaActual){ //comprobamos todas las filas en las que se encuentra la pieza actual una vez haya acabado de caer
+        int nLineasCompletas = 0;
+        for (int i = 0; i<4; i++){
+            boolean comprobarCompleta = true;
+            int filaAComprobar = piezaActual.getPieza()[i].getX();
+            for (int j = 0; j<10; j++){
+                if (tablero[filaAComprobar][j].getTipoPieza() == 0){
+                    comprobarCompleta = false;
+                }
+            }
+            if (comprobarCompleta){
+                nLineasCompletas++;
+            }
+        }
+        return nLineasCompletas;
+    }
 }
