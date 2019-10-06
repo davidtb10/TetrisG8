@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         gameLayout.addView(this.gameView);
         fichaLayout.addView(this.fichaView);
         
-        //start.partida();
+        start.partida(this.caja_score, gameView, fichaView, tab);
     }
     
 
