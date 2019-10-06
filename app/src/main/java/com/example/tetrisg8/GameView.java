@@ -45,4 +45,12 @@ public class GameView extends View {
         }
     }
 
+    public int getAnchoCeldaTablero(){
+        return this.getWidth() / 10;
+    }
+
+    public int getAltoCeldaTablero(){
+        return this.getHeight() / 20;
+    }
+
 }
