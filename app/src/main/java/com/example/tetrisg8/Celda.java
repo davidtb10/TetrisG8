@@ -56,7 +56,33 @@ public class Celda { //Clase celda de la que están formadas las piezas
 
     public void pintarCelda(Canvas canvas){ // método que dibuja la celda
         Paint p = new Paint();
-        p.setColor(Color.RED);
+        switch (tipoPieza){
+            case 1: {
+                p.setColor(Color.CYAN);
+            }
+            case 2:{
+                p.setColor(Color.BLUE);
+            }
+            case 3:{
+                p.setColor(Color.rgb(255, 128, 0));
+            }
+            case 4:{
+                p.setColor(Color.YELLOW);
+                break;
+            }
+            case 5:{
+                p.setColor(Color.GREEN);
+                break;
+            }
+            case 6:{
+                p.setColor(Color.MAGENTA);
+                break;
+            }
+            case 7:{
+                p.setColor(Color.RED);
+                break;
+            }
+        }
         canvas.drawRect(anchoCeldaTabl*y, altoCeldaTabl*x, (anchoCeldaTabl*y)+anchoCeldaTabl, (altoCeldaTabl*x)+altoCeldaTabl, p);
     }
 
