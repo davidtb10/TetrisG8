@@ -11,9 +11,8 @@ public class Celda { //Clase celda de la que están formadas las piezas
     private int x, y; // Coordenadas x e y de la celda en el tablero
     private int tipoPieza; // Tipo de pieza a la que pertenece la celda
     private Drawable dibujo; // Drawable que representa la celda
-    private GameView tamañocelda = new GameView();
-    private int anchoCeldaTabl;
-    private int altoCeldaTabl;
+    private int anchoCeldaTabl = 70;
+    private int altoCeldaTabl = 62;
 
     public int getX() {
         return x;
@@ -47,8 +46,6 @@ public class Celda { //Clase celda de la que están formadas las piezas
         this.x = x;
         this.y = y;
         tipoPieza = tipo;
-        anchoCeldaTabl = tamañocelda.getAnchoCeldaTablero();
-        altoCeldaTabl = tamañocelda.getAnchoCeldaTablero();
     }
 
     public void pintarCelda(Canvas canvas){ // método que dibuja la celda

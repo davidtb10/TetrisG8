@@ -14,11 +14,15 @@ public class GameView extends View {
     private Rect block;
     private Pieza pieza;
 
+    public GameView(Context context) {
+        super(context);
+    }
+
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         pintarCuadricula(canvas);
-        pieza = new PiezaT(this.getWidth()/10, this.getHeight()/20);
+        pieza = new PiezaZ(0,4);
         pieza.dibujarPieza(canvas);
     }
 
@@ -39,12 +43,5 @@ public class GameView extends View {
         }
     }
 
-    public int getAnchoCeldaTablero(){
-        return this.getWidth() / 10;
-    }
-
-    public int getAltoCeldaTablero(){
-        return this.getHeight() / 20;
-    }
 
 }
