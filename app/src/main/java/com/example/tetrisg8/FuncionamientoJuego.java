@@ -15,7 +15,7 @@ public class FuncionamientoJuego {
             //crear pieza nueva
             derrota = funcionamiento.finJuego(tablero, piezaAct); //comprueba si la pieza nueva entra en el tablero
             if (! derrota) {
-                //pintar la pieza
+                //pintarPieza(pieza);
                 //acciones de mover pieza durante x tiempo ?
                 //si no se produce ninguna acción:
                 if (! tablero.ocupadoBajar(piezaAct)) { //si se puede se baja la pieza si no se fija
