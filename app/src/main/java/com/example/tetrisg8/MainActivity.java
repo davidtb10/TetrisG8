@@ -8,10 +8,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-    private Tablero tablero = new Tablero();
-    private boolean derrota;
-    private int puntuacion;
-    private Pieza enjuego;
+    
+    private FuncionamientoJuego start = new FuncionamientoJuego(); 
     
     private GameView gameView;
     private FichaView fichaView;
@@ -32,30 +30,23 @@ public class MainActivity extends AppCompatActivity {
         gameLayout.addView(this.gameView);
         fichaLayout.addView(this.fichaView);
         
-        //partida();
+        //start.partida();
     }
     
 
 
     //move left
     public void moveLeft(View view) {
-        if (tablero.ocupadoIzq(enjuego)){
-            for (int i=0;i<4;i++){
-                enjuego.pieza[i].setY(enjuego.pieza[i].getY()-1);
-            }
-        }
+        start.izquierda();
     }
 
     //move right
     public void moveRight(View view) {
-        if (tablero.ocupadoDcha(enjuego)){
-            for (int i=0;i<4;i++){
-                enjuego.pieza[i].setY(enjuego.pieza[i].getY()+1);
-            }
-        }
+        start.derecha();
     }
 
     //rotate
     public void rotateAction(View view) {
+        //start.girar();
     }
 }
