@@ -47,4 +47,11 @@ public class Pieza {
         pieza[2].pintarCelda(canvas);
         pieza[3].pintarCelda(canvas);
     }
+
+    public void borrarPieza(Canvas canvas){
+        pieza[0].borrarCelda(canvas);
+        pieza[1].borrarCelda(canvas);
+        pieza[2].borrarCelda(canvas);
+        pieza[3].borrarCelda(canvas);
+    }
 }

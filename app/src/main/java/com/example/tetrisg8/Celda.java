@@ -10,7 +10,6 @@ import android.graphics.drawable.Drawable;
 public class Celda { //Clase celda de la que están formadas las piezas
     private int x, y; // Coordenadas x e y de la celda en el tablero
     private int tipoPieza; // Tipo de pieza a la que pertenece la celda
-    private Drawable dibujo; // Drawable que representa la celda
     private int anchoCeldaTabl = 70;
     private int altoCeldaTabl = 62;
 
@@ -42,6 +41,13 @@ public class Celda { //Clase celda de la que están formadas las piezas
 
     public void setTipoPieza(int tipoPieza) { this.tipoPieza = tipoPieza; }
 
+    public void setCelda(Celda celda){
+        this.x = celda.getX();
+        this.y = celda.getY();
+        this.tipoPieza = celda.getTipoPieza();
+
+    }
+
     public Celda(int x, int y, int tipo){
         this.x = x;
         this.y = y;
@@ -52,6 +58,10 @@ public class Celda { //Clase celda de la que están formadas las piezas
         Paint p = new Paint();
         p.setColor(Color.RED);
         canvas.drawRect(anchoCeldaTabl*y, altoCeldaTabl*x, (anchoCeldaTabl*y)+anchoCeldaTabl, (altoCeldaTabl*x)+altoCeldaTabl, p);
+    }
+
+    public void borrarCelda(Canvas canvas){
+        canvas.drawRGB(1,7,34);
     }
 
 }

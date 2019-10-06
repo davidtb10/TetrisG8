@@ -17,9 +17,9 @@ public class Tablero {
         }
     }
 
-    public void pintarPieza(Pieza pieza){
+    public void asignarPieza(Pieza pieza){
         for(int i = 0; i < 4; i++){
-            tablero[pieza.getPieza()[i].getX()][pieza.getPieza()[i].getY()].setTipoPieza(pieza.tipopieza);
+            tablero[pieza.getPieza()[i].getX()][pieza.getPieza()[i].getY()].setCelda(pieza.getPieza()[i]);
         }
     }
 
@@ -33,14 +33,14 @@ public class Tablero {
                 comprobar = false;
             } else {
                 comprobar = true;
-                pintarPieza(pieza);
+                //pintarPieza(pieza);
                 return comprobar;
             }
         }
         /*for (int i = 0; i < 4; i++) {
             tablero[pieza.getPieza()[i].getX()][pieza.getPieza()[i].getY()].setTipoPieza(pieza.getPieza()[i].getTipoPieza()); //si no está ocupado también vuelve a pintar la pieza
         }*/
-        pintarPieza(pieza);//si no está ocupado también vuelve a pintar la pieza
+        //pintarPieza(pieza);//si no está ocupado también vuelve a pintar la pieza
         return comprobar;
     }
 
@@ -54,29 +54,29 @@ public class Tablero {
                 comprobar = false;
             } else {
                 comprobar = true;
-                pintarPieza(pieza); //si está ocupado vuelve a pintar la pieza y devuelve true
+                //pintarPieza(pieza); //si está ocupado vuelve a pintar la pieza y devuelve true
                 return comprobar;
             }
         }
-        pintarPieza(pieza);//si no está ocupado también vuelve a pintar la pieza
+        //pintarPieza(pieza);//si no está ocupado también vuelve a pintar la pieza
         return comprobar;
     }
 
     public boolean ocupadoIzq(Pieza pieza) { //comprueba si la pieza puede moverse a la izquierda
         boolean comprobar = false;
-        for (int i = 0; i < 4; i++) { //borra la pieza para que al comprobar no se encuentre con una celda de la propia pieza
+        /*for (int i = 0; i < 4; i++) { //borra la pieza para que al comprobar no se encuentre con una celda de la propia pieza
             tablero[pieza.getPieza()[i].getX()][pieza.getPieza()[i].getY()].setTipoPieza(0);
-        }
+        }*/
         for (int i = 0; i < 4; i++) {
             if (tablero[pieza.getPieza()[i].getX()][(pieza.getPieza()[i].getY()) - 1].getTipoPieza() == 0 && !(pieza.getPieza()[i].getY() == 0)) { //comprueba si la celda de la izquierda está ocupada o es la última
                 comprobar = false;
             } else {
                 comprobar = true;
-                pintarPieza(pieza); //si está ocupado vuelve a pintar la pieza y devuelve true
+                //pintarPieza(pieza); //si está ocupado vuelve a pintar la pieza y devuelve true
                 return comprobar;
             }
         }
-        pintarPieza(pieza); //si no está ocupado también vuelve a pintar la pieza
+        //pintarPieza(pieza); //si no está ocupado también vuelve a pintar la pieza
         return comprobar;
     }
 

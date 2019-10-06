@@ -19,28 +19,37 @@ public class FuncionamientoJuego {
         //this.caja_score.setText("0");
         while(!derrota){
             pieza = generarPieza(0,4);
-
             derrota = finJuego(tablero, pieza); //comprueba si la pieza nueva entra en el tablero
+
             if (! derrota) {
-                //pintarPieza(pieza);
+                pieza.dibujarPieza(canvas);
                 //acciones de mover pieza durante x tiempo ?
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+
                 //si no se produce ninguna acción:
-                if (! tablero.ocupadoBajar(pieza)) { //si se puede se baja la pieza si no se fija
-                    tablero.bajarPieza(pieza);
-                }
-                else{
-                    //se fija la pieza
-                    puntuacion = funcionamiento.actualizarPuntuacion(puntuacion, tablero, piezaAct); //se comprueba si se han completado lineas y se actualiza la puntuacion
-                    //eliminar las lineas llenas y bajar las lineas superiores
+
+                boolean fijado = false;
+                while(!fijado){
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    if (! tablero.ocupadoBajar(pieza)) { //si se puede se baja la pieza si no se fija
+                        pieza.borrarPieza(canvas);
+                        tablero.bajarPieza(pieza);
+                        pieza.dibujarPieza(canvas);
+                    }
+                    else{
+                        tablero.asignarPieza(pieza);
+                        fijado = true;
+                        puntuacion = actualizarPuntuacion(puntuacion, tablero, pieza); //se comprueba si se han completado lineas y se actualiza la puntuacion
+                        //eliminar las lineas llenas y bajar las lineas superiores
                         /*
                         caja_score.setText(String.valueOf(puntuacion));
                         */
+                    }
                 }
+
 
             }
         }
