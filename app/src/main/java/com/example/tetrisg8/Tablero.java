@@ -19,9 +19,9 @@ public class Tablero {
 
     public boolean ocupadoBajar(Pieza pieza) { //comprueba si la pieza puede bajar
         boolean comprobar = false;
-        for (int i = 0; i < 4; i++) { //borra la pieza para que al comprobar no se encuentre con una celda de la propia pieza
+        /*for (int i = 0; i < 4; i++) { //borra la pieza para que al comprobar no se encuentre con una celda de la propia pieza
             tablero[pieza.getPieza()[i].getX()][pieza.getPieza()[i].getY()].setTipoPieza(0);
-        }
+        }*/
         for (int i = 0; i < 4; i++) {
             if (tablero[(pieza.getPieza()[i].getX()) + 1][pieza.getPieza()[i].getY()].getTipoPieza() == 0 && ! (pieza.getPieza()[i].getX()==19)) { //comprueba si la celda de abajo no está ocupada o es la última
                 comprobar = false;
@@ -33,9 +33,9 @@ public class Tablero {
                 return comprobar;
             }
         }
-        for (int i = 0; i < 4; i++) {
+        /*for (int i = 0; i < 4; i++) {
             tablero[pieza.getPieza()[i].getX()][pieza.getPieza()[i].getY()].setTipoPieza(pieza.getPieza()[i].getTipoPieza()); //si no está ocupado también vuelve a pintar la pieza
-        }
+        }*/
         return comprobar;
     }
 
@@ -83,7 +83,7 @@ public class Tablero {
         return comprobar;
     }
 
-    public boolean ocupadoGiro(Pieza pieza){
+    /*public boolean ocupadoGiro(Pieza pieza){
         boolean comprobar = false;
         for (int i = 0; i < 4; i++) { //borra la pieza para que al comprobar no se encuentre con una celda de la propia pieza
             tablero[pieza.getPieza()[i].getX()][pieza.getPieza()[i].getY()].setTipoPieza(0);
@@ -104,7 +104,7 @@ public class Tablero {
             }
         }
         return comprobar;
-    }
+    }*/
 
     public boolean ocupado (Pieza pieza){
         boolean comprobar = false;

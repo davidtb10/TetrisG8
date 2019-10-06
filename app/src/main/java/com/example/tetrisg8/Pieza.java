@@ -11,7 +11,7 @@ public class Pieza {
     }
 
     public Pieza(){
-        tipopieza = 1;
+        tipopieza = 0;
     }
 
     public Pieza(int tipopieza, int x, int y){

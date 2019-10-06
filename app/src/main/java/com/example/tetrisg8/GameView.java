@@ -22,7 +22,7 @@ public class GameView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         pintarCuadricula(canvas);
-        pieza = new PiezaZ(0,4);
+        //pieza = new PiezaZ(0,4);
         pieza.dibujarPieza(canvas);
     }
 

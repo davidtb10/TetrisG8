@@ -1,25 +1,37 @@
 package com.example.tetrisg8;
 
 import android.app.ActionBar;
+import android.graphics.Canvas;
 
 public class FuncionamientoJuego {
+    int puntuacion = 0;
 
-    /*public void partida(){
-        enjuego = generarPieza(0,4);
-        puntuacion = 0;
-        derrota = false;
-        FuncionamientoJuego funcionamiento = new FuncionamientoJuego();
+    public void partida(){
+        Pieza pieza;
+        boolean derrota;
+        Canvas canvas = new Canvas();
+
+        Tablero tablero = new Tablero();
         tablero.inicializarTablero();
-        this.caja_score.setText("0");
+
+        derrota = false;
+
+        //this.caja_score.setText("0");
         while(!derrota){
-            //crear pieza nueva
-            derrota = funcionamiento.finJuego(tablero, piezaAct); //comprueba si la pieza nueva entra en el tablero
+            pieza = generarPieza(0,4);
+
+            derrota = finJuego(tablero, pieza); //comprueba si la pieza nueva entra en el tablero
             if (! derrota) {
-                //pintar la pieza
+                pieza.dibujarPieza(canvas);
                 //acciones de mover pieza durante x tiempo ?
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 //si no se produce ninguna acción:
-                if (! tablero.ocupadoBajar(piezaAct)) { //si se puede se baja la pieza si no se fija
-                    tablero.bajarPieza(piezaAct);
+                if (! tablero.ocupadoBajar(pieza)) { //si se puede se baja la pieza si no se fija
+                    tablero.bajarPieza(pieza);
                 }
                 else{
                     //se fija la pieza
@@ -27,16 +39,46 @@ public class FuncionamientoJuego {
                     //eliminar las lineas llenas y bajar las lineas superiores
                         /*
                         caja_score.setText(String.valueOf(puntuacion));
-
+                        */
                 }
 
             }
         }
-    }*/
+    }
 
     public Pieza generarPieza (int x, int y){
+        Pieza pieza = new Pieza();
         int tipoPieza = (int) Math.floor(Math.random()*6+1); //función para generar un numero aleatorio del 1 al 7
-        Pieza pieza = new Pieza (tipoPieza, x, y);
+        switch (tipoPieza){
+            case 1: {
+                pieza = new PiezaI(x, y);
+                break;
+            }
+            case 2:{
+                pieza = new PiezaJ(x, y);
+                break;
+            }
+            case 3:{
+                pieza = new PiezaL(x, y);
+                break;
+            }
+            case 4:{
+                pieza = new PiezaO(x, y);
+                break;
+            }
+            case 5:{
+                pieza = new PiezaS(x, y);
+                break;
+            }
+            case 6:{
+                pieza = new PiezaT(x, y);
+                break;
+            }
+            case 7:{
+                pieza = new PiezaZ(x, y);
+                break;
+            }
+        }
         return pieza;
     }
 
