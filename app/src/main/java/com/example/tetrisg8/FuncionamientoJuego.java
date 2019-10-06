@@ -5,13 +5,12 @@ import android.graphics.Canvas;
 
 public class FuncionamientoJuego {
     int puntuacion = 0;
-
+    Tablero tablero = new Tablero();
+    Pieza pieza;
+    
     public void partida(){
-        Pieza pieza;
         boolean derrota;
         Canvas canvas = new Canvas();
-
-        Tablero tablero = new Tablero();
         tablero.inicializarTablero();
 
         derrota = false;
@@ -120,5 +119,25 @@ public class FuncionamientoJuego {
         else{
             return false;
         }
+    }
+    
+    public void izquierda() {
+        if (tablero.ocupadoIzq(pieza)){
+            for (int i=0;i<4;i++){
+                pieza.getPieza()[i].setY(pieza.getPieza()[i].getY()-1);
+            }
+        }
+    }
+
+    public void derecha() {
+        if (tablero.ocupadoDcha(pieza)){
+            for (int i=0;i<4;i++){
+                pieza.getPieza()[i].setY(pieza.getPieza()[i].getY()+1);
+            }
+        }
+    }
+    
+    public void girar() {
+        
     }
 }
