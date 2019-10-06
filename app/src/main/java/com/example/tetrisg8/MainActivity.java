@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         while(!derrota){
             /*codigo partida
             ...
+            puntuacion= tablero.actualizarPuntuacion(puntuacion, enjuego);
             caja_score.setText(String.valueOf(puntuacion));
             */
             derrota=true
