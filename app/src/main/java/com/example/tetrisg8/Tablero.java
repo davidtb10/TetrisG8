@@ -17,6 +17,12 @@ public class Tablero {
         }
     }
 
+    public void pintarPieza(Pieza pieza){
+        for(int i = 0; i < 4; i++){
+            tablero[pieza.getPieza()[i].getX()][pieza.getPieza()[i].getY()].setTipoPieza(pieza.tipopieza);
+        }
+    }
+
     public boolean ocupadoBajar(Pieza pieza) { //comprueba si la pieza puede bajar
         boolean comprobar = false;
         for (int i = 0; i < 4; i++) { //borra la pieza para que al comprobar no se encuentre con una celda de la propia pieza
