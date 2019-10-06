@@ -10,7 +10,7 @@ public class FuncionamientoJuego {
         return pieza;
     }
 
-    public int lineasCompletas (Tablero tablero, Pieza piezaActual){ //comprobamos todas las filas en las que se encuentra la pieza actual una vez haya acabado de caer
+    private int lineasCompletas (Tablero tablero, Pieza piezaActual){ //comprobamos todas las filas en las que se encuentra la pieza actual una vez haya acabado de caer
         int nLineasCompletas = 0;
         for (int i = 0; i<4; i++){
             boolean comprobarCompleta = true;

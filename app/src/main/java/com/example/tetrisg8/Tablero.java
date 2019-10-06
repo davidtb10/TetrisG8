@@ -17,7 +17,7 @@ public class Tablero {
         }
     }
 
-    private boolean ocupadoBajar(Pieza pieza) { //comprueba si la pieza puede bajar
+    public boolean ocupadoBajar(Pieza pieza) { //comprueba si la pieza puede bajar
         boolean comprobar = false;
         for (int i = 0; i < 4; i++) { //borra la pieza para que al comprobar no se encuentre con una celda de la propia pieza
             tablero[pieza.getPieza()[i].getX()][pieza.getPieza()[i].getY()].setTipoPieza(0);

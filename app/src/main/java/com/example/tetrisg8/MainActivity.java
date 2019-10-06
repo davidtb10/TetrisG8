@@ -39,15 +39,29 @@ public class MainActivity extends AppCompatActivity {
         enjuego = fichaView.generarPieza();
         puntuacion = 0;
         derrota = false;
+        FuncionamientoJuego funcionamiento = new FuncionamientoJuego();
         tablero.inicializarTablero();
         this.caja_score.setText("0");
         while(!derrota){
-            /*codigo partida
-            ...
-            puntuacion= tablero.actualizarPuntuacion(puntuacion, enjuego);
-            caja_score.setText(String.valueOf(puntuacion));
-            */
-            derrota=true
+            //crear pieza nueva
+            derrota = funcionamiento.finJuego(tablero, piezaAct); //comprueba si la pieza nueva entra en el tablero
+            if (! derrota) {
+                    //pintar la pieza
+                    //acciones de mover pieza durante x tiempo ?
+                    //si no se produce ninguna acción:
+                    if (! tablero.ocupadoBajar(piezaAct)) { //si se puede se baja la pieza si no se fija
+                        tablero.bajarPieza(piezaAct);
+                    }
+                    else{
+                        //se fija la pieza
+                        puntuacion = funcionamiento.actualizarPuntuacion(puntuacion, tablero, piezaAct); //se comprueba si se han completado lineas y se actualiza la puntuacion
+                        //eliminar las lineas llenas y bajar las lineas superiores
+                        /*
+                        caja_score.setText(String.valueOf(puntuacion));
+                        */
+                    }
+
+            }
         }
     }
 
