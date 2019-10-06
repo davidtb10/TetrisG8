@@ -104,7 +104,7 @@ public class Tablero {
         }
     }
 
-    public int lineasCompletas (Pieza piezaActual){ //comprobamos todas las filas en las que se encuentra la pieza actual una vez haya acabado de caer
+    private int lineasCompletas (Pieza piezaActual){ //comprobamos todas las filas en las que se encuentra la pieza actual una vez haya acabado de caer
         int nLineasCompletas = 0;
         for (int i = 0; i<4; i++){
             boolean comprobarCompleta = true;
@@ -119,5 +119,10 @@ public class Tablero {
             }
         }
         return nLineasCompletas;
+    }
+    
+    public int actualizarPuntuacion(int puntuacion, Pieza pieza){ //le pasamos la puntuación actual
+        puntuacion = puntuacion + lineasCompletas(pieza)*30;
+        return puntuacion;
     }
 }
