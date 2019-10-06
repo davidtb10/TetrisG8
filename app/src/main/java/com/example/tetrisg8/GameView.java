@@ -21,11 +21,20 @@ public class GameView extends View {
     @Override
     protected void onDraw(Canvas canvas) { //Pinta la cuadrícula del tablero
         super.onDraw(canvas);
+        pintarCeldas(canvas);
         pintarCuadricula(canvas);
         borrarTablero(canvas);
         pintarTablero(canvas);
         //pieza = new PiezaZ(0,4);
         //pieza.dibujarPieza(canvas);
+    }
+    
+    public void pintarCeldas(Canvas canvas){
+        for (int i = 0; i < 20; i++) {
+            for (int j = 0; j < 10; j++) {
+                tablero.tablero[i][j].pintarCelda(canvas);
+            }
+        }
     }
 
     public void pintarCuadricula(Canvas canvas){
