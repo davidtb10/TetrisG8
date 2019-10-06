@@ -2,8 +2,8 @@ package com.example.tetrisg8;
 
 import android.graphics.Canvas;
 
-public class Pieza {
-    protected int tipopieza;
+public class Pieza { //Pieza genérica
+    protected int tipopieza; // Variable que determinará el tipo de pieza
     protected Celda[] pieza;
 
     public Celda[] getPieza() {
@@ -50,6 +50,7 @@ public class Pieza {
         pieza[3].pintarCelda(canvas);
     }
 
+    //Se borra la pieza
     public void borrarPieza(Canvas canvas){
         pieza[0].borrarCelda(canvas);
         pieza[1].borrarCelda(canvas);

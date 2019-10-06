@@ -3,7 +3,7 @@ package com.example.tetrisg8;
 
 public class Tablero {
 
-    Celda tablero[][] = new Celda[20][10];
+    Celda tablero[][] = new Celda[20][10];  //Tablero que almacenará las piezas
 
     public Celda[][] getTablero(){
         return tablero;

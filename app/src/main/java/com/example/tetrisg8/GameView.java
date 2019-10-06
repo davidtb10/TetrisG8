@@ -11,15 +11,14 @@ import android.widget.LinearLayout;
 
 
 public class GameView extends View {
-    private Rect block;
-    private Pieza pieza;
+    //private Pieza pieza;
 
     public GameView(Context context) {
         super(context);
     }
 
     @Override
-    protected void onDraw(Canvas canvas) {
+    protected void onDraw(Canvas canvas) { //Pinta la cuadrícula del tablero
         super.onDraw(canvas);
         pintarCuadricula(canvas);
         //pieza = new PiezaZ(0,4);

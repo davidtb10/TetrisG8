@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+    //Ventana principal en la que se jugará la partida
+
 public class MainActivity extends AppCompatActivity {
     
     private FuncionamientoJuego start = new FuncionamientoJuego(); 

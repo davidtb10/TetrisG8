@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+    //Ventana inicial de arranque
+
 public class StartGame extends AppCompatActivity {
 
     @Override

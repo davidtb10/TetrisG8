@@ -1,7 +1,9 @@
 package com.example.tetrisg8;
 
-import android.app.ActionBar;
+
 import android.graphics.Canvas;
+
+//Clase que controla el funcionamiento del juego y de la partida
 
 public class FuncionamientoJuego {
     int puntuacion = 0;
@@ -11,23 +13,23 @@ public class FuncionamientoJuego {
     public void partida(){
         boolean derrota;
         Canvas canvas = new Canvas();
-        tablero.inicializarTablero();
+        tablero.inicializarTablero();  //Se crea un tablero inicial vacío
 
         derrota = false;
 
         //this.caja_score.setText("0");
-        while(!derrota){
-            pieza = generarPieza(0,4);
+        while(!derrota){  //Mientras no se pierda, se juega la partida
+            pieza = generarPieza(0,4); // Se genera una pieza aleatoria
             derrota = finJuego(tablero, pieza); //comprueba si la pieza nueva entra en el tablero
 
-            if (! derrota) {
+            if (! derrota) {  //Si no se ha perdido se dibuja la pieza
                 pieza.dibujarPieza(canvas);
                 //acciones de mover pieza durante x tiempo ?
 
                 //si no se produce ninguna acción:
 
                 boolean fijado = false;
-                while(!fijado){
+                while(!fijado){ //Mientras la ficha no esté fijada se va bajando por el tablero
                     try {
                         Thread.sleep(1000);
                     } catch (InterruptedException e) {
@@ -39,7 +41,7 @@ public class FuncionamientoJuego {
                         pieza.dibujarPieza(canvas);
                     }
                     else{
-                        tablero.asignarPieza(pieza);
+                        tablero.asignarPieza(pieza);  //La pieza se asigna al tablero una vez ha colisionado con otra pieza por debajo de esta
                         fijado = true;
                         puntuacion = actualizarPuntuacion(puntuacion, tablero, pieza); //se comprueba si se han completado lineas y se actualiza la puntuacion
                         //eliminar las lineas llenas y bajar las lineas superiores

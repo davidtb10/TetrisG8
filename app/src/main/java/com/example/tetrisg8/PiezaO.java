@@ -6,6 +6,7 @@ public class PiezaO extends Pieza {
     //Se construye la pieza
     Celda[] pieza = new Celda[4];
 
+    //Coordenadas para la pieza dependiendo de la posición en la que se encuentre
     public PiezaO (int x, int y, int nGiro) {
         switch (nGiro) {
             case 1:
