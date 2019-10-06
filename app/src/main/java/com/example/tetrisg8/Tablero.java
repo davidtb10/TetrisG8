@@ -5,6 +5,10 @@ public class Tablero {
 
     Celda tablero[][] = new Celda[20][10];
 
+    public Celda[][] getTablero(){
+        return tablero;
+    }
+
     public void inicializarTablero() {
         for (int i = 0; i < 20; i++) {
             for (int j = 0; j < 10; j++) {
@@ -125,25 +129,4 @@ public class Tablero {
         }
     }
 
-    private int lineasCompletas (Pieza piezaActual){ //comprobamos todas las filas en las que se encuentra la pieza actual una vez haya acabado de caer
-        int nLineasCompletas = 0;
-        for (int i = 0; i<4; i++){
-            boolean comprobarCompleta = true;
-            int filaAComprobar = piezaActual.getPieza()[i].getX();
-            for (int j = 0; j<10; j++){
-                if (tablero[filaAComprobar][j].getTipoPieza() == 0){
-                    comprobarCompleta = false;
-                }
-            }
-            if (comprobarCompleta){
-                nLineasCompletas++;
-            }
-        }
-        return nLineasCompletas;
-    }
-    
-    public int actualizarPuntuacion(int puntuacion, Pieza pieza){ //le pasamos la puntuación actual
-        puntuacion = puntuacion + lineasCompletas(pieza)*30;
-        return puntuacion;
-    }
 }
