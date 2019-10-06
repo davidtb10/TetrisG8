@@ -14,12 +14,6 @@ public class GameView extends View {
     private Rect block;
     private Pieza pieza;
 
-    public GameView(Context context) {
-        super(context);
-
-
-    }
-
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);

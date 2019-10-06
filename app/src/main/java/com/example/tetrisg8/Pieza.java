@@ -14,28 +14,28 @@ public class Pieza {
         tipopieza = 1;
     }
 
-    public Pieza(int tipopieza){
+    public Pieza(int tipopieza, int x, int y){
         switch (tipopieza){
             case 1:
-                Pieza PiezaI = new PiezaI ();
+                Pieza PiezaI = new PiezaI (x, y);
                 break;
             case 2:
-                Pieza PiezaJ = new PiezaJ ();
+                Pieza PiezaJ = new PiezaJ (x, y);
                 break;
             case 3:
-                Pieza PiezaL = new PiezaL ();
+                Pieza PiezaL = new PiezaL (x, y);
                 break;
             case 4:
-                Pieza PiezaO = new PiezaO ();
+                Pieza PiezaO = new PiezaO (x, y);
                 break;
             case 5:
-                Pieza PiezaS = new PiezaS ();
+                Pieza PiezaS = new PiezaS (x, y);
                 break;
             case 6:
-                Pieza PiezaT = new PiezaT ();
+                Pieza PiezaT = new PiezaT (x, y);
                break;
             case 7:
-                Pieza PiezaZ = new PiezaZ ();
+                Pieza PiezaZ = new PiezaZ (x, y);
                 break;
         }
     }
