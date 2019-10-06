@@ -9,8 +9,15 @@ public class FuncionamientoJuego {
     int puntuacion = 0;
     Tablero tablero = new Tablero();
     Pieza pieza;
-    
-    public void partida(){
+    public void partida(TextView score, GameView gameView, FichaView fichaView, Tablero tab){
+        tablero=tab;
+        this.caja_score = score;
+        caja_score.setText("0");
+        //llamar a invalidate cada vez que se mueve una ficha
+        gameView.invalidate();
+    }
+        
+    public void partida1(){
         boolean derrota;
         Canvas canvas = new Canvas();
         tablero.inicializarTablero();  //Se crea un tablero inicial vacío
