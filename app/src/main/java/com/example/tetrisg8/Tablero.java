@@ -9,6 +9,7 @@ public class Tablero {
         return tablero;
     }
 
+
     public void inicializarTablero() {
         for (int i = 0; i < 20; i++) {
             for (int j = 0; j < 10; j++) {
@@ -19,7 +20,8 @@ public class Tablero {
 
     public void asignarPieza(Pieza pieza){
         for(int i = 0; i < 4; i++){
-            tablero[pieza.getPieza()[i].getX()][pieza.getPieza()[i].getY()].setCelda(pieza.getPieza()[i]);
+            Celda celdaTablero = tablero[pieza.getPieza()[i].getX()][pieza.getPieza()[i].getY()];
+            celdaTablero.setTipoPieza(pieza.getPieza()[i].getTipoPieza());
         }
     }
 

@@ -11,16 +11,19 @@ import android.widget.LinearLayout;
 
 
 public class GameView extends View {
-    //private Pieza pieza;
+    Tablero tablero;
 
-    public GameView(Context context) {
+    public GameView(Context context, Tablero tablero) {
         super(context);
+        this.tablero = tablero;
     }
 
     @Override
     protected void onDraw(Canvas canvas) { //Pinta la cuadrícula del tablero
         super.onDraw(canvas);
         pintarCuadricula(canvas);
+        borrarTablero(canvas);
+        pintarTablero(canvas);
         //pieza = new PiezaZ(0,4);
         //pieza.dibujarPieza(canvas);
     }
@@ -42,5 +45,23 @@ public class GameView extends View {
         }
     }
 
+    public void pintarTablero(Canvas canvas){
+        Celda celda;
+        for (int i = 0; i < 20; i++) {
+            for (int j = 0; j < 10; j++) {
+                celda = tablero.getTablero()[i][j];
+                celda.pintarCelda(canvas);
+            }
+        }
+    }
 
+    public void borrarTablero(Canvas canvas){
+        Celda celda;
+        for (int i = 0; i < 20; i++) {
+            for (int j = 0; j < 10; j++) {
+                celda = tablero.getTablero()[i][j];
+                celda.borrarCelda(canvas);
+            }
+        }
+    }
 }

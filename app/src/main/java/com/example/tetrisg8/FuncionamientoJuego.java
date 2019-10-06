@@ -7,13 +7,24 @@ import android.graphics.Canvas;
 
 public class FuncionamientoJuego {
     int puntuacion = 0;
-    Tablero tablero = new Tablero();
+    Tablero tablero;
     Pieza pieza;
+    GameView gameView;
+
+    public FuncionamientoJuego(GameView gameView, Tablero tab){
+        this.gameView = gameView;
+        tablero = tab;
+    }
+
+    public void partida() {
+        pieza = generarPieza(0,4); // Se genera una pieza aleatoria
+        tablero.asignarPieza(pieza);
+        gameView.invalidate();
+    }
     
-    public void partida(){
+    /*public void partida(){
         boolean derrota;
-        Canvas canvas = new Canvas();
-        tablero.inicializarTablero();  //Se crea un tablero inicial vacío
+        //tablero.inicializarTablero();  //Se crea un tablero inicial vacío
 
         derrota = false;
 
@@ -47,45 +58,45 @@ public class FuncionamientoJuego {
                         //eliminar las lineas llenas y bajar las lineas superiores
                         /*
                         caja_score.setText(String.valueOf(puntuacion));
-                        */
+
                     }
                 }
 
 
             }
         }
-    }
+    }*/
 
     public Pieza generarPieza (int x, int y){
         Pieza pieza = new Pieza();
         int tipoPieza = (int) Math.floor(Math.random()*6+1); //función para generar un numero aleatorio del 1 al 7
         switch (tipoPieza){
             case 1: {
-                pieza = new PiezaI(x, y);
+                pieza = new PiezaI(x, y, 1);
                 break;
             }
             case 2:{
-                pieza = new PiezaJ(x, y);
+                pieza = new PiezaJ(x, y, 1);
                 break;
             }
             case 3:{
-                pieza = new PiezaL(x, y);
+                pieza = new PiezaL(x, y, 1);
                 break;
             }
             case 4:{
-                pieza = new PiezaO(x, y);
+                pieza = new PiezaO(x, y, 1);
                 break;
             }
             case 5:{
-                pieza = new PiezaS(x, y);
+                pieza = new PiezaS(x, y, 1);
                 break;
             }
             case 6:{
-                pieza = new PiezaT(x, y);
+                pieza = new PiezaT(x, y, 1);
                 break;
             }
             case 7:{
-                pieza = new PiezaZ(x, y);
+                pieza = new PiezaZ(x, y, 1);
                 break;
             }
         }
