@@ -24,7 +24,7 @@ public class GameView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         pintarCuadricula(canvas);
-        pieza = new Pieza(1);
+        pieza = new PiezaI(this.getWidth()/10, this.getHeight()/20);
         pieza.dibujarPieza(canvas);
     }
 
@@ -44,4 +44,5 @@ public class GameView extends View {
             canvas.drawLine(0, ejeY, this.getWidth(), ejeY, p);
         }
     }
+
 }
