@@ -22,7 +22,7 @@ public class FuncionamientoJuego {
 
             derrota = finJuego(tablero, pieza); //comprueba si la pieza nueva entra en el tablero
             if (! derrota) {
-                pieza.dibujarPieza(canvas);
+                //pintarPieza(pieza);
                 //acciones de mover pieza durante x tiempo ?
                 try {
                     Thread.sleep(1000);

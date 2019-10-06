@@ -17,6 +17,12 @@ public class Tablero {
         }
     }
 
+    public void pintarPieza(Pieza pieza){
+        for(int i = 0; i < 4; i++){
+            tablero[pieza.getPieza()[i].getX()][pieza.getPieza()[i].getY()].setTipoPieza(pieza.tipopieza);
+        }
+    }
+
     public boolean ocupadoBajar(Pieza pieza) { //comprueba si la pieza puede bajar
         boolean comprobar = false;
         /*for (int i = 0; i < 4; i++) { //borra la pieza para que al comprobar no se encuentre con una celda de la propia pieza
@@ -27,15 +33,14 @@ public class Tablero {
                 comprobar = false;
             } else {
                 comprobar = true;
-                for (int j = 0; j < 4; j++) {
-                    tablero[pieza.getPieza()[i].getX()][pieza.getPieza()[i].getY()].setTipoPieza(pieza.getPieza()[i].getTipoPieza());
-                }
+                pintarPieza(pieza);
                 return comprobar;
             }
         }
         /*for (int i = 0; i < 4; i++) {
             tablero[pieza.getPieza()[i].getX()][pieza.getPieza()[i].getY()].setTipoPieza(pieza.getPieza()[i].getTipoPieza()); //si no está ocupado también vuelve a pintar la pieza
         }*/
+        pintarPieza(pieza);//si no está ocupado también vuelve a pintar la pieza
         return comprobar;
     }
 
@@ -49,15 +54,11 @@ public class Tablero {
                 comprobar = false;
             } else {
                 comprobar = true;
-                for (int j = 0; j < 4; j++) {
-                    tablero[pieza.getPieza()[j].getX()][pieza.getPieza()[j].getY()].setTipoPieza(pieza.getPieza()[j].getTipoPieza()); //si está ocupado vuelve a pintar la pieza y devuelve true
-                }
+                pintarPieza(pieza); //si está ocupado vuelve a pintar la pieza y devuelve true
                 return comprobar;
             }
         }
-        for (int i = 0; i < 4; i++) {
-            tablero[pieza.getPieza()[i].getX()][pieza.getPieza()[i].getY()].setTipoPieza(pieza.getPieza()[i].getTipoPieza()); //si no está ocupado también vuelve a pintar la pieza
-        }
+        pintarPieza(pieza);//si no está ocupado también vuelve a pintar la pieza
         return comprobar;
     }
 
@@ -71,15 +72,11 @@ public class Tablero {
                 comprobar = false;
             } else {
                 comprobar = true;
-                for (int j = 0; j < 4; j++) {
-                    tablero[pieza.getPieza()[j].getX()][pieza.getPieza()[j].getY()].setTipoPieza(pieza.getPieza()[j].getTipoPieza()); //si está ocupado vuelve a pintar la pieza y devuelve true
-                }
+                pintarPieza(pieza); //si está ocupado vuelve a pintar la pieza y devuelve true
                 return comprobar;
             }
         }
-        for (int i = 0; i < 4; i++) {
-            tablero[pieza.getPieza()[i].getX()][pieza.getPieza()[i].getY()].setTipoPieza(pieza.getPieza()[i].getTipoPieza()); //si no está ocupado también vuelve a pintar la pieza
-        }
+        pintarPieza(pieza); //si no está ocupado también vuelve a pintar la pieza
         return comprobar;
     }
 
