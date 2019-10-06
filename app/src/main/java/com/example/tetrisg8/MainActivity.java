@@ -12,7 +12,7 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
     
     private FuncionamientoJuego start = new FuncionamientoJuego(); 
-    
+    private Tablero tab = new Tablero();
     private GameView gameView;
     private FichaView fichaView;
     private TextView caja_score;
@@ -23,7 +23,8 @@ public class MainActivity extends AppCompatActivity {
         this.caja_score = (TextView)findViewById(R.id.caja_score);
         //to set score
         //this.caja_score.setText(String.valueOf());
-        this.gameView = new GameView(this);
+        this.inicializarTablero();
+        this.gameView = new GameView(this,tab);
         this.fichaView = new FichaView(this);
 
         LinearLayout gameLayout = (LinearLayout)findViewById(R.id.gameView);
