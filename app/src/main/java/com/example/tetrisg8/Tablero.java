@@ -79,13 +79,34 @@ public class Tablero {
         return comprobar;
     }
 
-    private boolean ocupadoGiro(Pieza pieza){
+    public boolean ocupadoGiro(Pieza pieza){
         boolean comprobar = false;
+        for (int i = 0; i < 4; i++) { //borra la pieza para que al comprobar no se encuentre con una celda de la propia pieza
+            tablero[pieza.getPieza()[i].getX()][pieza.getPieza()[i].getY()].setTipoPieza(0);
+        }
         Celda celdasComprobar [] = pieza.coordPiezaGirada(); //METODO QUE DEVUELVE UN ARRAY CON LAS COORDENADAS QUE OCUPARIA LA PIEZA GIRADA
         for (int i = 0; i < 4; i++) {
             if (tablero[celdasComprobar[i].getX()][(celdasComprobar[i].getY())].getTipoPieza() == 0 && !(celdasComprobar[i].getX() < 0)
                     && !(celdasComprobar[i].getX() > 19) && !(celdasComprobar[i].getY() < 0) && !(celdasComprobar[i].getY() > 9)) {
                 //comprueba si las celdas están ocupadas o se salen del tablero
+                comprobar = false; //si no está ocupado devuelve false y se pintaría girada
+            }
+            else {
+                comprobar = true;
+                for (int j = 0; j < 4; j++) {
+                    tablero[pieza.getPieza()[j].getX()][pieza.getPieza()[j].getY()].setTipoPieza(pieza.getPieza()[j].getTipoPieza()); //si está ocupado vuelve a pintar la pieza y devuelve true
+                }
+                return comprobar;
+            }
+        }
+        return comprobar;
+    }
+
+    public boolean ocupado (Pieza pieza){
+        boolean comprobar = false;
+        for (int i = 0; i<4; i++){
+            if (tablero[pieza.getPieza()[i].getX()][(pieza.getPieza()[i].getY())].getTipoPieza() == 0) {
+                //comprueba si las celdas están ocupadas
                 comprobar = false;
             }
             else {
