@@ -4,12 +4,12 @@ package com.example.tetrisg8;
 public class PiezaO extends Pieza {
 
     //Se construye la pieza
-    public PiezaO(int anchoCeldaTabl, int altoCeldaTabl) {
+    public PiezaO(int x, int y) {
         pieza = new Celda[4];
-        pieza[0] = new Celda(0, 4, 4);
-        pieza[1] = new Celda(1, 4, 4);
-        pieza[2] = new Celda(0, 5, 4);
-        pieza[3] = new Celda(1, 5, 4);
+        pieza[0] = new Celda(x+0, y+0, 4);
+        pieza[1] = new Celda(x+1, y+0, 4);
+        pieza[2] = new Celda(x+0, y+1, 4);
+        pieza[3] = new Celda(x+1, y+1, 4);
     }
 
 }
