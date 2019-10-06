@@ -35,7 +35,7 @@ public class Tablero {
         return comprobar;
     }
 
-    private boolean ocupadoDcha(Pieza pieza) { //comprueba si la pieza puede moverse a la derecha
+    public boolean ocupadoDcha(Pieza pieza) { //comprueba si la pieza puede moverse a la derecha
         boolean comprobar = false;
         for (int i = 0; i < 4; i++) { //borra la pieza para que al comprobar no se encuentre con una celda de la propia pieza
             tablero[pieza.getPieza()[i].getX()][pieza.getPieza()[i].getY()].setTipoPieza(0);
@@ -57,7 +57,7 @@ public class Tablero {
         return comprobar;
     }
 
-    private boolean ocupadoIzq(Pieza pieza) { //comprueba si la pieza puede moverse a la izquierda
+    public boolean ocupadoIzq(Pieza pieza) { //comprueba si la pieza puede moverse a la izquierda
         boolean comprobar = false;
         for (int i = 0; i < 4; i++) { //borra la pieza para que al comprobar no se encuentre con una celda de la propia pieza
             tablero[pieza.getPieza()[i].getX()][pieza.getPieza()[i].getY()].setTipoPieza(0);
