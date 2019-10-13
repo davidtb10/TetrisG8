@@ -21,23 +21,24 @@ public class GameView extends View {
     @Override
     protected void onDraw(Canvas canvas) { //Pinta la cuadrícula del tablero
         super.onDraw(canvas);
-        pintarCeldas(canvas);
-        pintarCuadricula(canvas);
-        borrarTablero(canvas);
         pintarTablero(canvas);
-        //pieza = new PiezaZ(0,4);
-        //pieza.dibujarPieza(canvas);
+        pintarPieza(canvas);
+        pintarCuadricula(canvas);
     }
     
-    public void pintarCeldas(Canvas canvas){
-        for (int i = 0; i < 20; i++) {
-            for (int j = 0; j < 10; j++) {
-                tablero.tablero[i][j].pintarCelda(canvas);
+    private void pintarTablero(Canvas canvas){
+        Paint p = new Paint();
+        int color=0;
+        for(int i=0;i<20;i++){
+            for(int j=0;j<10;j++){
+                color = colorCelda(tablero.tablero[i][j]);
+                p.setColor(color);
+                canvas.drawRect(j*70,i*70,j*70+70,i*70+70,p);
             }
         }
     }
 
-    public void pintarCuadricula(Canvas canvas){
+    private void pintarCuadricula(Canvas canvas){
         Paint p = new Paint();
         p.setColor(Color.GRAY);
         int anchoCelda = this.getWidth() / 10;
@@ -54,23 +55,50 @@ public class GameView extends View {
         }
     }
 
-    public void pintarTablero(Canvas canvas){
-        Celda celda;
-        for (int i = 0; i < 20; i++) {
-            for (int j = 0; j < 10; j++) {
-                celda = tablero.getTablero()[i][j];
-                celda.pintarCelda(canvas);
-            }
+    public void pintarPieza(Canvas canvas){
+        int color=0;
+        color=colorCelda(tablero.enjuego.tipopieza);
+        p.setColor(color);
+        int fila;
+        int columna;
+        int ite=0;
+        while(ite<8){
+            fila=tablero.enjuego.cuadrados[ite];
+            ite++;
+            columna=tablero.enjuego.cuadrados[ite];
+            ite++;
+            canvas.drawRect(columna*70,fila*60,columna*70+70,fila*60+60,p);
         }
     }
 
-    public void borrarTablero(Canvas canvas){
-        Celda celda;
-        for (int i = 0; i < 20; i++) {
-            for (int j = 0; j < 10; j++) {
-                celda = tablero.getTablero()[i][j];
-                celda.borrarCelda(canvas);
-            }
+    private int colorCelda(int codigo){
+        int color=0;
+        switch (codigo){
+            case 0:
+                color = Color.BLACK;
+                break;
+            case 1:
+                color = Color.RED;
+                break;
+            case 2:
+                color = Color.WHITE;
+                break;
+            case 3:
+                color = Color.MAGENTA;
+                break;
+            case 4:
+                color = Color.BLUE;
+                break;
+            case 5:
+                color = Color.GREEN;
+                break;
+            case 6:
+                color = Color.GRAY;
+                break;
+            case 7:
+                color = Color.CYAN;
+                break;
         }
+        return color;
     }
 }
