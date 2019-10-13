@@ -3,17 +3,14 @@ package com.example.tetrisg8;
 
 public class Tablero {
 
-    Celda tablero[][] = new Celda[20][10];  //Tablero que almacenará las piezas
-
-    public Celda[][] getTablero(){
-        return tablero;
-    }
-
+    int tablero[][] = new int[20][10];  //Tablero que almacenará las piezas
+    Pieza enjuego;
+    Pieza siguiente;
 
     public void inicializarTablero() {
         for (int i = 0; i < 20; i++) {
             for (int j = 0; j < 10; j++) {
-                tablero[i][j] = new Celda(i,j);
+                tablero[i][j] = 0;
             }
         }
     }
@@ -23,63 +20,6 @@ public class Tablero {
             Celda celdaTablero = tablero[pieza.getPieza()[i].getX()][pieza.getPieza()[i].getY()];
             celdaTablero.setTipoPieza(pieza.getPieza()[i].getTipoPieza());
         }
-    }
-
-    public boolean ocupadoBajar(Pieza pieza) { //comprueba si la pieza puede bajar
-        boolean comprobar = false;
-        /*for (int i = 0; i < 4; i++) { //borra la pieza para que al comprobar no se encuentre con una celda de la propia pieza
-            tablero[pieza.getPieza()[i].getX()][pieza.getPieza()[i].getY()].setTipoPieza(0);
-        }*/
-        for (int i = 0; i < 4; i++) {
-            if (tablero[(pieza.getPieza()[i].getX()) + 1][pieza.getPieza()[i].getY()].getTipoPieza() == 0 && ! (pieza.getPieza()[i].getX()==19)) { //comprueba si la celda de abajo no está ocupada o es la última
-                comprobar = false;
-            } else {
-                comprobar = true;
-                //pintarPieza(pieza);
-                return comprobar;
-            }
-        }
-        /*for (int i = 0; i < 4; i++) {
-            tablero[pieza.getPieza()[i].getX()][pieza.getPieza()[i].getY()].setTipoPieza(pieza.getPieza()[i].getTipoPieza()); //si no está ocupado también vuelve a pintar la pieza
-        }*/
-        //pintarPieza(pieza);//si no está ocupado también vuelve a pintar la pieza
-        return comprobar;
-    }
-
-    public boolean ocupadoDcha(Pieza pieza) { //comprueba si la pieza puede moverse a la derecha
-        boolean comprobar = false;
-        for (int i = 0; i < 4; i++) { //borra la pieza para que al comprobar no se encuentre con una celda de la propia pieza
-            tablero[pieza.getPieza()[i].getX()][pieza.getPieza()[i].getY()].setTipoPieza(0);
-        }
-        for (int i = 0; i < 4; i++) {
-            if (tablero[pieza.getPieza()[i].getX()][(pieza.getPieza()[i].getY()) + 1].getTipoPieza() == 0 && !(pieza.getPieza()[i].getY() == 9)) { //comprueba si la celda de la derecha está ocupada o es la última
-                comprobar = false;
-            } else {
-                comprobar = true;
-                //pintarPieza(pieza); //si está ocupado vuelve a pintar la pieza y devuelve true
-                return comprobar;
-            }
-        }
-        //pintarPieza(pieza);//si no está ocupado también vuelve a pintar la pieza
-        return comprobar;
-    }
-
-    public boolean ocupadoIzq(Pieza pieza) { //comprueba si la pieza puede moverse a la izquierda
-        boolean comprobar = false;
-        /*for (int i = 0; i < 4; i++) { //borra la pieza para que al comprobar no se encuentre con una celda de la propia pieza
-            tablero[pieza.getPieza()[i].getX()][pieza.getPieza()[i].getY()].setTipoPieza(0);
-        }*/
-        for (int i = 0; i < 4; i++) {
-            if (tablero[pieza.getPieza()[i].getX()][(pieza.getPieza()[i].getY()) - 1].getTipoPieza() == 0 && !(pieza.getPieza()[i].getY() == 0)) { //comprueba si la celda de la izquierda está ocupada o es la última
-                comprobar = false;
-            } else {
-                comprobar = true;
-                //pintarPieza(pieza); //si está ocupado vuelve a pintar la pieza y devuelve true
-                return comprobar;
-            }
-        }
-        //pintarPieza(pieza); //si no está ocupado también vuelve a pintar la pieza
-        return comprobar;
     }
 
     /*public boolean ocupadoGiro(Pieza pieza){
@@ -121,11 +61,67 @@ public class Tablero {
     }
 
     public void bajarPieza (Pieza pieza){
-        if (! ocupadoBajar (pieza)){ //si la fila de abajo no está ocupada la matriz de la ficha baja una posición
-            for (int i=0; i<4; i++) {
-                pieza.getPieza()[i].setX(pieza.getPieza()[i].getX() + 1);
+        int fila=0;
+        boolean esposible=true;
+        int i=0;
+        //Comprueba si es posible (si existe la celda y si esta vacia)
+        while (esposible && i<8){
+            fila=enjuego.cuadrados[i]+1;
+            esposible=(fila<21)&&(tablero[fila][enjuego.cuadrados[i+1]]==0);
+            i+=2;
+        }
+        
+        if (esposible) {
+            //Si ha sido posible realiza el cambio en la pieza en juego
+            i=0;
+            while (i < 8) {
+                this.enjuego.cuadrados[i]++;
+                i += 2;
             }
         }
     }
+    //Mover pieza a la izquierda
+    public boolean izquierda(){
+        int columna=0;
+        boolean esposible=true;
+        int i=0;
+        //Comprueba si es posible (si existe la celda y si esta vacia)
+        while (esposible && i<8) {
+            columna=enjuego.cuadrados[i + 1]-1;
+            esposible=(columna>-1 && columna<11)&&(tablero[enjuego.cuadrados[i]][columna]==0);
+            i += 2;
+        }
+        
+        if(esposible) {
+            //Si ha sido posible realiza el cambio en la pieza en juego
+            i=1;
+            while (i < 8) {
+                this.enjuego.cuadrados[i]--;
+                i += 2;
+            }
+        }
+        return esposible;
+    }
+    //Mover pieza a la derecha
+    public boolean derecha(){
+        int columna=0;
+        boolean esposible=true;
+        int i=0;
+        //Comprueba si es posible (si existe la celda y si esta vacia)
+        while (esposible && i<8) {
+            columna=enjuego.cuadrados[i + 1]+1;
+            esposible=(columna>-1 && columna<10)&&(tablero[enjuego.cuadrados[i]][columna]==0);
+            i += 2;
+        }
 
+        if(esposible) {
+            //Si ha sido posible realiza el cambio en la pieza en juego
+            i=1;
+            while (i < 8) {
+                this.enjuego.cuadrados[i]++;
+                i += 2;
+            }
+        }
+        return esposible;
+    }
 }
