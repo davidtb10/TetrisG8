@@ -4,57 +4,37 @@ import android.graphics.Canvas;
 
 public class Pieza { //Pieza genérica
     protected int tipopieza; // Variable que determinará el tipo de pieza
-    protected Celda[] pieza;
+    protected int x; //coordenada x de la pieza
+    protected int y; //coordenada y de la pieza
+    protected int nGiro; //para saber la posicion de giro
 
-    public Celda[] getPieza() {
-        return pieza;
-    }
 
-    public Pieza(){
-        tipopieza = 0;
-    }
-
-    int nGiro;
-
-    public Pieza(int tipopieza, int x, int y){
+    public Pieza(int x, int y, int tipopieza, int nGiro){
         switch (tipopieza){
             case 1:
-                Pieza PiezaI = new PiezaI (x, y, nGiro);
+                Pieza PiezaI = new PiezaI (x, y, tipopieza, nGiro);
                 break;
             case 2:
-                Pieza PiezaJ = new PiezaJ (x, y, nGiro);
+                Pieza PiezaJ = new PiezaJ (x, y, tipopieza, nGiro);
                 break;
             case 3:
-                Pieza PiezaL = new PiezaL (x, y, nGiro);
+                Pieza PiezaL = new PiezaL (x, y, tipopieza, nGiro);
                 break;
             case 4:
-                Pieza PiezaO = new PiezaO (x, y, nGiro);
+                Pieza PiezaO = new PiezaO (x, y, tipopieza, nGiro);
                 break;
             case 5:
-                Pieza PiezaS = new PiezaS (x, y, nGiro);
+                Pieza PiezaS = new PiezaS (x, y, tipopieza, nGiro);
                 break;
             case 6:
-                Pieza PiezaT = new PiezaT (x, y, nGiro);
+                Pieza PiezaT = new PiezaT (x, y, tipopieza, nGiro);
                break;
             case 7:
-                Pieza PiezaZ = new PiezaZ (x, y, nGiro);
+                Pieza PiezaZ = new PiezaZ (x, y, tipopieza, nGiro);
                 break;
         }
     }
 
-    //Se pinta la pieza
-    public void dibujarPieza(Canvas canvas){
-        pieza[0].pintarCelda(canvas);
-        pieza[1].pintarCelda(canvas);
-        pieza[2].pintarCelda(canvas);
-        pieza[3].pintarCelda(canvas);
-    }
-
-    //Se borra la pieza
-    public void borrarPieza(Canvas canvas){
-        pieza[0].borrarCelda(canvas);
-        pieza[1].borrarCelda(canvas);
-        pieza[2].borrarCelda(canvas);
-        pieza[3].borrarCelda(canvas);
+    public Pieza() {
     }
 }

@@ -32,7 +32,7 @@ public class GameView extends View {
     public void pintarCeldas(Canvas canvas){
         for (int i = 0; i < 20; i++) {
             for (int j = 0; j < 10; j++) {
-                tablero.tablero[i][j].pintarCelda(canvas);
+                tablero.pintarCelda(tablero.getTipoPieza()[i][j], canvas);
             }
         }
     }
@@ -55,21 +55,17 @@ public class GameView extends View {
     }
 
     public void pintarTablero(Canvas canvas){
-        Celda celda;
         for (int i = 0; i < 20; i++) {
             for (int j = 0; j < 10; j++) {
-                celda = tablero.getTablero()[i][j];
-                celda.pintarCelda(canvas);
+                tablero.pintarCelda(tablero.getTipoPieza()[i][j], canvas);
             }
         }
     }
 
     public void borrarTablero(Canvas canvas){
-        Celda celda;
         for (int i = 0; i < 20; i++) {
             for (int j = 0; j < 10; j++) {
-                celda = tablero.getTablero()[i][j];
-                celda.borrarCelda(canvas);
+                tablero.pintarCelda(tablero.getTipoPieza()[i][j],canvas);
             }
         }
     }
