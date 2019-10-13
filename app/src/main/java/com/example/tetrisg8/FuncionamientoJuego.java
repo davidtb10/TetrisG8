@@ -1,7 +1,11 @@
 package com.example.tetrisg8;
 
 
+import android.content.Context;
 import android.graphics.Canvas;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 //Clase que controla el funcionamiento del juego y de la partida
 
@@ -10,16 +14,29 @@ public class FuncionamientoJuego {
     Tablero tablero;
     Pieza pieza;
     GameView gameView;
+    MainActivity mainActivity;
 
-    public FuncionamientoJuego(GameView gameView, Tablero tab){
+    public FuncionamientoJuego(GameView gameView, Tablero tab, Context context){
         this.gameView = gameView;
         tablero = tab;
+        mainActivity = (MainActivity) context;
     }
 
     public void partida() {
-        pieza = generarPieza(0,4); // Se genera una pieza aleatoria
-        tablero.asignarPieza(pieza);
-        gameView.invalidate();
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                mainActivity.runOnUiThread(new TimerTask() {
+                    @Override
+                    public void run() {
+                        pieza = generarPieza(0,4); // Se genera una pieza aleatoria
+                        tablero.setEnjuego(pieza);
+                        gameView.invalidate();
+                    }
+                });
+            }
+        },0, 1000);
     }
     
     /*public void partida(){
@@ -68,42 +85,13 @@ public class FuncionamientoJuego {
     }*/
 
     public Pieza generarPieza (int x, int y){
-        Pieza pieza = new Pieza();
+
         int tipoPieza = (int) Math.floor(Math.random()*6+1); //función para generar un numero aleatorio del 1 al 7
-        switch (tipoPieza){
-            case 1: {
-                pieza = new PiezaI(x, y, 1);
-                break;
-            }
-            case 2:{
-                pieza = new PiezaJ(x, y, 1);
-                break;
-            }
-            case 3:{
-                pieza = new PiezaL(x, y, 1);
-                break;
-            }
-            case 4:{
-                pieza = new PiezaO(x, y, 1);
-                break;
-            }
-            case 5:{
-                pieza = new PiezaS(x, y, 1);
-                break;
-            }
-            case 6:{
-                pieza = new PiezaT(x, y, 1);
-                break;
-            }
-            case 7:{
-                pieza = new PiezaZ(x, y, 1);
-                break;
-            }
-        }
+        Pieza pieza = new Pieza(tipoPieza);
         return pieza;
     }
 
-    private int lineasCompletas (Tablero tablero, Pieza piezaActual){ //comprobamos todas las filas en las que se encuentra la pieza actual una vez haya acabado de caer
+    /*private int lineasCompletas (Tablero tablero, Pieza piezaActual){ //comprobamos todas las filas en las que se encuentra la pieza actual una vez haya acabado de caer
         int nLineasCompletas = 0;
         for (int i = 0; i<4; i++){
             boolean comprobarCompleta = true;
@@ -118,37 +106,37 @@ public class FuncionamientoJuego {
             }
         }
         return nLineasCompletas;
-    }
+    }*/
 
-    public int actualizarPuntuacion(int puntuacion, Tablero tablero, Pieza pieza){ //le pasamos la puntuación actual
+    /*public int actualizarPuntuacion(int puntuacion, Tablero tablero, Pieza pieza){ //le pasamos la puntuación actual
         puntuacion = puntuacion + lineasCompletas(tablero, pieza)*30;
         return puntuacion;
-    }
+    }*/
 
-    public boolean finJuego (Tablero tablero, Pieza pieza){ //comprueba si el tablero está ocupado ANTES de salir una pieza nueva
+    /*public boolean finJuego (Tablero tablero, Pieza pieza){ //comprueba si el tablero está ocupado ANTES de salir una pieza nueva
         if (tablero.ocupado(pieza)){
             return true;
         }
         else{
             return false;
         }
-    }
+    }*/
     
-    public void izquierda() {
+    /*public void izquierda() {
         if (tablero.ocupadoIzq(pieza)){
             for (int i=0;i<4;i++){
                 pieza.getPieza()[i].setY(pieza.getPieza()[i].getY()-1);
             }
         }
-    }
+    }*/
 
-    public void derecha() {
+    /*public void derecha() {
         if (tablero.ocupadoDcha(pieza)){
             for (int i=0;i<4;i++){
                 pieza.getPieza()[i].setY(pieza.getPieza()[i].getY()+1);
             }
         }
-    }
+    }*/
     
     public void girar() {
         

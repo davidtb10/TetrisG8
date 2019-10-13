@@ -3,9 +3,9 @@ package com.example.tetrisg8;
 
 public class Tablero {
 
-    int tablero[][] = new int[20][10];  //Tablero que almacenará las piezas
-    Pieza enjuego;
-    Pieza siguiente;
+    private int tablero[][] = new int[20][10];  //Tablero que almacenará las piezas
+    private Pieza enjuego;
+    private Pieza siguiente;
 
     public void inicializarTablero() {
         for (int i = 0; i < 20; i++) {
@@ -15,12 +15,12 @@ public class Tablero {
         }
     }
 
-    public void asignarPieza(Pieza pieza){
+    /*public void asignarPieza(Pieza pieza){
         for(int i = 0; i < 4; i++){
             Celda celdaTablero = tablero[pieza.getPieza()[i].getX()][pieza.getPieza()[i].getY()];
             celdaTablero.setTipoPieza(pieza.getPieza()[i].getTipoPieza());
         }
-    }
+    }*/
 
     /*public boolean ocupadoGiro(Pieza pieza){
         boolean comprobar = false;
@@ -45,7 +45,7 @@ public class Tablero {
         return comprobar;
     }*/
 
-    public boolean ocupado (Pieza pieza){
+    /*public boolean ocupado (Pieza pieza){
         boolean comprobar = false;
         for (int i = 0; i<4; i++){
             if (tablero[pieza.getPieza()[i].getX()][(pieza.getPieza()[i].getY())].getTipoPieza() == 0) {
@@ -58,7 +58,7 @@ public class Tablero {
             }
         }
         return comprobar;
-    }
+    }*/
 
     public void bajarPieza (Pieza pieza){
         int fila=0;
@@ -123,5 +123,21 @@ public class Tablero {
             }
         }
         return esposible;
+    }
+
+    public int[][] getTablero() {
+        return tablero;
+    }
+
+    public Pieza getEnjuego() {
+        return enjuego;
+    }
+
+    public void setEnjuego(Pieza enjuego) {
+        this.enjuego = enjuego;
+    }
+
+    public Pieza getSiguiente() {
+        return siguiente;
     }
 }

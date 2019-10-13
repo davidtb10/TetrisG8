@@ -17,11 +17,11 @@ public class FichaView extends View{
             this.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorDarkBlue));
         }
 
-        public Pieza generarPieza (int x, int y){// la pieza necesita unas coordenadas por defecto en las que aparecer
+        /*public Pieza generarPieza (int x, int y){// la pieza necesita unas coordenadas por defecto en las que aparecer
             int tipoPieza = (int) Math.floor(Math.random()*6+1); //función para generar un numero aleatorio del 1 al 7
             Pieza pieza = new Pieza (tipoPieza, x, y);
             return pieza;
-        }
+        }*/
 
         @Override
         protected void onDraw(Canvas canvas) {

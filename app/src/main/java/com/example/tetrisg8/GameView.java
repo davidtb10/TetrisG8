@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 
 public class GameView extends View {
     Tablero tablero;
+    Paint p = new Paint();
 
     public GameView(Context context, Tablero tablero) {
         super(context);
@@ -27,11 +28,10 @@ public class GameView extends View {
     }
     
     private void pintarTablero(Canvas canvas){
-        Paint p = new Paint();
         int color=0;
         for(int i=0;i<20;i++){
             for(int j=0;j<10;j++){
-                color = colorCelda(tablero.tablero[i][j]);
+                color = colorCelda(tablero.getTablero()[i][j]);
                 p.setColor(color);
                 canvas.drawRect(j*70,i*70,j*70+70,i*70+70,p);
             }
@@ -39,7 +39,6 @@ public class GameView extends View {
     }
 
     private void pintarCuadricula(Canvas canvas){
-        Paint p = new Paint();
         p.setColor(Color.GRAY);
         int anchoCelda = this.getWidth() / 10;
         int ejeX = 0;
@@ -57,15 +56,15 @@ public class GameView extends View {
 
     public void pintarPieza(Canvas canvas){
         int color=0;
-        color=colorCelda(tablero.enjuego.tipopieza);
+        color=colorCelda(tablero.getEnjuego().tipopieza);
         p.setColor(color);
         int fila;
         int columna;
         int ite=0;
         while(ite<8){
-            fila=tablero.enjuego.cuadrados[ite];
+            fila=tablero.getEnjuego().cuadrados[ite];
             ite++;
-            columna=tablero.enjuego.cuadrados[ite];
+            columna=tablero.getEnjuego().cuadrados[ite];
             ite++;
             canvas.drawRect(columna*70,fila*60,columna*70+70,fila*60+60,p);
         }
