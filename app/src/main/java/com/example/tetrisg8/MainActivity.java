@@ -37,17 +37,19 @@ public class MainActivity extends AppCompatActivity {
         
         start.partida();
     }
-    
-
 
     //move left
     public void moveLeft(View view) {
-        start.izquierda();
+        //Se intenta desplazar la ficha a la izquierda, si ha sido posible se actualiza el canvas
+        if(tab.izquierda())
+            gameView.invalidate();
     }
 
     //move right
     public void moveRight(View view) {
-        start.derecha();
+        //Se intenta desplazar la ficha a la derecha, si ha sido posible se actualiza el canvas
+        if(tab.derecha())
+            gameView.invalidate();
     }
 
     //rotate
