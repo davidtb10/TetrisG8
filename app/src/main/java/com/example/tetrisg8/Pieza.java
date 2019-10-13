@@ -2,59 +2,36 @@ package com.example.tetrisg8;
 
 import android.graphics.Canvas;
 
-public class Pieza { //Pieza genérica
+public class Pieza {
     protected int tipopieza; // Variable que determinará el tipo de pieza
-    protected Celda[] pieza;
+    //posiciones de los cuadrados que forman la pieza(xfila,ycolumna):X1,Y1,...,X4,Y4
+    protected int[] cuadrados;
 
-    public Celda[] getPieza() {
-        return pieza;
-    }
-
-    public Pieza(){
-        tipopieza = 0;
-    }
-
-    int nGiro;
-
-    public Pieza(int tipopieza, int x, int y){
-        switch (tipopieza){
-            case 1:
-                Pieza PiezaI = new PiezaI (x, y, nGiro);
+    public Pieza(int tipo){
+        tipopieza = tipo;
+        //Posicion inicial de las celdas en funcion del tipo
+        switch (tipo){
+            case 1://tipo I
+                cuadrados = new int[]{0,3,0,4,0,6,0,5};
                 break;
-            case 2:
-                Pieza PiezaJ = new PiezaJ (x, y, nGiro);
+            case 2://tipo J
+                cuadrados = new int[]{0,6,1,4,1,6,1,5};
                 break;
-            case 3:
-                Pieza PiezaL = new PiezaL (x, y, nGiro);
+            case 3://tipo L
+                cuadrados = new int[]{0,4,1,4,1,6,1,5};
                 break;
-            case 4:
-                Pieza PiezaO = new PiezaO (x, y, nGiro);
+            case 4://tipo O
+                cuadrados = new int[]{0,4,0,5,1,4,1,5};
                 break;
-            case 5:
-                Pieza PiezaS = new PiezaS (x, y, nGiro);
+            case 5://tipo S
+                cuadrados = new int[]{0,4,0,5,1,3,1,4};
                 break;
-            case 6:
-                Pieza PiezaT = new PiezaT (x, y, nGiro);
-               break;
-            case 7:
-                Pieza PiezaZ = new PiezaZ (x, y, nGiro);
+            case 6://tipo T
+                cuadrados = new int[]{0,4,0,5,0,6,1,5};
+                break;
+            case 7://tipo Z
+                cuadrados = new int[]{0,4,0,5,1,6,1,5};
                 break;
         }
-    }
-
-    //Se pinta la pieza
-    public void dibujarPieza(Canvas canvas){
-        pieza[0].pintarCelda(canvas);
-        pieza[1].pintarCelda(canvas);
-        pieza[2].pintarCelda(canvas);
-        pieza[3].pintarCelda(canvas);
-    }
-
-    //Se borra la pieza
-    public void borrarPieza(Canvas canvas){
-        pieza[0].borrarCelda(canvas);
-        pieza[1].borrarCelda(canvas);
-        pieza[2].borrarCelda(canvas);
-        pieza[3].borrarCelda(canvas);
     }
 }
