@@ -30,17 +30,23 @@ public class FuncionamientoJuego {
                 mainActivity.runOnUiThread(new TimerTask() {
                     @Override
                     public void run() {
-                        if(tablero.getEnjuego() != null && tablero.posibleBajar(tablero.getEnjuego())){
-                            tablero.bajarPieza(pieza);
-                        }else{
+                        if(tablero.getEnjuego() == null){
                             pieza = generarPieza(0,4); // Se genera una pieza aleatoria
                             tablero.setEnjuego(pieza);
+                        }else{
+                            if(tablero.posibleBajar(tablero.getEnjuego())){
+                                tablero.bajarPieza(pieza);
+                            }else{
+                                tablero.asignarPieza(pieza);
+                                pieza = generarPieza(0,4); // Se genera una pieza aleatoria
+                                tablero.setEnjuego(pieza);
+                            }
                         }
                         gameView.invalidate();
                     }
                 });
             }
-        },0, 1000);
+        },0, 250);
     }
     
     /*public void partida(){

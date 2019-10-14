@@ -38,4 +38,8 @@ public class Pieza {
     public int[] getCuadrados() {
         return cuadrados;
     }
+
+    public int getTipopieza() {
+        return tipopieza;
+    }
 }

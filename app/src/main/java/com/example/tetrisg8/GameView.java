@@ -28,12 +28,14 @@ public class GameView extends View {
     }
     
     private void pintarTablero(Canvas canvas){
+        int anchoCelda = this.getWidth() / 10;
+        int altoCelda = this.getHeight() / 20;
         int color=0;
         for(int i=0;i<20;i++){
             for(int j=0;j<10;j++){
                 color = colorCelda(tablero.getTablero()[i][j]);
                 p.setColor(color);
-                canvas.drawRect(j*70,i*70,j*70+70,i*70+70,p);
+                canvas.drawRect(j*anchoCelda,i*altoCelda,j*anchoCelda+anchoCelda,i*altoCelda+altoCelda,p);
             }
         }
     }
@@ -55,6 +57,8 @@ public class GameView extends View {
     }
 
     public void pintarPieza(Canvas canvas){
+        int anchoCelda = this.getWidth() / 10;
+        int altoCelda = this.getHeight() / 20;
         int color=0;
         color=colorCelda(tablero.getEnjuego().tipopieza);
         p.setColor(color);
@@ -66,7 +70,7 @@ public class GameView extends View {
             ite++;
             columna=tablero.getEnjuego().cuadrados[ite];
             ite++;
-            canvas.drawRect(columna*70,fila*60,columna*70+70,fila*60+60,p);
+            canvas.drawRect(columna*anchoCelda,fila*altoCelda,columna*anchoCelda+anchoCelda,fila*altoCelda+altoCelda,p);
         }
     }
 

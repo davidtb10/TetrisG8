@@ -15,12 +15,14 @@ public class Tablero {
         }
     }
 
-    /*public void asignarPieza(Pieza pieza){
-        for(int i = 0; i < 4; i++){
-            Celda celdaTablero = tablero[pieza.getPieza()[i].getX()][pieza.getPieza()[i].getY()];
-            celdaTablero.setTipoPieza(pieza.getPieza()[i].getTipoPieza());
+    public void asignarPieza(Pieza pieza){
+        for(int i = 0; i < 8; i += 2){
+            int fila = pieza.getCuadrados()[i];
+            int columna = pieza.getCuadrados()[i+1];
+
+            tablero[fila][columna] = pieza.getTipopieza();
         }
-    }*/
+    }
 
     /*public boolean ocupadoGiro(Pieza pieza){
         boolean comprobar = false;
@@ -75,7 +77,7 @@ public class Tablero {
         //Comprueba si es posible (si existe la celda y si esta vacia)
         while (esposible && i < 8) {
             filaSiguiente = enjuego.cuadrados[i] + 1;
-            esposible = (filaSiguiente < 21) && (tablero[filaSiguiente][enjuego.cuadrados[i + 1]] == 0);
+            esposible = (filaSiguiente < 20) && (tablero[filaSiguiente][enjuego.cuadrados[i + 1]] == 0);
             i += 2;
         }
         return esposible;
