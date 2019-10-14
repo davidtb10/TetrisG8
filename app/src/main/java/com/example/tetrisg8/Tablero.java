@@ -60,41 +60,42 @@ public class Tablero {
         return comprobar;
     }*/
 
-    public void bajarPieza (Pieza pieza){
-        int fila=0;
-        boolean esposible=true;
-        int i=0;
-        //Comprueba si es posible (si existe la celda y si esta vacia)
-        while (esposible && i<8){
-            fila=enjuego.cuadrados[i]+1;
-            esposible=(fila<21)&&(tablero[fila][enjuego.cuadrados[i+1]]==0);
-            i+=2;
-        }
-        
-        if (esposible) {
-            //Si ha sido posible realiza el cambio en la pieza en juego
-            i=0;
-            while (i < 8) {
-                this.enjuego.cuadrados[i]++;
-                i += 2;
-            }
-        }
-    }
-    //Mover pieza a la izquierda
-    public boolean izquierda(){
-        int columna=0;
-        boolean esposible=true;
-        int i=0;
-        //Comprueba si es posible (si existe la celda y si esta vacia)
-        while (esposible && i<8) {
-            columna=enjuego.cuadrados[i + 1]-1;
-            esposible=(columna>-1 && columna<11)&&(tablero[enjuego.cuadrados[i]][columna]==0);
+    public void bajarPieza(Pieza pieza) {
+        int i = 0;
+        while (i < 8) {
+            this.enjuego.cuadrados[i]++;
             i += 2;
         }
-        
-        if(esposible) {
+    }
+
+    public boolean posibleBajar(Pieza pieza) {
+        int filaSiguiente;
+        boolean esposible = true;
+        int i = 0;
+        //Comprueba si es posible (si existe la celda y si esta vacia)
+        while (esposible && i < 8) {
+            filaSiguiente = enjuego.cuadrados[i] + 1;
+            esposible = (filaSiguiente < 21) && (tablero[filaSiguiente][enjuego.cuadrados[i + 1]] == 0);
+            i += 2;
+        }
+        return esposible;
+    }
+
+    //Mover pieza a la izquierda
+    public boolean izquierda() {
+        int columna = 0;
+        boolean esposible = true;
+        int i = 0;
+        //Comprueba si es posible (si existe la celda y si esta vacia)
+        while (esposible && i < 8) {
+            columna = enjuego.cuadrados[i + 1] - 1;
+            esposible = (columna > -1 && columna < 11) && (tablero[enjuego.cuadrados[i]][columna] == 0);
+            i += 2;
+        }
+
+        if (esposible) {
             //Si ha sido posible realiza el cambio en la pieza en juego
-            i=1;
+            i = 1;
             while (i < 8) {
                 this.enjuego.cuadrados[i]--;
                 i += 2;
@@ -102,21 +103,22 @@ public class Tablero {
         }
         return esposible;
     }
+
     //Mover pieza a la derecha
-    public boolean derecha(){
-        int columna=0;
-        boolean esposible=true;
-        int i=0;
+    public boolean derecha() {
+        int columna = 0;
+        boolean esposible = true;
+        int i = 0;
         //Comprueba si es posible (si existe la celda y si esta vacia)
-        while (esposible && i<8) {
-            columna=enjuego.cuadrados[i + 1]+1;
-            esposible=(columna>-1 && columna<10)&&(tablero[enjuego.cuadrados[i]][columna]==0);
+        while (esposible && i < 8) {
+            columna = enjuego.cuadrados[i + 1] + 1;
+            esposible = (columna > -1 && columna < 10) && (tablero[enjuego.cuadrados[i]][columna] == 0);
             i += 2;
         }
 
-        if(esposible) {
+        if (esposible) {
             //Si ha sido posible realiza el cambio en la pieza en juego
-            i=1;
+            i = 1;
             while (i < 8) {
                 this.enjuego.cuadrados[i]++;
                 i += 2;

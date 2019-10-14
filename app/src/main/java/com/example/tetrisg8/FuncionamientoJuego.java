@@ -30,8 +30,12 @@ public class FuncionamientoJuego {
                 mainActivity.runOnUiThread(new TimerTask() {
                     @Override
                     public void run() {
-                        pieza = generarPieza(0,4); // Se genera una pieza aleatoria
-                        tablero.setEnjuego(pieza);
+                        if(tablero.getEnjuego() != null && tablero.posibleBajar(tablero.getEnjuego())){
+                            tablero.bajarPieza(pieza);
+                        }else{
+                            pieza = generarPieza(0,4); // Se genera una pieza aleatoria
+                            tablero.setEnjuego(pieza);
+                        }
                         gameView.invalidate();
                     }
                 });

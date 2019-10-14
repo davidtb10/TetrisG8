@@ -34,4 +34,8 @@ public class Pieza {
                 break;
         }
     }
+
+    public int[] getCuadrados() {
+        return cuadrados;
+    }
 }
