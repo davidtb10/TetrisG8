@@ -139,4 +139,34 @@ public class Tablero {
     public Pieza getSiguiente() {
         return siguiente;
     }
+
+    public int lineasCompletas (){ //comprobamos todas las filas en las que se encuentra la pieza actual una vez haya acabado de caer
+        int nLineasCompletas = 0;
+        boolean lineaCompleta;
+        for (int i = 0; i<8; i += 2){
+            lineaCompleta= true;
+            int filaAComprobar = enjuego.getCuadrados()[i];
+            for (int j = 0; j<10; j++){
+                if (tablero[filaAComprobar][j] == 0){
+                    lineaCompleta = false;
+                }
+            }
+            if (lineaCompleta){
+                nLineasCompletas++;
+                bajarLineas(filaAComprobar);
+            }
+        }
+        return nLineasCompletas;
+    }
+
+    public void bajarLineas(int filaEliminar){
+        for(int i = filaEliminar; i > 0; i--){ //Baja todas las filas una posición menos la primera
+            for (int j=0; j< 10; j++){
+                tablero[i][j] = tablero[i-1][j];
+            }
+        }
+        for(int j=0; j<10;j++){ //Pone a 0 la primera fila
+            tablero[0][j] = 0;
+        }
+    }
 }
