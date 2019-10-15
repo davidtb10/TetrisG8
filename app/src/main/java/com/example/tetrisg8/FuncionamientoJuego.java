@@ -4,6 +4,7 @@ package com.example.tetrisg8;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Canvas;
+import android.widget.Toast;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -16,6 +17,7 @@ public class FuncionamientoJuego {
     Pieza pieza;
     GameView gameView;
     MainActivity mainActivity;
+    Timer timer;
 
     public FuncionamientoJuego(GameView gameView, Tablero tab, Context context){
         this.gameView = gameView;
@@ -24,7 +26,7 @@ public class FuncionamientoJuego {
     }
 
     public void partida() {
-        Timer timer = new Timer();
+        timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
@@ -52,6 +54,10 @@ public class FuncionamientoJuego {
                 });
             }
         },0, 250);
+    }
+
+    public void finalizarTimer(){
+        timer.cancel();
     }
 
     /*public void partida(){

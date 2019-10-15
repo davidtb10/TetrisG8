@@ -62,4 +62,11 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this,GameOverActivity.class);
         startActivity(intent);
     }
+
+    //Para el timer cuando se abre otro activity por encima
+    @Override
+    protected void onPause() {
+        super.onPause();
+        start.finalizarTimer();
+    }
 }
