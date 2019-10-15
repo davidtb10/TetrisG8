@@ -47,20 +47,15 @@ public class Tablero {
         return comprobar;
     }*/
 
-    /*public boolean ocupado (Pieza pieza){
-        boolean comprobar = false;
-        for (int i = 0; i<4; i++){
-            if (tablero[pieza.getPieza()[i].getX()][(pieza.getPieza()[i].getY())].getTipoPieza() == 0) {
-                //comprueba si las celdas están ocupadas
-                comprobar = false;
-            }
-            else {
-                comprobar = true;
-                return comprobar;
+    public boolean ocupadoPosPieza (Pieza pieza){
+        boolean ocupado = false;
+        for (int i = 0; i<8; i += 2){
+            if(tablero[pieza.getCuadrados()[i]][pieza.getCuadrados()[i+1]] != 0){
+                ocupado = true;
             }
         }
-        return comprobar;
-    }*/
+        return ocupado;
+    }
 
     public void bajarPieza(Pieza pieza) {
         int i = 0;

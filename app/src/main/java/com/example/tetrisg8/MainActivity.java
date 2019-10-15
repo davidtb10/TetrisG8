@@ -2,6 +2,7 @@ package com.example.tetrisg8;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -55,5 +56,10 @@ public class MainActivity extends AppCompatActivity {
     //rotate
     public void rotateAction(View view) {
         //start.girar();
+    }
+
+    public void pantallaGameOver(){
+        Intent intent = new Intent(this,GameOverActivity.class);
+        startActivity(intent);
     }
 }

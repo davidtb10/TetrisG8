@@ -2,6 +2,7 @@ package com.example.tetrisg8;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Canvas;
 
 import java.util.Timer;
@@ -37,9 +38,13 @@ public class FuncionamientoJuego {
                             if(tablero.posibleBajar(tablero.getEnjuego())){
                                 tablero.bajarPieza(pieza);
                             }else{
-                                tablero.asignarPieza(pieza);
-                                pieza = generarPieza(0,4); // Se genera una pieza aleatoria
-                                tablero.setEnjuego(pieza);
+                                if(tablero.ocupadoPosPieza(pieza)){
+                                    mainActivity.pantallaGameOver();
+                                }else{
+                                    tablero.asignarPieza(pieza);
+                                    pieza = generarPieza(0,4); // Se genera una pieza aleatoria
+                                    tablero.setEnjuego(pieza);
+                                }
                             }
                         }
                         gameView.invalidate();
@@ -48,7 +53,7 @@ public class FuncionamientoJuego {
             }
         },0, 250);
     }
-    
+
     /*public void partida(){
         boolean derrota;
         //tablero.inicializarTablero();  //Se crea un tablero inicial vacío
