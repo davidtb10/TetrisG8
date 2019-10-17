@@ -123,6 +123,36 @@ public class Tablero {
         }
         return esposible;
     }
+    
+    //Rotar pieza
+    public void rotar(){
+        //Coordenadas del ultimo cuadrado de la pieza
+        int fila = enjuego.cuadrados[6];
+        int columna = enjuego.cuadrados[7];
+        //cuadrados representados como puntos en una matriz
+        Matrix matriz = new Matrix();
+        matriz.setRotate(-90,fila,columna);
+        float[] puntos = new float[]{0,0,0,0,0,0,0,0};
+        for (int i=0;i<8;i++){
+            puntos[i]=enjuego.cuadrados[i];
+        }
+        matriz.mapPoints(puntos);
+        //comprobar si es posible
+        boolean esposible = true;
+        int j=0;
+        while (esposible && j<8) {
+            fila= (int) puntos[j];
+            columna= (int) puntos[j+1];
+            esposible=tablero[fila][columna]==0;
+            j += 2;
+        }
+        //si ha sido posible guarda las nuevas coordenadas en pieza en juego
+        if (esposible){
+            for (int i = 0; i < 8; i++) {
+                enjuego.cuadrados[i] = (int) puntos[i];
+            }
+        }
+    }
 
     public int[][] getTablero() {
         return tablero;
