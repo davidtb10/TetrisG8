@@ -55,7 +55,9 @@ public class MainActivity extends AppCompatActivity {
 
     //rotate
     public void rotateAction(View view) {
-        //start.girar();
+        //Se intenta girar la ficha a la derecha, si ha sido posible se actualiza el canvas
+        if(tab.rotar())
+            gameView.invalidate();
     }
 
     public void pantallaGameOver(){
