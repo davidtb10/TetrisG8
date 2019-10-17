@@ -12,11 +12,12 @@ import android.widget.LinearLayout;
 
 public class GameView extends View {
     Tablero tablero;
-    Paint p = new Paint();
+    Paint p;
 
     public GameView(Context context, Tablero tablero) {
         super(context);
         this.tablero = tablero;
+        p = new Paint();
     }
 
     @Override
@@ -74,7 +75,7 @@ public class GameView extends View {
         }
     }
 
-    private int colorCelda(int codigo){
+    public int colorCelda(int codigo){
         int color=0;
         switch (codigo){
             case 0:

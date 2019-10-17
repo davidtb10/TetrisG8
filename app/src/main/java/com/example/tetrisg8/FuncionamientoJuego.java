@@ -14,13 +14,15 @@ import java.util.TimerTask;
 public class FuncionamientoJuego {
     int puntuacion = 0;
     Tablero tablero;
-    Pieza pieza;
+    Pieza pieza, piezaSiguiente;
     GameView gameView;
+    FichaView fichaView;
     MainActivity mainActivity;
     Timer timer;
 
-    public FuncionamientoJuego(GameView gameView, Tablero tab, Context context){
+    public FuncionamientoJuego(GameView gameView, FichaView fichaView, Tablero tab, Context context) {
         this.gameView = gameView;
+        this.fichaView = fichaView;
         tablero = tab;
         mainActivity = (MainActivity) context;
     }
@@ -33,38 +35,43 @@ public class FuncionamientoJuego {
                 mainActivity.runOnUiThread(new TimerTask() {
                     @Override
                     public void run() {
-                        if(tablero.getEnjuego() == null){  //Si es la primera pieza
-                            pieza = generarPieza(0,4); // Se genera una pieza aleatoria
+                        if (tablero.getEnjuego() == null) {  //Si es la primera pieza
+                            pieza = generarPieza(); // Se genera una pieza aleatoria
                             tablero.setEnjuego(pieza);
-                        }else{
-                            if(tablero.posibleBajar(tablero.getEnjuego())){ //Si es posible bajar la pieza
+                            piezaSiguiente = generarPieza();
+                            fichaView.setPiezaSiguiente(piezaSiguiente);
+                        } else {
+                            if (tablero.posibleBajar(tablero.getEnjuego())) { //Si es posible bajar la pieza
                                 tablero.bajarPieza(pieza);
-                            }else{
-                                if(tablero.ocupadoPosPieza(pieza)){ //Comprueba si es el final de la partida comprobando si hay otra pieza en su posición
+                            } else {
+                                if (tablero.ocupadoPosPieza(pieza)) { //Comprueba si es el final de la partida comprobando si hay otra pieza en su posición
                                     mainActivity.pantallaGameOver();
-                                }else{
+                                } else {
                                     tablero.asignarPieza(pieza);
                                     tablero.lineasCompletas();
-                                    pieza = generarPieza(0,4); // Se genera una pieza aleatoria
+                                    pieza = piezaSiguiente;
                                     tablero.setEnjuego(pieza);
+                                    piezaSiguiente = generarPieza(); // Se genera una pieza aleatoria
+                                    fichaView.setPiezaSiguiente(piezaSiguiente);
                                 }
                             }
                         }
+                        fichaView.invalidate();
                         gameView.invalidate();
+
                     }
                 });
             }
-        },0, 500);
+        }, 0, 500);
     }
 
-    public void finalizarTimer(){
+    public void finalizarTimer() {
         timer.cancel();
     }
 
 
-    public Pieza generarPieza (int x, int y){
-
-        int tipoPieza = (int) Math.floor(Math.random()*6+1); //función para generar un numero aleatorio del 1 al 7
+    public Pieza generarPieza() {
+        int tipoPieza = (int) Math.floor(Math.random() * 6 + 1); //función para generar un numero aleatorio del 1 al 7
         Pieza pieza = new Pieza(tipoPieza);
         return pieza;
     }
@@ -91,8 +98,8 @@ public class FuncionamientoJuego {
             }
         }
     }*/
-    
+
     public void girar() {
-        
+
     }
 }
