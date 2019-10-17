@@ -125,7 +125,7 @@ public class Tablero {
     }
     
     //Rotar pieza
-    public void rotar(){
+    public boolean rotar(){
         //Coordenadas del ultimo cuadrado de la pieza
         int fila = enjuego.cuadrados[6];
         int columna = enjuego.cuadrados[7];
@@ -152,6 +152,7 @@ public class Tablero {
                 enjuego.cuadrados[i] = (int) puntos[i];
             }
         }
+        return esposible;
     }
 
     public int[][] getTablero() {
