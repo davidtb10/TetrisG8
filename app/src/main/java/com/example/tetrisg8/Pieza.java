@@ -12,25 +12,25 @@ public class Pieza {
         //Posicion inicial de las celdas en funcion del tipo
         switch (tipo){
             case 1://tipo I
-                cuadrados = new int[]{0,3,0,4,0,6,0,5};
+                cuadrados = new int[]{0,4,1,4,2,4,3,4};
                 break;
             case 2://tipo J
-                cuadrados = new int[]{0,6,1,4,1,6,1,5};
+                cuadrados = new int[]{2,4,0,5,1,5,2,5};
                 break;
             case 3://tipo L
-                cuadrados = new int[]{0,4,1,4,1,6,1,5};
+                cuadrados = new int[]{0,4,1,4,2,4,2,5};
                 break;
             case 4://tipo O
-                cuadrados = new int[]{0,4,0,5,1,4,1,5};
+                cuadrados = new int[]{0,4,1,4,0,5,1,5};
                 break;
             case 5://tipo S
-                cuadrados = new int[]{0,4,0,5,1,3,1,4};
+                cuadrados = new int[]{1,4,0,5,1,5,0,6};
                 break;
             case 6://tipo T
-                cuadrados = new int[]{0,4,0,5,0,6,1,5};
+                cuadrados = new int[]{0,4,0,5,1,5,0,6};
                 break;
             case 7://tipo Z
-                cuadrados = new int[]{0,4,0,5,1,6,1,5};
+                cuadrados = new int[]{0,4,0,5,1,5,1,6};
                 break;
         }
     }

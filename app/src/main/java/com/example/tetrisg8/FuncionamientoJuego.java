@@ -54,7 +54,7 @@ public class FuncionamientoJuego {
                     }
                 });
             }
-        },0, 250);
+        },0, 500);
     }
 
     public void finalizarTimer(){
