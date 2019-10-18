@@ -167,7 +167,7 @@ public class Tablero {
     public void setEnjuego(Pieza enjuego) {
         this.enjuego = enjuego;
     }
-    
+
 
     public int lineasCompletas (){ //comprobamos todas las filas en las que se encuentra la pieza actual una vez haya acabado de caer y devuelve la puntuacion
         int nLineasCompletas = 0;
