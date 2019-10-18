@@ -2,9 +2,6 @@ package com.example.tetrisg8;
 
 
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Canvas;
-import android.widget.Toast;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -48,7 +45,8 @@ public class FuncionamientoJuego {
                                     mainActivity.pantallaGameOver();
                                 } else {
                                     tablero.asignarPieza(pieza);
-                                    tablero.lineasCompletas();
+                                    puntuacion += tablero.lineasCompletas();
+                                    mainActivity.actualizarPuntuacion();
                                     pieza = piezaSiguiente;
                                     tablero.setEnjuego(pieza);
                                     piezaSiguiente = generarPieza(); // Se genera una pieza aleatoria
@@ -99,7 +97,7 @@ public class FuncionamientoJuego {
         }
     }*/
 
-    public void girar() {
-
+    public int getPuntuacion() {
+        return puntuacion;
     }
 }

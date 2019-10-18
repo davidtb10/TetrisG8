@@ -71,4 +71,8 @@ public class MainActivity extends AppCompatActivity {
         super.onPause();
         start.finalizarTimer();
     }
+
+    public void actualizarPuntuacion(){
+        caja_score.setText(String.valueOf(start.getPuntuacion()));
+    }
 }

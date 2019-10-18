@@ -1,11 +1,12 @@
 package com.example.tetrisg8;
 
 
+import android.graphics.Matrix;
+
 public class Tablero {
 
     private int tablero[][] = new int[20][10];  //Tablero que almacenará las piezas
     private Pieza enjuego;
-    private Pieza siguiente;
 
     public void inicializarTablero() {
         for (int i = 0; i < 20; i++) {
@@ -166,12 +167,9 @@ public class Tablero {
     public void setEnjuego(Pieza enjuego) {
         this.enjuego = enjuego;
     }
+    
 
-    public Pieza getSiguiente() {
-        return siguiente;
-    }
-
-    public int lineasCompletas (){ //comprobamos todas las filas en las que se encuentra la pieza actual una vez haya acabado de caer
+    public int lineasCompletas (){ //comprobamos todas las filas en las que se encuentra la pieza actual una vez haya acabado de caer y devuelve la puntuacion
         int nLineasCompletas = 0;
         boolean lineaCompleta;
         for (int i = 0; i<8; i += 2){
@@ -187,7 +185,7 @@ public class Tablero {
                 bajarLineas(filaAComprobar);
             }
         }
-        return nLineasCompletas;
+        return nLineasCompletas*30;
     }
 
     public void bajarLineas(int filaEliminar){
