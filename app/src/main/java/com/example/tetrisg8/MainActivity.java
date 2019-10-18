@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        this.caja_score = (TextView)findViewById(R.id.caja_score);
+        this.caja_score = (TextView)findViewById(R.id.scoreBoxContent);
         //to set score
         //this.caja_score.setText(String.valueOf());
         tab.inicializarTablero();
@@ -79,3 +79,4 @@ public class MainActivity extends AppCompatActivity {
         caja_score.setText(String.valueOf(start.getPuntuacion()));
     }
 }
+
