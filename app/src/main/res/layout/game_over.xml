@@ -21,47 +21,51 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
-        android:fontFamily="casual"
+        android:fontFamily="monospace"
         android:text="GAME OVER"
         android:textAlignment="center"
-        android:textColor="#15BE67"
+        android:textColor="#FFFBFB"
         android:textSize="50sp" />
 
     <TextView
         android:id="@+id/score"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:fontFamily="casual"
+        android:layout_width="262dp"
+        android:layout_height="82dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:fontFamily="monospace"
         android:text="SCORE"
         android:textAlignment="center"
-        android:textColor="#15BE67"
+        android:textColor="#FFFFFF"
         android:textSize="30sp"
-        android:background="@android:color/background_dark"
+        android:background="@drawable/dark"
+
         android:onClick="puntuacionFinal" />
 
     <Button
         android:id="@+id/botJugar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="262dp"
+        android:layout_height="82dp"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
-        android:background="@android:color/background_dark"
+        android:background="@drawable/dark"
         android:onClick="jugar"
         android:text="JUGAR DE NUEVO"
-        android:textColor="@color/colorPrimaryDark"
+        android:fontFamily="monospace"
+        android:textColor="#FFFFFF"
         android:textSize="12pt" />
 
     <Button
         android:id="@+id/botSalir"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="262dp"
+        android:layout_height="82dp"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
-        android:background="@android:color/background_dark"
+        android:background="@drawable/dark"
         android:onClick="salirJuego"
+        android:fontFamily="monospace"
         android:text="SALIR"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="#FFFFFF"
         android:textSize="12pt" />
 
 </LinearLayout>
