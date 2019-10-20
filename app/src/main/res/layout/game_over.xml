@@ -28,6 +28,15 @@
         android:textSize="50sp" />
 
     <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#FFFBFB"
+        android:textSize="35sp"
+        android:textAlignment="center"
+        android:text="Score:" />
+
+    <TextView
         android:id="@+id/score"
         android:layout_width="262dp"
         android:layout_height="82dp"
@@ -49,9 +58,9 @@
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
         android:background="@drawable/dark"
-        android:onClick="jugar"
-        android:text="JUGAR DE NUEVO"
         android:fontFamily="monospace"
+        android:onClick="jugar"
+        android:text="PLAY AGAIN"
         android:textColor="#FFFFFF"
         android:textSize="12pt" />
 
@@ -62,9 +71,9 @@
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
         android:background="@drawable/dark"
-        android:onClick="salirJuego"
         android:fontFamily="monospace"
-        android:text="SALIR"
+        android:onClick="salirJuego"
+        android:text="EXIT"
         android:textColor="#FFFFFF"
         android:textSize="12pt" />
 
