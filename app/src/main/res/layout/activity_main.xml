@@ -108,9 +108,8 @@
             android:id="@+id/buttonLeft"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:layout_marginStart="68dp"
-            android:layout_marginLeft="68dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
             android:background="@drawable/lefticon"
             android:onClick="moveLeft"
             app:layout_constraintStart_toStartOf="parent"
@@ -120,8 +119,7 @@
             android:id="@+id/buttonRight"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:layout_marginStart="12dp"
-            android:layout_marginLeft="12dp"
+            android:layout_marginStart="88dp"
             android:background="@drawable/righticon"
             android:onClick="moveRight"
             app:layout_constraintStart_toEndOf="@+id/buttonLeft"
@@ -131,12 +129,24 @@
             android:id="@+id/buttonGirar"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="24dp"
             android:background="@drawable/giraricon"
             android:onClick="rotateAction"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.123"
+            app:layout_constraintHorizontal_bias="0.592"
             app:layout_constraintStart_toEndOf="@+id/buttonRight"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/buttonDown"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/down3"
+            android:onClick="DownAction"
+            app:layout_constraintEnd_toStartOf="@+id/buttonRight"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/buttonLeft"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
