@@ -78,5 +78,11 @@ public class MainActivity extends AppCompatActivity {
     public void actualizarPuntuacion(){
         caja_score.setText(String.valueOf(start.getPuntuacion()));
     }
+    
+   public void DownAction(View view) {
+        while (tab.posibleBajar(tab.getEnjuego())) {
+            tab.bajarPieza(pieza);
+        }
+    }
 }
 
