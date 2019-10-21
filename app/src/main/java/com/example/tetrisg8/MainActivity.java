@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     private GameView gameView;
     private FichaView fichaView;
     private TextView caja_score;
+    private Pieza pieza;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
