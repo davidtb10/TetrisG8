@@ -2,6 +2,7 @@ package com.example.tetrisg8;
 
 
 import android.content.Context;
+import android.widget.Toast;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -9,13 +10,15 @@ import java.util.TimerTask;
 //Clase que controla el funcionamiento del juego y de la partida
 
 public class FuncionamientoJuego {
-    int puntuacion = 0;
-    Tablero tablero;
-    Pieza pieza, piezaSiguiente;
-    GameView gameView;
-    FichaView fichaView;
-    MainActivity mainActivity;
-    Timer timer;
+    private int puntuacion = 0;
+    private Tablero tablero;
+    private Pieza pieza, piezaSiguiente, piezaExtra;
+    private GameView gameView;
+    private FichaView fichaView;
+    private MainActivity mainActivity;
+    private Timer timer;
+    private int periodo = 500;
+    private int tiempoTranscurrido = 0;
 
     public FuncionamientoJuego(GameView gameView, FichaView fichaView, Tablero tab, Context context) {
         this.gameView = gameView;
@@ -38,15 +41,13 @@ public class FuncionamientoJuego {
                             piezaSiguiente = generarPieza();
                             fichaView.setPiezaSiguiente(piezaSiguiente);
                         } else {
-                            if (tablero.posibleBajar(tablero.getEnjuego())) { //Si es posible bajar la pieza
-                                tablero.bajarPieza(pieza);
+                            if (tablero.posibleBajar(tablero.getEnjuego(),"normal")) { //Si es posible bajar la pieza
+                                tablero.bajarPieza(pieza, "normal");
                             } else {
                                 if (tablero.ocupadoPosPieza(pieza)) { //Comprueba si es el final de la partida comprobando si hay otra pieza en su posición
                                     mainActivity.pantallaGameOver();
                                 } else {
                                     tablero.asignarPieza(pieza);
-                                    puntuacion += tablero.lineasCompletas();
-                                    mainActivity.actualizarPuntuacion();
                                     pieza = piezaSiguiente;
                                     tablero.setEnjuego(pieza);
                                     piezaSiguiente = generarPieza(); // Se genera una pieza aleatoria
@@ -54,13 +55,41 @@ public class FuncionamientoJuego {
                                 }
                             }
                         }
+
+                        //Se crea la pieza extra cada 30 segundos
+                        if (tablero.getPiezaExtra() == null) {
+
+                            if (tiempoTranscurrido > 0 && tiempoTranscurrido % 30000 == 0) {
+                                Toast.makeText(mainActivity, "Creamos la pieza extra", Toast.LENGTH_SHORT).show();
+                                piezaExtra = generarPieza();
+                                tablero.setPiezaExtra(piezaExtra);
+                            }
+                        } else {
+                            if (tablero.posibleBajar(tablero.getPiezaExtra(),"extra")) { //Si es posible bajar la pieza
+                                tablero.bajarPieza(piezaExtra, "extra");
+                            } else {
+                                if (tablero.ocupadoPosPieza(piezaExtra)) { //Comprueba si es el final de la partida comprobando si hay otra pieza en su posición
+                                    mainActivity.pantallaGameOver();
+                                } else {
+                                    tablero.asignarPieza(piezaExtra);
+                                    piezaExtra = null;
+                                    tablero.setPiezaExtra(null);
+                                }
+                            }
+                        }
+
+
+                        puntuacion += tablero.lineasCompletas();
+                        mainActivity.actualizarPuntuacion();
+
                         fichaView.invalidate();
                         gameView.invalidate();
+                        tiempoTranscurrido += periodo;
 
                     }
                 });
             }
-        }, 0, 500);
+        }, 0, periodo);
     }
 
     public void finalizarTimer() {

@@ -25,6 +25,7 @@ public class GameView extends View {
         super.onDraw(canvas);
         pintarTablero(canvas);
         pintarPieza(canvas);
+        pintarPiezaExtra(canvas);
         pintarCuadricula(canvas);
     }
     
@@ -72,6 +73,26 @@ public class GameView extends View {
             columna=tablero.getEnjuego().cuadrados[ite];
             ite++;
             canvas.drawRect(columna*anchoCelda,fila*altoCelda,columna*anchoCelda+anchoCelda,fila*altoCelda+altoCelda,p);
+        }
+    }
+
+    public void pintarPiezaExtra(Canvas canvas){
+        if(tablero.getPiezaExtra() != null){
+            int anchoCelda = this.getWidth() / 10;
+            int altoCelda = this.getHeight() / 20;
+            int color=0;
+            color=colorCelda(tablero.getPiezaExtra().tipopieza);
+            p.setColor(color);
+            int fila;
+            int columna;
+            int ite=0;
+            while(ite<8){
+                fila=tablero.getPiezaExtra().cuadrados[ite];
+                ite++;
+                columna=tablero.getPiezaExtra().cuadrados[ite];
+                ite++;
+                canvas.drawRect(columna*anchoCelda,fila*altoCelda,columna*anchoCelda+anchoCelda,fila*altoCelda+altoCelda,p);
+            }
         }
     }
 

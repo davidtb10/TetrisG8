@@ -7,6 +7,7 @@ public class Tablero {
 
     private int tablero[][] = new int[20][10];  //Tablero que almacenará las piezas
     private Pieza enjuego;
+    private Pieza piezaExtra;
 
     public void inicializarTablero() {
         for (int i = 0; i < 20; i++) {
@@ -16,10 +17,10 @@ public class Tablero {
         }
     }
 
-    public void asignarPieza(Pieza pieza){
-        for(int i = 0; i < 8; i += 2){
+    public void asignarPieza(Pieza pieza) {
+        for (int i = 0; i < 8; i += 2) {
             int fila = pieza.getCuadrados()[i];
-            int columna = pieza.getCuadrados()[i+1];
+            int columna = pieza.getCuadrados()[i + 1];
 
             tablero[fila][columna] = pieza.getTipopieza();
         }
@@ -48,32 +49,49 @@ public class Tablero {
         return comprobar;
     }*/
 
-    public boolean ocupadoPosPieza (Pieza pieza){
+    public boolean ocupadoPosPieza(Pieza pieza) {
         boolean ocupado = false;
-        for (int i = 0; i<8; i += 2){
-            if(tablero[pieza.getCuadrados()[i]][pieza.getCuadrados()[i+1]] != 0){
+        for (int i = 0; i < 8; i += 2) {
+            if (tablero[pieza.getCuadrados()[i]][pieza.getCuadrados()[i + 1]] != 0) {
                 ocupado = true;
             }
         }
         return ocupado;
     }
 
-    public void bajarPieza(Pieza pieza) {
+    public void bajarPieza(Pieza pieza, String tipoPieza) {
         int i = 0;
         while (i < 8) {
-            this.enjuego.cuadrados[i]++;
+            switch (tipoPieza) {
+                case "normal":
+                    this.enjuego.cuadrados[i]++;
+                    break;
+                case "extra":
+                    this.piezaExtra.cuadrados[i] += 2;
+                    break;
+            }
+
             i += 2;
         }
     }
 
-    public boolean posibleBajar(Pieza pieza) {
+
+    public boolean posibleBajar(Pieza pieza, String tipoPieza) {
         int filaSiguiente;
         boolean esposible = true;
         int i = 0;
         //Comprueba si es posible (si existe la celda y si esta vacia)
         while (esposible && i < 8) {
-            filaSiguiente = enjuego.cuadrados[i] + 1;
-            esposible = (filaSiguiente < 20) && (tablero[filaSiguiente][enjuego.cuadrados[i + 1]] == 0);
+            switch (tipoPieza) {
+                case "normal":
+                    filaSiguiente = enjuego.cuadrados[i] + 1;
+                    esposible = (filaSiguiente < 20) && (tablero[filaSiguiente][enjuego.cuadrados[i + 1]] == 0);
+                    break;
+                case "extra":
+                    filaSiguiente = piezaExtra.cuadrados[i] + 1;
+                    esposible = (filaSiguiente < 20) && (tablero[filaSiguiente][piezaExtra.cuadrados[i + 1]] == 0);
+                    break;
+            }
             i += 2;
         }
         return esposible;
@@ -124,31 +142,31 @@ public class Tablero {
         }
         return esposible;
     }
-    
+
     //Rotar pieza
-    public boolean rotar(){
+    public boolean rotar() {
         //Coordenadas del ultimo cuadrado de la pieza
         int fila = enjuego.cuadrados[6];
         int columna = enjuego.cuadrados[7];
         //cuadrados representados como puntos en una matriz
         Matrix matriz = new Matrix();
-        matriz.setRotate(-90,fila,columna);
-        float[] puntos = new float[]{0,0,0,0,0,0,0,0};
-        for (int i=0;i<8;i++){
-            puntos[i]=enjuego.cuadrados[i];
+        matriz.setRotate(-90, fila, columna);
+        float[] puntos = new float[]{0, 0, 0, 0, 0, 0, 0, 0};
+        for (int i = 0; i < 8; i++) {
+            puntos[i] = enjuego.cuadrados[i];
         }
         matriz.mapPoints(puntos);
         //comprobar si es posible
         boolean esposible = true;
-        int j=0;
-        while (esposible && j<8) {
-            fila= (int) puntos[j];
-            columna= (int) puntos[j+1];
-            esposible=tablero[fila][columna]==0;
+        int j = 0;
+        while (esposible && j < 8) {
+            fila = (int) puntos[j];
+            columna = (int) puntos[j + 1];
+            esposible = tablero[fila][columna] == 0;
             j += 2;
         }
         //si ha sido posible guarda las nuevas coordenadas en pieza en juego
-        if (esposible){
+        if (esposible) {
             for (int i = 0; i < 8; i++) {
                 enjuego.cuadrados[i] = (int) puntos[i];
             }
@@ -169,33 +187,41 @@ public class Tablero {
     }
 
 
-    public int lineasCompletas (){ //comprobamos todas las filas en las que se encuentra la pieza actual una vez haya acabado de caer y devuelve la puntuacion
+    public int lineasCompletas() { //comprobamos todas las filas en las que se encuentra la pieza actual una vez haya acabado de caer y devuelve la puntuacion
         int nLineasCompletas = 0;
         boolean lineaCompleta;
-        for (int i = 0; i<8; i += 2){
-            lineaCompleta= true;
+        for (int i = 0; i < 8; i += 2) {
+            lineaCompleta = true;
             int filaAComprobar = enjuego.getCuadrados()[i];
-            for (int j = 0; j<10; j++){
-                if (tablero[filaAComprobar][j] == 0){
+            for (int j = 0; j < 10; j++) {
+                if (tablero[filaAComprobar][j] == 0) {
                     lineaCompleta = false;
                 }
             }
-            if (lineaCompleta){
+            if (lineaCompleta) {
                 nLineasCompletas++;
                 bajarLineas(filaAComprobar);
             }
         }
-        return nLineasCompletas*30;
+        return nLineasCompletas * 30;
     }
 
-    public void bajarLineas(int filaEliminar){
-        for(int i = filaEliminar; i > 0; i--){ //Baja todas las filas una posición menos la primera
-            for (int j=0; j< 10; j++){
-                tablero[i][j] = tablero[i-1][j];
+    public void bajarLineas(int filaEliminar) {
+        for (int i = filaEliminar; i > 0; i--) { //Baja todas las filas una posición menos la primera
+            for (int j = 0; j < 10; j++) {
+                tablero[i][j] = tablero[i - 1][j];
             }
         }
-        for(int j=0; j<10;j++){ //Pone a 0 la primera fila
+        for (int j = 0; j < 10; j++) { //Pone a 0 la primera fila
             tablero[0][j] = 0;
         }
+    }
+
+    public void setPiezaExtra(Pieza piezaExtra) {
+        this.piezaExtra = piezaExtra;
+    }
+
+    public Pieza getPiezaExtra() {
+        return piezaExtra;
     }
 }

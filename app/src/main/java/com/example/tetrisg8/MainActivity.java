@@ -81,8 +81,8 @@ public class MainActivity extends AppCompatActivity {
     }
     
    public void DownAction(View view) {
-        while (tab.posibleBajar(tab.getEnjuego())) {
-            tab.bajarPieza(pieza);
+        while (tab.posibleBajar(tab.getEnjuego(),"normal")) {
+            tab.bajarPieza(pieza,"normal");
         }
     }
 }
