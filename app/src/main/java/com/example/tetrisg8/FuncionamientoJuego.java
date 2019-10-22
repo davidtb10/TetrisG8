@@ -17,7 +17,7 @@ public class FuncionamientoJuego {
     private FichaView fichaView;
     private MainActivity mainActivity;
     private Timer timer;
-    private int periodo = 500;
+    private int periodo = 1000;
     private int tiempoTranscurrido = 0;
 
     public FuncionamientoJuego(GameView gameView, FichaView fichaView, Tablero tab, Context context) {
