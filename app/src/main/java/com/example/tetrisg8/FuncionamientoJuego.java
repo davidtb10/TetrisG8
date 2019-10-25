@@ -2,7 +2,6 @@ package com.example.tetrisg8;
 
 
 import android.content.Context;
-import android.widget.Toast;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -36,13 +35,13 @@ public class FuncionamientoJuego {
                     @Override
                     public void run() {
                         if (tablero.getEnjuego() == null) {  //Si es la primera pieza
-                            pieza = generarPieza(); // Se genera una pieza aleatoria
+                            pieza = generarPieza(0); // Se genera una pieza aleatoria
                             tablero.setEnjuego(pieza);
-                            piezaSiguiente = generarPieza();
+                            piezaSiguiente = generarPieza(0);
                             fichaView.setPiezaSiguiente(piezaSiguiente);
                         } else {
-                            if (tablero.posibleBajar(tablero.getEnjuego(),"normal")) { //Si es posible bajar la pieza
-                                tablero.bajarPieza(pieza, "normal");
+                            if (tablero.posibleBajar("normal")) { //Si es posible bajar la pieza
+                                tablero.bajarPieza("normal");
                             } else {
                                 if (tablero.ocupadoPosPieza(pieza)) { //Comprueba si es el final de la partida comprobando si hay otra pieza en su posición
                                     mainActivity.pantallaGameOver();
@@ -50,7 +49,7 @@ public class FuncionamientoJuego {
                                     tablero.asignarPieza(pieza);
                                     pieza = piezaSiguiente;
                                     tablero.setEnjuego(pieza);
-                                    piezaSiguiente = generarPieza(); // Se genera una pieza aleatoria
+                                    piezaSiguiente = generarPieza(0); // Se genera una pieza aleatoria
                                     fichaView.setPiezaSiguiente(piezaSiguiente);
                                 }
                             }
@@ -60,13 +59,12 @@ public class FuncionamientoJuego {
                         if (tablero.getPiezaExtra() == null) {
 
                             if (tiempoTranscurrido > 0 && tiempoTranscurrido % 30000 == 0) {
-                                Toast.makeText(mainActivity, "Creamos la pieza extra", Toast.LENGTH_SHORT).show();
-                                piezaExtra = generarPieza();
+                                piezaExtra = generarPieza(3);
                                 tablero.setPiezaExtra(piezaExtra);
                             }
                         } else {
-                            if (tablero.posibleBajar(tablero.getPiezaExtra(),"extra")) { //Si es posible bajar la pieza
-                                tablero.bajarPieza(piezaExtra, "extra");
+                            if (tablero.posibleBajar("extra")) { //Si es posible bajar la pieza
+                                tablero.bajarPieza("extra");
                             } else {
                                 if (tablero.ocupadoPosPieza(piezaExtra)) { //Comprueba si es el final de la partida comprobando si hay otra pieza en su posición
                                     mainActivity.pantallaGameOver();
@@ -97,9 +95,9 @@ public class FuncionamientoJuego {
     }
 
 
-    public Pieza generarPieza() {
+    public Pieza generarPieza(int desplazamientoColumnas) {
         int tipoPieza = (int) Math.floor(Math.random() * 6 + 1); //función para generar un numero aleatorio del 1 al 7
-        Pieza pieza = new Pieza(tipoPieza);
+        Pieza pieza = new Pieza(tipoPieza, desplazamientoColumnas);
         return pieza;
     }
 

@@ -7,7 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-    //Ventana inicial de arranque
+//Ventana inicial de arranque
 
 public class StartGame extends AppCompatActivity {
     static Activity ventanaInicio;
@@ -21,7 +21,7 @@ public class StartGame extends AppCompatActivity {
     }
 
     public void jugar(View view) {
-        Intent goToMain = new Intent(this,MainActivity.class);
+        Intent goToMain = new Intent(this, MainActivity.class);
         startActivity(goToMain);
     }
 }

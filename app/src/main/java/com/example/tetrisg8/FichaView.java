@@ -11,7 +11,7 @@ import androidx.core.content.ContextCompat;
 //Vista que muestra la siguiente ficha
 
 public class FichaView extends View {
-    Paint p ;
+    Paint p;
     Pieza piezaSiguiente;
 
     public FichaView(Context context) {
@@ -26,28 +26,28 @@ public class FichaView extends View {
         pintarPieza(canvas);
     }
 
-    public void pintarPieza(Canvas canvas){
+    public void pintarPieza(Canvas canvas) {
         int anchoCelda = this.getWidth() / 10;
         int altoCelda = this.getHeight() / 20;
-        int color=0;
-        color=colorCelda(piezaSiguiente.tipopieza);
+        int color = 0;
+        color = colorCelda(piezaSiguiente.tipopieza);
         p.setColor(color);
         int fila;
         int columna;
-        int ite=0;
-        while(ite<8){
-            fila=piezaSiguiente.cuadrados[ite];
+        int ite = 0;
+        while (ite < 8) {
+            fila = piezaSiguiente.cuadrados[ite];
             ite++;
-            columna=piezaSiguiente.cuadrados[ite];
+            columna = piezaSiguiente.cuadrados[ite];
             ite++;
             //Deja 8 celdas vacías por arriba para aparecer centrada
-            canvas.drawRect(columna*anchoCelda,(fila*altoCelda)+8*altoCelda,columna*anchoCelda+anchoCelda,(fila*altoCelda+altoCelda)+8*altoCelda,p);
+            canvas.drawRect(columna * anchoCelda, (fila * altoCelda) + 8 * altoCelda, columna * anchoCelda + anchoCelda, (fila * altoCelda + altoCelda) + 8 * altoCelda, p);
         }
     }
 
-    public int colorCelda(int codigo){
-        int color=0;
-        switch (codigo){
+    public int colorCelda(int codigo) {
+        int color = 0;
+        switch (codigo) {
             case 0:
                 color = Color.BLACK;
                 break;

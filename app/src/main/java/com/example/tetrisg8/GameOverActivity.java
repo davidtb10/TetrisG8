@@ -35,8 +35,7 @@ public class GameOverActivity extends AppCompatActivity implements View.OnClickL
         if (v.getId() == R.id.botSalir) {
             StartGame.ventanaInicio.finish();
             finish();
-        }
-        else{
+        } else {
             finish();
         }
     }

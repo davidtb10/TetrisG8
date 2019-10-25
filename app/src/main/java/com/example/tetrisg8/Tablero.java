@@ -59,7 +59,7 @@ public class Tablero {
         return ocupado;
     }
 
-    public void bajarPieza(Pieza pieza, String tipoPieza) {
+    public void bajarPieza(String tipoPieza) {
         int i = 0;
         while (i < 8) {
             switch (tipoPieza) {
@@ -76,7 +76,7 @@ public class Tablero {
     }
 
 
-    public boolean posibleBajar(Pieza pieza, String tipoPieza) {
+    public boolean posibleBajar(String tipoPieza) {
         int filaSiguiente;
         boolean esposible = true;
         int i = 0;

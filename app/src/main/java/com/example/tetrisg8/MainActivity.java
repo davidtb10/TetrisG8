@@ -8,61 +8,61 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-    //Ventana principal en la que se jugará la partida
+//Ventana principal en la que se jugará la partida
 
 public class MainActivity extends AppCompatActivity {
-    
+
     private FuncionamientoJuego start;
     private Tablero tab = new Tablero();
     private GameView gameView;
     private FichaView fichaView;
     private TextView caja_score;
-    private Pieza pieza;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        this.caja_score = (TextView)findViewById(R.id.scoreBoxContent);
+        this.caja_score = (TextView) findViewById(R.id.scoreBoxContent);
         //to set score
         //this.caja_score.setText(String.valueOf());
         tab.inicializarTablero();
         this.gameView = new GameView(this, tab);
         this.fichaView = new FichaView(this);
 
-        LinearLayout gameLayout = (LinearLayout)findViewById(R.id.gameView);
-        LinearLayout fichaLayout = (LinearLayout)findViewById(R.id.fichaView);
+        LinearLayout gameLayout = (LinearLayout) findViewById(R.id.gameView);
+        LinearLayout fichaLayout = (LinearLayout) findViewById(R.id.fichaView);
 
         gameLayout.addView(this.gameView);
         fichaLayout.addView(this.fichaView);
 
         start = new FuncionamientoJuego(gameView, fichaView, tab, this);
-        
+
         start.partida();
     }
 
     //move left
     public void moveLeft(View view) {
         //Se intenta desplazar la ficha a la izquierda, si ha sido posible se actualiza el canvas
-        if(tab.izquierda())
+        if (tab.izquierda())
             gameView.invalidate();
     }
 
     //move right
     public void moveRight(View view) {
         //Se intenta desplazar la ficha a la derecha, si ha sido posible se actualiza el canvas
-        if(tab.derecha())
+        if (tab.derecha())
             gameView.invalidate();
     }
 
     //rotate
     public void rotateAction(View view) {
         //Se intenta girar la ficha a la derecha, si ha sido posible se actualiza el canvas
-        if(tab.rotar())
+        if (tab.rotar())
             gameView.invalidate();
     }
 
-    public void pantallaGameOver(){
-        Intent intent = new Intent(this,GameOverActivity.class);
+    public void pantallaGameOver() {
+        Intent intent = new Intent(this, GameOverActivity.class);
         //Mandamos la puntuacion a la ventana de game over
         intent.putExtra("puntuacion", start.getPuntuacion());
         startActivity(intent);
@@ -76,13 +76,13 @@ public class MainActivity extends AppCompatActivity {
         start.finalizarTimer();
     }
 
-    public void actualizarPuntuacion(){
+    public void actualizarPuntuacion() {
         caja_score.setText(String.valueOf(start.getPuntuacion()));
     }
-    
-   public void DownAction(View view) {
-        while (tab.posibleBajar(tab.getEnjuego(),"normal")) {
-            tab.bajarPieza(pieza,"normal");
+
+    public void DownAction(View view) {
+        while (tab.posibleBajar("normal")) {
+            tab.bajarPieza("normal");
         }
     }
 }
