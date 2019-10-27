@@ -190,7 +190,20 @@ public class Tablero {
     public int lineasCompletas() { //comprobamos todas las filas en las que se encuentra la pieza actual una vez haya acabado de caer y devuelve la puntuacion
         int nLineasCompletas = 0;
         boolean lineaCompleta;
-        for (int i = 0; i < 8; i += 2) {
+        for(int i=19; i>0; i--){
+            lineaCompleta = true;
+            for (int j = 0; j < 10; j++) {
+                if (tablero[i][j] == 0) {
+                    lineaCompleta = false;
+                }
+            }
+            if (lineaCompleta) {
+                nLineasCompletas++;
+                bajarLineas(i);
+            }
+        }
+        return nLineasCompletas * 30;
+        /*for (int i = 0; i < 8; i += 2) {
             lineaCompleta = true;
             int filaAComprobar = enjuego.getCuadrados()[i];
             for (int j = 0; j < 10; j++) {
@@ -203,7 +216,7 @@ public class Tablero {
                 bajarLineas(filaAComprobar);
             }
         }
-        return nLineasCompletas * 30;
+        return nLineasCompletas * 30;*/
     }
 
     public void bajarLineas(int filaEliminar) {
