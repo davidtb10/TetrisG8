@@ -59,23 +59,23 @@ public class Tablero {
         return ocupado;
     }
 
-    public void bajarPieza(String tipoPieza) {
+    //Bajar la pieza el número de celdas recibidas
+    public void bajarPieza(String tipoPieza, int celdasBajar) {
         int i = 0;
         while (i < 8) {
             switch (tipoPieza) {
                 case "normal":
-                    this.enjuego.cuadrados[i]++;
+                    this.enjuego.cuadrados[i] += celdasBajar;
                     break;
                 case "extra":
-                    this.piezaExtra.cuadrados[i] += 2;
+                    this.piezaExtra.cuadrados[i] += celdasBajar;
                     break;
             }
-
             i += 2;
         }
     }
 
-
+    //Comprueba si es posible bajar las piezas
     public boolean posibleBajar(String tipoPieza) {
         int filaSiguiente;
         boolean esposible = true;
@@ -96,6 +96,24 @@ public class Tablero {
         }
         return esposible;
     }
+
+    //Devuelve el número de posiciones que se puede bajar una pieza extra: 2 (por defecto) o 1
+    public int numPosicionesBajar() {
+        int numeroCasillas = 0;
+        int filaSiguiente;
+        int i = 0;
+        while ((i < 8) && (numeroCasillas != 1)) {
+            filaSiguiente = piezaExtra.cuadrados[i] + 1;
+            if ((filaSiguiente < 19) && (tablero[filaSiguiente + 1][piezaExtra.cuadrados[i + 1]] == 0)) {
+                numeroCasillas = 2;
+            } else {
+                numeroCasillas = 1;
+            }
+            i += 2;
+        }
+        return numeroCasillas;
+    }
+
 
     //Mover pieza a la izquierda
     public boolean izquierda() {
@@ -190,7 +208,7 @@ public class Tablero {
     public int lineasCompletas() { //comprobamos todas las filas en las que se encuentra la pieza actual una vez haya acabado de caer y devuelve la puntuacion
         int nLineasCompletas = 0;
         boolean lineaCompleta;
-        for(int i=19; i>0; i--){
+        for (int i = 19; i > 0; i--) {
             lineaCompleta = true;
             for (int j = 0; j < 10; j++) {
                 if (tablero[i][j] == 0) {
@@ -203,20 +221,7 @@ public class Tablero {
             }
         }
         return nLineasCompletas * 30;
-        /*for (int i = 0; i < 8; i += 2) {
-            lineaCompleta = true;
-            int filaAComprobar = enjuego.getCuadrados()[i];
-            for (int j = 0; j < 10; j++) {
-                if (tablero[filaAComprobar][j] == 0) {
-                    lineaCompleta = false;
-                }
-            }
-            if (lineaCompleta) {
-                nLineasCompletas++;
-                bajarLineas(filaAComprobar);
-            }
-        }
-        return nLineasCompletas * 30;*/
+
     }
 
     public void bajarLineas(int filaEliminar) {

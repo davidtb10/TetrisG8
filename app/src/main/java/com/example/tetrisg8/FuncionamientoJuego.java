@@ -34,6 +34,7 @@ public class FuncionamientoJuego {
                 mainActivity.runOnUiThread(new TimerTask() {
                     @Override
                     public void run() {
+                        int numPosiciones;
                         if (tablero.getEnjuego() == null) {  //Si es la primera pieza
                             pieza = generarPieza(0); // Se genera una pieza aleatoria
                             tablero.setEnjuego(pieza);
@@ -41,7 +42,7 @@ public class FuncionamientoJuego {
                             fichaView.setPiezaSiguiente(piezaSiguiente);
                         } else {
                             if (tablero.posibleBajar("normal")) { //Si es posible bajar la pieza
-                                tablero.bajarPieza("normal");
+                                tablero.bajarPieza("normal", 1);
                             } else {
                                 if (tablero.ocupadoPosPieza(pieza)) { //Comprueba si es el final de la partida comprobando si hay otra pieza en su posición
                                     mainActivity.pantallaGameOver();
@@ -64,7 +65,8 @@ public class FuncionamientoJuego {
                             }
                         } else {
                             if (tablero.posibleBajar("extra")) { //Si es posible bajar la pieza
-                                tablero.bajarPieza("extra");
+                                numPosiciones = tablero.numPosicionesBajar();
+                                tablero.bajarPieza("extra", numPosiciones);
                             } else {
                                 if (tablero.ocupadoPosPieza(piezaExtra)) { //Comprueba si es el final de la partida comprobando si hay otra pieza en su posición
                                     mainActivity.pantallaGameOver();

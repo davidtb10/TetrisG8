@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void DownAction(View view) {
         while (tab.posibleBajar("normal")) {
-            tab.bajarPieza("normal");
+            tab.bajarPieza("normal", 1);
         }
     }
 }
