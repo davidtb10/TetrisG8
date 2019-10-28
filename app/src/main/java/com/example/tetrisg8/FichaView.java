@@ -27,8 +27,8 @@ public class FichaView extends View {
     }
 
     public void pintarPieza(Canvas canvas) {
-        int anchoCelda = this.getWidth() / 10;
-        int altoCelda = this.getHeight() / 20;
+        int anchoCelda = this.getWidth() / 5;
+        int altoCelda = this.getHeight() / 10;
         int color = 0;
         color = colorCelda(piezaSiguiente.tipopieza);
         p.setColor(color);
@@ -41,7 +41,7 @@ public class FichaView extends View {
             columna = piezaSiguiente.cuadrados[ite];
             ite++;
             //Deja 8 celdas vacías por arriba para aparecer centrada
-            canvas.drawRect(columna * anchoCelda, (fila * altoCelda) + 8 * altoCelda, columna * anchoCelda + anchoCelda, (fila * altoCelda + altoCelda) + 8 * altoCelda, p);
+            canvas.drawRect(columna * anchoCelda, fila * altoCelda, columna * anchoCelda + anchoCelda, fila * altoCelda + altoCelda, p);
         }
     }
 

@@ -96,6 +96,9 @@ public class GameView extends View {
     public int colorCelda(int codigo) {
         int color = 0;
         switch (codigo) {
+            case -1:
+                color = Color.GRAY;
+                break;
             case 0:
                 color = Color.BLACK;
                 break;

@@ -1,8 +1,6 @@
 package com.example.tetrisg8;
 
 
-
-
 import android.content.Context;
 
 import java.util.Timer;
@@ -20,16 +18,12 @@ public class FuncionamientoJuego {
     private Timer timer;
     private int periodo = 1000;
     private int tiempoTranscurrido = 0;
-    private String namePlayer;
-    private DatabaseClass db;
-    //this one copy
-    public FuncionamientoJuego(GameView gameView, FichaView fichaView, Tablero tab,String namePlayer, Context context) {
+
+    public FuncionamientoJuego(GameView gameView, FichaView fichaView, Tablero tab, Context context) {
         this.gameView = gameView;
         this.fichaView = fichaView;
         tablero = tab;
         mainActivity = (MainActivity) context;
-        this.namePlayer = namePlayer;
-        db = new DatabaseClass(mainActivity);
     }
 
     public void partida() {
@@ -40,67 +34,11 @@ public class FuncionamientoJuego {
                 mainActivity.runOnUiThread(new TimerTask() {
                     @Override
                     public void run() {
-                        int numPosiciones;
-                        if (tablero.getEnjuego() == null) {  //Si es la primera pieza
-                            pieza = generarPieza(0); // Se genera una pieza aleatoria
-                            tablero.setEnjuego(pieza);
-                            piezaSiguiente = generarPieza(0);
-                            fichaView.setPiezaSiguiente(piezaSiguiente);
-                        } else {
-                            if (tablero.posibleBajar("normal")) { //Si es posible bajar la pieza
-                                tablero.bajarPieza("normal", 1);
-                            } else {
-                                if (tablero.ocupadoPosPieza(pieza)) { //Comprueba si es el final de la partida comprobando si hay otra pieza en su posición
-                                    if(!namePlayer.isEmpty()){
-                                        db.insertData(namePlayer,String.valueOf(puntuacion));
-                                    }
 
-                                    try {
-                                        this.finalize();
-                                    } catch (Throwable e) {
 
-                                    }
-                                    mainActivity.pantallaGameOver();
-                                } else {
-                                    tablero.asignarPieza(pieza);
-                                    pieza = piezaSiguiente;
-                                    tablero.setEnjuego(pieza);
-                                    piezaSiguiente = generarPieza(0); // Se genera una pieza aleatoria
-                                    fichaView.setPiezaSiguiente(piezaSiguiente);
-                                }
-                            }
-                        }
-
-                        //Se crea la pieza extra cada 30 segundos
-                        if (tablero.getPiezaExtra() == null) {
-
-                            if (tiempoTranscurrido > 0 && tiempoTranscurrido % 30000 == 0) {
-                                piezaExtra = generarPieza(3);
-                                tablero.setPiezaExtra(piezaExtra);
-                            }
-                        } else {
-                            if (tablero.posibleBajar("extra")) { //Si es posible bajar la pieza
-                                numPosiciones = tablero.numPosicionesBajar();
-                                tablero.bajarPieza("extra", numPosiciones);
-                            } else {
-                                if (tablero.ocupadoPosPieza(piezaExtra)) { //Comprueba si es el final de la partida comprobando si hay otra pieza en su posición
-                                    if(!namePlayer.isEmpty()){
-                                        db.insertData(namePlayer,String.valueOf(puntuacion));
-                                    }
-
-                                    try {
-                                        this.finalize();
-                                    } catch (Throwable e) {
-
-                                    }
-                                    mainActivity.pantallaGameOver();
-                                } else {
-                                    tablero.asignarPieza(piezaExtra);
-                                    piezaExtra = null;
-                                    tablero.setPiezaExtra(null);
-                                }
-                            }
-                        }
+                        controlarPiezaNormal();
+                        controlarPiezaExtra();
+                        //acortarTablero();
 
 
                         puntuacion += tablero.lineasCompletas();
@@ -116,6 +54,62 @@ public class FuncionamientoJuego {
         }, 0, periodo);
     }
 
+    public void controlarPiezaNormal(){
+        if (tablero.getEnjuego() == null) {  //Si es la primera pieza
+            pieza = generarPieza(0); // Se genera una pieza aleatoria
+            tablero.setEnjuego(pieza);
+            piezaSiguiente = generarPieza();
+            tablero.setPiezaSiguiente(piezaSiguiente);
+            fichaView.setPiezaSiguiente(piezaSiguiente);
+        } else {
+            if (tablero.posibleBajar("normal")) { //Si es posible bajar la pieza
+                tablero.bajarPieza("normal", 1);
+            } else {
+                if (tablero.ocupadoPosPieza(pieza)) { //Comprueba si es el final de la partida comprobando si hay otra pieza en su posición
+                    mainActivity.pantallaGameOver();
+                } else {
+                    tablero.asignarPieza(pieza);
+                    pieza = new Pieza(piezaSiguiente.getTipopieza(),tablero.getFilaInicial(), 0);
+                    tablero.setEnjuego(pieza);
+                    piezaSiguiente = generarPieza(); // Se genera una pieza aleatoria
+                    tablero.setPiezaSiguiente(piezaSiguiente);
+                    fichaView.setPiezaSiguiente(piezaSiguiente);
+                }
+            }
+        }
+    }
+
+    public void controlarPiezaExtra(){
+        int numPosiciones;
+        //Se crea la pieza extra cada 30 segundos
+        if (tablero.getPiezaExtra() == null) {
+
+            if (tiempoTranscurrido > 0 && tiempoTranscurrido % 30000 == 0) {
+                piezaExtra = generarPieza(3);
+                tablero.setPiezaExtra(piezaExtra);
+            }
+        } else {
+            if (tablero.posibleBajar("extra")) { //Si es posible bajar la pieza
+                numPosiciones = tablero.numPosicionesBajar();
+                tablero.bajarPieza("extra", numPosiciones);
+            } else {
+                if (tablero.ocupadoPosPieza(piezaExtra)) { //Comprueba si es el final de la partida comprobando si hay otra pieza en su posición
+                    mainActivity.pantallaGameOver();
+                } else {
+                    tablero.asignarPieza(piezaExtra);
+                    piezaExtra = null;
+                    tablero.setPiezaExtra(null);
+                }
+            }
+        }
+    }
+
+    public void acortarTablero(){
+        if (tiempoTranscurrido > 0 && tiempoTranscurrido % 10000 == 0) {
+            tablero.acortarTablero();
+        }
+    }
+
     public void finalizarTimer() {
         timer.cancel();
     }
@@ -123,7 +117,13 @@ public class FuncionamientoJuego {
 
     public Pieza generarPieza(int desplazamientoColumnas) {
         int tipoPieza = (int) Math.floor(Math.random() * 6 + 1); //función para generar un numero aleatorio del 1 al 7
-        Pieza pieza = new Pieza(tipoPieza, desplazamientoColumnas);
+        Pieza pieza = new Pieza(tipoPieza, tablero.getFilaInicial(), desplazamientoColumnas);
+        return pieza;
+    }
+
+    public Pieza generarPieza(){
+        int tipoPieza = (int) Math.floor(Math.random() * 6 + 1); //función para generar un numero aleatorio del 1 al 7
+        Pieza pieza = new Pieza(tipoPieza);
         return pieza;
     }
 
@@ -133,7 +133,7 @@ public class FuncionamientoJuego {
         return puntuacion;
     }*/
 
-    
+
     /*public void izquierda() {
         if (tablero.ocupadoIzq(pieza)){
             for (int i=0;i<4;i++){
@@ -154,4 +154,3 @@ public class FuncionamientoJuego {
         return puntuacion;
     }
 }
-

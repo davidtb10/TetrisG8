@@ -8,6 +8,8 @@ public class Tablero {
     private int tablero[][] = new int[20][10];  //Tablero que almacenará las piezas
     private Pieza enjuego;
     private Pieza piezaExtra;
+    private Pieza piezaSiguiente;
+    private int filaInicial = 0;
 
     public void inicializarTablero() {
         for (int i = 0; i < 20; i++) {
@@ -204,6 +206,9 @@ public class Tablero {
         this.enjuego = enjuego;
     }
 
+    public int getFilaInicial() {
+        return filaInicial;
+    }
 
     public int lineasCompletas() { //comprobamos todas las filas en las que se encuentra la pieza actual una vez haya acabado de caer y devuelve la puntuacion
         int nLineasCompletas = 0;
@@ -211,7 +216,7 @@ public class Tablero {
         for (int i = 19; i > 0; i--) {
             lineaCompleta = true;
             for (int j = 0; j < 10; j++) {
-                if (tablero[i][j] == 0) {
+                if (tablero[i][j] == 0 || tablero[i][j] == -1) {
                     lineaCompleta = false;
                 }
             }
@@ -235,6 +240,16 @@ public class Tablero {
         }
     }
 
+    public void acortarTablero(){
+        int filaLimite = filaInicial + 2;
+        for (int i=filaInicial; i < filaLimite; i++){
+            for (int j = 0; j < 10; j++){
+                tablero[i][j] = -1;
+            }
+        }
+        filaInicial = filaLimite;
+    }
+
     public void setPiezaExtra(Pieza piezaExtra) {
         this.piezaExtra = piezaExtra;
     }
@@ -242,4 +257,9 @@ public class Tablero {
     public Pieza getPiezaExtra() {
         return piezaExtra;
     }
+
+    public void setPiezaSiguiente(Pieza piezaSiguiente) {
+        this.piezaSiguiente = piezaSiguiente;
+    }
+
 }
