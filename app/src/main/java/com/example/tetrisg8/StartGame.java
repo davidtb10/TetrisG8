@@ -21,7 +21,8 @@ public class StartGame extends AppCompatActivity {
     }
 
     public void jugar(View view) {
-        Intent goToMain = new Intent(this, MainActivity.class);
+        Intent goToMain = new Intent(this,Alert.class);
         startActivity(goToMain);
     }
 }
+
