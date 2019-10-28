@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.content.Intent;
+
 
 //Ventana principal en la que se jugará la partida
 
@@ -17,6 +19,8 @@ public class MainActivity extends AppCompatActivity {
     private GameView gameView;
     private FichaView fichaView;
     private TextView caja_score;
+    private String namePlayer;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +38,9 @@ public class MainActivity extends AppCompatActivity {
 
         gameLayout.addView(this.gameView);
         fichaLayout.addView(this.fichaView);
-
-        start = new FuncionamientoJuego(gameView, fichaView, tab, this);
+        Intent intent = getIntent();
+        this.namePlayer = intent.getStringExtra("name");
+        start = new FuncionamientoJuego(gameView, fichaView, tab,namePlayer, this);
 
         start.partida();
     }
@@ -62,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void pantallaGameOver() {
-        Intent intent = new Intent(this, GameOverActivity.class);
+        Intent intent = new Intent(this,GameOverActivity.class);
         //Mandamos la puntuacion a la ventana de game over
         intent.putExtra("puntuacion", start.getPuntuacion());
         startActivity(intent);
@@ -86,4 +91,5 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 }
+
 
