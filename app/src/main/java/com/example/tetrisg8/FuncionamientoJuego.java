@@ -20,6 +20,7 @@ public class FuncionamientoJuego {
     private int tiempoTranscurrido = 0;
     private String namePlayer;
     private DatabaseClass db;
+    private boolean pendienteAcortar = false;
 
     public FuncionamientoJuego(GameView gameView, FichaView fichaView, Tablero tab, String namePlayer,Context context) {
         this.gameView = gameView;
@@ -31,6 +32,7 @@ public class FuncionamientoJuego {
     }
 
     public void partida() {
+        final boolean pendiente = false;
         timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
@@ -42,7 +44,7 @@ public class FuncionamientoJuego {
 
                         controlarPiezaNormal();
                         controlarPiezaExtra();
-                        //acortarTablero();
+                        acortarTablero();
 
 
                         puntuacion += tablero.lineasCompletas();
@@ -127,8 +129,14 @@ public class FuncionamientoJuego {
     }
 
     public void acortarTablero(){
-        if (tiempoTranscurrido > 0 && tiempoTranscurrido % 10000 == 0) {
-            tablero.acortarTablero();
+        if ((tiempoTranscurrido > 0 && tiempoTranscurrido % 10000 == 0) || (pendienteAcortar)) {
+            if(tablero.posibleAcortarTablero()){
+                tablero.acortarTablero();
+                pendienteAcortar = false;
+            }else{
+                pendienteAcortar = true;
+            }
+
         }
     }
 

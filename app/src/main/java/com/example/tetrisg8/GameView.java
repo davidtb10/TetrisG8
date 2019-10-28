@@ -97,7 +97,7 @@ public class GameView extends View {
         int color = 0;
         switch (codigo) {
             case -1:
-                color = Color.GRAY;
+                color = Color.DKGRAY;
                 break;
             case 0:
                 color = Color.BLACK;

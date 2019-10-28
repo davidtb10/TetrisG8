@@ -240,14 +240,28 @@ public class Tablero {
         }
     }
 
-    public void acortarTablero(){
+    public void acortarTablero() {
         int filaLimite = filaInicial + 2;
-        for (int i=filaInicial; i < filaLimite; i++){
-            for (int j = 0; j < 10; j++){
+        for (int i = filaInicial; i < filaLimite; i++) {
+            for (int j = 0; j < 10; j++) {
                 tablero[i][j] = -1;
             }
         }
         filaInicial = filaLimite;
+    }
+
+    public boolean posibleAcortarTablero() {
+        boolean posible = true;
+        int i = 0;
+        while (i < 8 && posible) {
+            if (piezaExtra == null) {
+                posible = !((enjuego.getCuadrados()[i] == filaInicial) || (enjuego.getCuadrados()[i] == filaInicial + 1));
+            } else {
+                posible = !((enjuego.getCuadrados()[i] == filaInicial) || (enjuego.getCuadrados()[i] == filaInicial + 1) || (piezaExtra.getCuadrados()[i] == filaInicial) || (piezaExtra.getCuadrados()[i] == filaInicial));
+            }
+            i += 2;
+        }
+        return posible;
     }
 
     public void setPiezaExtra(Pieza piezaExtra) {
