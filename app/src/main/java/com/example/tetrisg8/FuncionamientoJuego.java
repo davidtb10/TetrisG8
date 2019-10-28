@@ -18,12 +18,16 @@ public class FuncionamientoJuego {
     private Timer timer;
     private int periodo = 1000;
     private int tiempoTranscurrido = 0;
+    private String namePlayer;
+    private DatabaseClass db;
 
-    public FuncionamientoJuego(GameView gameView, FichaView fichaView, Tablero tab, Context context) {
+    public FuncionamientoJuego(GameView gameView, FichaView fichaView, Tablero tab, String namePlayer,Context context) {
         this.gameView = gameView;
         this.fichaView = fichaView;
         tablero = tab;
         mainActivity = (MainActivity) context;
+        this.namePlayer = namePlayer;
+        db = new DatabaseClass(mainActivity);
     }
 
     public void partida() {
@@ -66,6 +70,15 @@ public class FuncionamientoJuego {
                 tablero.bajarPieza("normal", 1);
             } else {
                 if (tablero.ocupadoPosPieza(pieza)) { //Comprueba si es el final de la partida comprobando si hay otra pieza en su posición
+                    if(!namePlayer.isEmpty()){
+                        db.insertData(namePlayer,String.valueOf(puntuacion));
+                    }
+
+                    try {
+                        this.finalize();
+                    } catch (Throwable e) {
+
+                    }
                     mainActivity.pantallaGameOver();
                 } else {
                     tablero.asignarPieza(pieza);
@@ -94,6 +107,15 @@ public class FuncionamientoJuego {
                 tablero.bajarPieza("extra", numPosiciones);
             } else {
                 if (tablero.ocupadoPosPieza(piezaExtra)) { //Comprueba si es el final de la partida comprobando si hay otra pieza en su posición
+                    if(!namePlayer.isEmpty()){
+                        db.insertData(namePlayer,String.valueOf(puntuacion));
+                    }
+
+                    try {
+                        this.finalize();
+                    } catch (Throwable e) {
+
+                    }
                     mainActivity.pantallaGameOver();
                 } else {
                     tablero.asignarPieza(piezaExtra);
