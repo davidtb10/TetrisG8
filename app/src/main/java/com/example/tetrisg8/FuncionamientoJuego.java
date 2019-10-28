@@ -129,7 +129,7 @@ public class FuncionamientoJuego {
     }
 
     public void acortarTablero(){
-        if ((tiempoTranscurrido > 0 && tiempoTranscurrido % 10000 == 0) || (pendienteAcortar)) {
+        if ((tiempoTranscurrido > 0 && tiempoTranscurrido % 50000 == 0) || (pendienteAcortar)) {
             if(tablero.posibleAcortarTablero()){
                 tablero.acortarTablero();
                 pendienteAcortar = false;
