@@ -164,13 +164,13 @@ public class Tablero {
     }
 
     //Rotar pieza
-    public boolean rotar() {
+    public boolean rotar(int grados) {
         //Coordenadas del ultimo cuadrado de la pieza
         int fila = enjuego.cuadrados[6];
         int columna = enjuego.cuadrados[7];
         //cuadrados representados como puntos en una matriz
         Matrix matriz = new Matrix();
-        matriz.setRotate(-90, fila, columna);
+        matriz.setRotate(grados, fila, columna);
         float[] puntos = new float[]{0, 0, 0, 0, 0, 0, 0, 0};
         for (int i = 0; i < 8; i++) {
             puntos[i] = enjuego.cuadrados[i];
