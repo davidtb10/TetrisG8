@@ -165,6 +165,9 @@ public class Tablero {
 
     //Rotar pieza
     public boolean rotar(int grados) {
+        //Si es la pieza es cuadrada no se rota
+        if(enjuego.tipopieza==4)
+            return false;
         //Coordenadas del ultimo cuadrado de la pieza
         int fila = enjuego.cuadrados[6];
         int columna = enjuego.cuadrados[7];
