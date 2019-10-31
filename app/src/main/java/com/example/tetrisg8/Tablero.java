@@ -9,7 +9,7 @@ public class Tablero {
     private Pieza enjuego;
     private Pieza piezaExtra;
     private Pieza piezaSiguiente;
-    private int filaInicial = 0;
+    private int filaInicial;
 
     public void inicializarTablero() {
         for (int i = 0; i < 20; i++) {
@@ -17,6 +17,7 @@ public class Tablero {
                 tablero[i][j] = 0;
             }
         }
+        filaInicial = 0;
     }
 
     public void asignarPieza(Pieza pieza) {

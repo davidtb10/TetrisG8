@@ -9,7 +9,7 @@ import java.util.TimerTask;
 //Clase que controla el funcionamiento del juego y de la partida
 
 public class FuncionamientoJuego {
-    private int puntuacion = 0;
+    private int puntuacion;
     private Tablero tablero;
     private Pieza pieza, piezaSiguiente, piezaExtra;
     private GameView gameView;
@@ -17,7 +17,7 @@ public class FuncionamientoJuego {
     private MainActivity mainActivity;
     private Timer timer;
     private int periodo = 1000;
-    private int tiempoTranscurrido = 0;
+    private int tiempoTranscurrido;
     private String namePlayer;
     private DatabaseClass db;
     private boolean pendienteAcortar = false;
@@ -33,6 +33,7 @@ public class FuncionamientoJuego {
 
     public void partida() {
         final boolean pendiente = false;
+        inicializarPartida();
         timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
@@ -58,6 +59,11 @@ public class FuncionamientoJuego {
                 });
             }
         }, 0, periodo);
+    }
+
+    public void inicializarPartida(){
+        puntuacion = 0;
+        tiempoTranscurrido = 0;
     }
 
     public void controlarPiezaNormal(){
