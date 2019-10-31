@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.content.Intent;
 
 
 //Ventana principal en la que se jugará la partida
@@ -44,6 +43,9 @@ public class MainActivity extends AppCompatActivity {
 
         start.partida();
     }
+
+
+
 
     //move left
     public void moveLeft(View view) {

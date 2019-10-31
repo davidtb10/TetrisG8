@@ -1,20 +1,25 @@
 package com.example.tetrisg8;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.preference.PreferenceManager;
 import android.view.View;
 
 
 public class GameView extends View {
-    Tablero tablero;
-    Paint p;
+    private Tablero tablero;
+    private Paint p;
+    private int gamaColores;
 
     public GameView(Context context, Tablero tablero) {
         super(context);
         this.tablero = tablero;
         p = new Paint();
+        SharedPreferences pref= PreferenceManager.getDefaultSharedPreferences(context);
+        gamaColores = Integer.parseInt(pref.getString("lista","1"));
     }
 
     @Override
@@ -95,35 +100,72 @@ public class GameView extends View {
 
     public int colorCelda(int codigo) {
         int color = 0;
-        switch (codigo) {
-            case -1:
-                color = Color.DKGRAY;
-                break;
-            case 0:
-                color = Color.BLACK;
-                break;
-            case 1:
-                color = Color.RED;
-                break;
-            case 2:
-                color = Color.WHITE;
-                break;
-            case 3:
-                color = Color.MAGENTA;
-                break;
-            case 4:
-                color = Color.BLUE;
-                break;
-            case 5:
-                color = Color.GREEN;
-                break;
-            case 6:
-                color = Color.GRAY;
-                break;
-            case 7:
-                color = Color.CYAN;
-                break;
+        if(gamaColores == 1){
+            switch (codigo) {
+                case -1:
+                    color = Color.DKGRAY;
+                    break;
+                case 0:
+                    color = Color.BLACK;
+                    break;
+                case 1:
+                    color = Color.RED;
+                    break;
+                case 2:
+                    color = Color.WHITE;
+                    break;
+                case 3:
+                    color = Color.MAGENTA;
+                    break;
+                case 4:
+                    color = Color.BLUE;
+                    break;
+                case 5:
+                    color = Color.GREEN;
+                    break;
+                case 6:
+                    color = Color.GRAY;
+                    break;
+                case 7:
+                    color = Color.CYAN;
+                    break;
+            }
+        }else if(gamaColores == 2){
+            switch (codigo) {
+                case -1:
+                    color = Color.DKGRAY;
+                    break;
+                case 0:
+                    color = Color.BLACK;
+                    break;
+                case 1:
+                    color = Color.BLUE;
+                    break;
+                case 2:
+                    color = Color.BLUE;
+                    break;
+                case 3:
+                    color = Color.BLUE;
+                    break;
+                case 4:
+                    color = Color.BLUE;
+                    break;
+                case 5:
+                    color = Color.BLUE;
+                    break;
+                case 6:
+                    color = Color.BLUE;
+                    break;
+                case 7:
+                    color = Color.BLUE;
+                    break;
+            }
         }
+
         return color;
+    }
+
+    public void setGamaColores(int gamaColores) {
+        this.gamaColores = gamaColores;
     }
 }

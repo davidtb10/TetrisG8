@@ -189,4 +189,5 @@ public class FuncionamientoJuego {
     public int getPuntuacion() {
         return puntuacion;
     }
+
 }

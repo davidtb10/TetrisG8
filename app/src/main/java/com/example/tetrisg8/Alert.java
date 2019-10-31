@@ -11,7 +11,7 @@ import android.widget.Switch;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class Alert extends AppCompatActivity {
-    static Activity ventanaInicio;
+    static Activity ventanaNombre;
     DatabaseClass myDb;
     EditText editName;
     String name;
@@ -23,7 +23,7 @@ public class Alert extends AppCompatActivity {
         myDb = new DatabaseClass(this);
         //Mostramos la puntuación
         editName = (EditText)findViewById(R.id.nombreUsuario);
-        ventanaInicio=this;
+        ventanaNombre=this;
 
 
     }
