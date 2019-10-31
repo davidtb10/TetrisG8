@@ -185,7 +185,8 @@ public class Tablero {
         while (esposible && j < 8) {
             fila = (int) puntos[j];
             columna = (int) puntos[j + 1];
-            esposible = tablero[fila][columna] == 0;
+            //si no excede los limites y la posicion esta vacia
+            esposible = (columna>=0)&&(columna<10)&&(tablero[fila][columna] == 0);
             j += 2;
         }
         //si ha sido posible guarda las nuevas coordenadas en pieza en juego
