@@ -102,7 +102,19 @@
 
 
         >
-
+        
+        
+        <Button
+            android:id="@+id/buttonGirar2"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/girariconizq"
+            android:onClick="rotarInverso"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/buttonRight"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/buttonLeft"
@@ -133,7 +145,7 @@
             android:background="@drawable/giraricon"
             android:onClick="rotateAction"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.592"
+            app:layout_constraintHorizontal_bias="0.721"
             app:layout_constraintStart_toEndOf="@+id/buttonRight"
             app:layout_constraintTop_toTopOf="parent" />
 
