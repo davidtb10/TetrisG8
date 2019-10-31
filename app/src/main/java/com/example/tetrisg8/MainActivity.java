@@ -62,7 +62,12 @@ public class MainActivity extends AppCompatActivity {
     //rotate
     public void rotateAction(View view) {
         //Se intenta girar la ficha a la derecha, si ha sido posible se actualiza el canvas
-        if (tab.rotar())
+        if (tab.rotar(-90))
+            gameView.invalidate();
+    }
+    public void rotarInverso(View view) {
+        //Se intenta girar la ficha a la derecha, si ha sido posible se actualiza el canvas
+        if (tab.rotar(90))
             gameView.invalidate();
     }
 
