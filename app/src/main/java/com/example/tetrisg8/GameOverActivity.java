@@ -14,6 +14,7 @@ public class GameOverActivity extends AppCompatActivity implements View.OnClickL
     TextView textViewPuntuacion;
     DatabaseClass myDb;
     Button btnviewAll;
+    int cont=1;
 
 
     @Override
@@ -47,11 +48,12 @@ public class GameOverActivity extends AppCompatActivity implements View.OnClickL
                         }
 
                         StringBuffer buffer = new StringBuffer();
-                        while (res.moveToNext()) {
-                            buffer.append( res.getString(0)+". ");
+                         while (res.moveToNext()) {
+                            buffer.append( cont+". ");
                             buffer.append( res.getString(1) + "           ");
                             buffer.append("    Score :" + res.getString(2) + "\n");
                             buffer.append("\n");
+                            cont++;
                         }
 
                         // MUESTRA NOMBRES CON PUNTUACIONES
