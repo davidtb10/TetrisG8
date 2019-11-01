@@ -2,6 +2,8 @@ package com.example.tetrisg8;
 
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -10,6 +12,7 @@ import java.util.TimerTask;
 
 public class FuncionamientoJuego {
     private int puntuacion;
+    private int lineasEliminadas;
     private Tablero tablero;
     private Pieza pieza, piezaSiguiente, piezaExtra;
     private GameView gameView;
@@ -21,6 +24,8 @@ public class FuncionamientoJuego {
     private String namePlayer;
     private DatabaseClass db;
     private boolean pendienteAcortar = false;
+    private int gamaColores;
+    SharedPreferences pref;
 
     public FuncionamientoJuego(GameView gameView, FichaView fichaView, Tablero tab, String namePlayer,Context context) {
         this.gameView = gameView;
@@ -32,7 +37,6 @@ public class FuncionamientoJuego {
     }
 
     public void partida() {
-        final boolean pendiente = false;
         inicializarPartida();
         timer = new Timer();
         timer.schedule(new TimerTask() {
@@ -48,7 +52,9 @@ public class FuncionamientoJuego {
                         acortarTablero();
 
 
-                        puntuacion += tablero.lineasCompletas();
+                        lineasEliminadas = tablero.lineasCompletas();
+                        cambiarColorPiezas(lineasEliminadas);
+                        puntuacion += (30*lineasEliminadas);
                         mainActivity.actualizarPuntuacion();
 
                         fichaView.invalidate();
@@ -64,6 +70,11 @@ public class FuncionamientoJuego {
     public void inicializarPartida(){
         puntuacion = 0;
         tiempoTranscurrido = 0;
+        pref = PreferenceManager.getDefaultSharedPreferences(mainActivity);
+        gamaColores = Integer.parseInt(pref.getString("lista", "1"));
+        gameView.rellenarArray(gamaColores);
+        int[] colores = gameView.getArrayColoresAleatorios();
+        fichaView.rellenarArray(gamaColores, colores);
     }
 
     public void controlarPiezaNormal(){
@@ -142,6 +153,19 @@ public class FuncionamientoJuego {
             }else{
                 pendienteAcortar = true;
             }
+
+        }
+    }
+
+    public void cambiarColorPiezas(int lineasEliminadas){
+        int colores[];
+        if(lineasEliminadas == 1){
+            colores = gameView.rellenarArrayColorFijo();
+            fichaView.rellenarArrayColorFijo(colores);
+
+        }else if(lineasEliminadas > 1){
+            colores = gameView.rellenarArrayColoresAleatorios();
+            fichaView.rellenarArrayColoresAleatorios(colores);
 
         }
     }

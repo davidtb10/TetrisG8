@@ -2,7 +2,7 @@
 <resources>
     <string-array name="gamas">
         <item>Multicolor</item>
-        <item>Azul</item>
+        <item>Color único</item>
     </string-array>
     <string-array name="numGamas">
         <item>1</item>

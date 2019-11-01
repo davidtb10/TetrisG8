@@ -88,7 +88,7 @@ public class GameOverActivity extends AppCompatActivity implements View.OnClickL
             } else {
                 Intent goToMain = new Intent(this, StartGame.class);
                 startActivity(goToMain);
-
+                finish();
             }
         }
     }

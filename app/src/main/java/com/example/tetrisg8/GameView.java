@@ -1,25 +1,22 @@
 package com.example.tetrisg8;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.preference.PreferenceManager;
 import android.view.View;
 
 
 public class GameView extends View {
     private Tablero tablero;
     private Paint p;
-    private int gamaColores;
+    private int[] arrayColores = {Color.RED, Color.WHITE, Color.MAGENTA, Color.BLUE, Color.GREEN, Color.GRAY, Color.CYAN};
+    private int[] arrayColoresAleatorios = {0, 0, 0, 0, 0, 0, 0};
 
     public GameView(Context context, Tablero tablero) {
         super(context);
         this.tablero = tablero;
         p = new Paint();
-        SharedPreferences pref= PreferenceManager.getDefaultSharedPreferences(context);
-        gamaColores = Integer.parseInt(pref.getString("lista","1"));
     }
 
     @Override
@@ -100,72 +97,85 @@ public class GameView extends View {
 
     public int colorCelda(int codigo) {
         int color = 0;
-        if(gamaColores == 1){
-            switch (codigo) {
-                case -1:
-                    color = Color.DKGRAY;
-                    break;
-                case 0:
-                    color = Color.BLACK;
-                    break;
-                case 1:
-                    color = Color.RED;
-                    break;
-                case 2:
-                    color = Color.WHITE;
-                    break;
-                case 3:
-                    color = Color.MAGENTA;
-                    break;
-                case 4:
-                    color = Color.BLUE;
-                    break;
-                case 5:
-                    color = Color.GREEN;
-                    break;
-                case 6:
-                    color = Color.GRAY;
-                    break;
-                case 7:
-                    color = Color.CYAN;
-                    break;
-            }
-        }else if(gamaColores == 2){
-            switch (codigo) {
-                case -1:
-                    color = Color.DKGRAY;
-                    break;
-                case 0:
-                    color = Color.BLACK;
-                    break;
-                case 1:
-                    color = Color.BLUE;
-                    break;
-                case 2:
-                    color = Color.BLUE;
-                    break;
-                case 3:
-                    color = Color.BLUE;
-                    break;
-                case 4:
-                    color = Color.BLUE;
-                    break;
-                case 5:
-                    color = Color.BLUE;
-                    break;
-                case 6:
-                    color = Color.BLUE;
-                    break;
-                case 7:
-                    color = Color.BLUE;
-                    break;
-            }
-        }
 
+        switch (codigo) {
+            case -1:
+                color = Color.DKGRAY;
+                break;
+            case 0:
+                color = Color.BLACK;
+                break;
+            case 1:
+                color = arrayColoresAleatorios[0];
+                break;
+            case 2:
+                color = arrayColoresAleatorios[1];
+                break;
+            case 3:
+                color = arrayColoresAleatorios[2];
+                break;
+            case 4:
+                color = arrayColoresAleatorios[3];
+                break;
+            case 5:
+                color = arrayColoresAleatorios[4];
+                break;
+            case 6:
+                color = arrayColoresAleatorios[5];
+                break;
+            case 7:
+                color = arrayColoresAleatorios[6];
+                break;
+        }
         return color;
     }
 
-    public void setGamaColores(int gamaColores) {
-        this.gamaColores = gamaColores;
+    public void rellenarArray(int gama){
+        if(gama == 1){
+            rellenarArrayColoresAleatorios();
+        }else if(gama == 2){
+            rellenarArrayColorFijo();
+        }
+    }
+
+    public int[] rellenarArrayColorFijo() {
+        int indice;
+        int color;
+        indice = (int) Math.floor(Math.random() * 7);
+        color = arrayColores[indice];
+        for (int i = 0; i < arrayColoresAleatorios.length; i++) {
+            arrayColoresAleatorios[i] = color;
+        }
+        return arrayColoresAleatorios;
+    }
+
+    public int[] rellenarArrayColoresAleatorios() {
+        int indice;
+        int color;
+        for (int i = 0; i < arrayColoresAleatorios.length; i++) {
+            indice = (int) Math.floor(Math.random() * 7);
+            color = arrayColores[indice];
+            while (colorAsignado(color, i)) {
+                indice = (int) Math.floor(Math.random() * 7);
+                color = arrayColores[indice];
+            }
+            arrayColoresAleatorios[i] = color;
+        }
+        return arrayColoresAleatorios;
+    }
+
+    public boolean colorAsignado(int color, int index) {
+        boolean asignado = false;
+        for (int i = 0; i < index; i++) {
+            asignado = (arrayColoresAleatorios[i] == color);
+            if (asignado) {
+                return true;
+            }
+        }
+        return asignado;
+    }
+
+    public int[] getArrayColoresAleatorios() {
+        return arrayColoresAleatorios;
     }
 }

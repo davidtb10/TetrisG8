@@ -29,29 +29,6 @@ public class Tablero {
         }
     }
 
-    /*public boolean ocupadoGiro(Pieza pieza){
-        boolean comprobar = false;
-        for (int i = 0; i < 4; i++) { //borra la pieza para que al comprobar no se encuentre con una celda de la propia pieza
-            tablero[pieza.getPieza()[i].getX()][pieza.getPieza()[i].getY()].setTipoPieza(0);
-        }
-        Celda celdasComprobar [] = pieza.coordPiezaGirada(); //METODO QUE DEVUELVE UN ARRAY CON LAS COORDENADAS QUE OCUPARIA LA PIEZA GIRADA
-        for (int i = 0; i < 4; i++) {
-            if (tablero[celdasComprobar[i].getX()][(celdasComprobar[i].getY())].getTipoPieza() == 0 && !(celdasComprobar[i].getX() < 0)
-                    && !(celdasComprobar[i].getX() > 19) && !(celdasComprobar[i].getY() < 0) && !(celdasComprobar[i].getY() > 9)) {
-                //comprueba si las celdas están ocupadas o se salen del tablero
-                comprobar = false; //si no está ocupado devuelve false y se pintaría girada
-            }
-            else {
-                comprobar = true;
-                for (int j = 0; j < 4; j++) {
-                    tablero[pieza.getPieza()[j].getX()][pieza.getPieza()[j].getY()].setTipoPieza(pieza.getPieza()[j].getTipoPieza()); //si está ocupado vuelve a pintar la pieza y devuelve true
-                }
-                return comprobar;
-            }
-        }
-        return comprobar;
-    }*/
-
     public boolean ocupadoPosPieza(Pieza pieza) {
         boolean ocupado = false;
         for (int i = 0; i < 8; i += 2) {
@@ -167,7 +144,7 @@ public class Tablero {
     //Rotar pieza
     public boolean rotar(int grados) {
         //Si es la pieza es cuadrada no se rota
-        if(enjuego.tipopieza==4)
+        if (enjuego.tipopieza == 4)
             return false;
         //Coordenadas del ultimo cuadrado de la pieza
         int fila = enjuego.cuadrados[6];
@@ -187,7 +164,7 @@ public class Tablero {
             fila = (int) puntos[j];
             columna = (int) puntos[j + 1];
             //si no excede los limites y la posicion esta vacia
-            esposible = (columna>=0)&&(columna<10)&&(fila>=0)&&(tablero[fila][columna] == 0);
+            esposible = (columna >= 0) && (columna < 10) && (fila >= 0) && (tablero[fila][columna] == 0);
             j += 2;
         }
         //si ha sido posible guarda las nuevas coordenadas en pieza en juego
@@ -215,10 +192,13 @@ public class Tablero {
         return filaInicial;
     }
 
-    public int lineasCompletas() { //comprobamos todas las filas en las que se encuentra la pieza actual una vez haya acabado de caer y devuelve la puntuacion
+    public int lineasCompletas() { //comprobamos todas las filas para ver si alguna esté completa y devuelve el número de filas completas
         int nLineasCompletas = 0;
+        boolean todasFilasEliminadas = true;
         boolean lineaCompleta;
-        for (int i = 19; i > 0; i--) {
+
+
+        for (int i = filaInicial+1; i < 20; i++) {
             lineaCompleta = true;
             for (int j = 0; j < 10; j++) {
                 if (tablero[i][j] == 0 || tablero[i][j] == -1) {
@@ -229,21 +209,37 @@ public class Tablero {
                 nLineasCompletas++;
                 bajarLineas(i);
             }
+
         }
-        return nLineasCompletas * 30;
+
+        return nLineasCompletas;
 
     }
 
     public void bajarLineas(int filaEliminar) {
-        for (int i = filaEliminar; i > 0; i--) { //Baja todas las filas una posición menos la primera
+        int filaAuxEliminada[];
+        int filaAuxSuperior[] = copiarFila(filaInicial);
+        for (int i = filaInicial+1; i <= filaEliminar; i++) { //Baja todas las filas una posición menos la primera hasta la linea a eliminar
+            filaAuxEliminada = copiarFila(i);
             for (int j = 0; j < 10; j++) {
-                tablero[i][j] = tablero[i - 1][j];
+                tablero[i][j] = filaAuxSuperior[j];
             }
+            filaAuxSuperior = filaAuxEliminada;
         }
+
         for (int j = 0; j < 10; j++) { //Pone a 0 la primera fila
-            tablero[0][j] = 0;
+            tablero[filaInicial][j] = 0;
         }
     }
+
+    public int[] copiarFila(int fila){
+        int aux[] = new int[10];
+        for (int j = 0; j < 10; j++) {
+            aux[j] = tablero[fila][j];
+        }
+        return aux;
+    }
+
 
     public void acortarTablero() {
         int filaLimite = filaInicial + 2;
