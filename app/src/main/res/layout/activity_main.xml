@@ -102,12 +102,33 @@
 
 
         >
-        
-        
+
+
+        <Button
+            android:id="@+id/buttonLeft"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/lefticon"
+            android:onClick="moveLeft"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/buttonRight"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="60dp"
+            android:background="@drawable/righticon"
+            android:onClick="moveRight"
+            app:layout_constraintStart_toEndOf="@+id/buttonLeft"
+            app:layout_constraintTop_toTopOf="@+id/buttonLeft" />
+
         <Button
             android:id="@+id/buttonGirar2"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_marginTop="24dp"
             android:background="@drawable/girariconizq"
             android:onClick="rotarInverso"
@@ -117,42 +138,22 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/buttonLeft"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="24dp"
-            android:background="@drawable/lefticon"
-            android:onClick="moveLeft"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
-            android:id="@+id/buttonRight"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_marginStart="88dp"
-            android:background="@drawable/righticon"
-            android:onClick="moveRight"
-            app:layout_constraintStart_toEndOf="@+id/buttonLeft"
-            app:layout_constraintTop_toTopOf="@+id/buttonLeft" />
-
-        <Button
             android:id="@+id/buttonGirar"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_marginTop="24dp"
             android:background="@drawable/giraricon"
             android:onClick="rotateAction"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.721"
-            app:layout_constraintStart_toEndOf="@+id/buttonRight"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/buttonGirar2"
             app:layout_constraintTop_toTopOf="parent" />
+
 
         <Button
             android:id="@+id/buttonDown"
-            android:layout_width="wrap_content"
-            android:layout_height="70dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_marginTop="24dp"
             android:background="@drawable/down3"
             android:onClick="DownAction"
