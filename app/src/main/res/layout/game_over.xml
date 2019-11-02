@@ -27,29 +27,44 @@
         android:textColor="#FFFBFB"
         android:textSize="50sp" />
 
+
     <TextView
         android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="#FFFBFB"
-        android:textSize="35sp"
+        android:layout_width="273dp"
+        android:layout_height="50dp"
+        android:text="SCORE            TIME"
         android:textAlignment="center"
-        android:text="Score:" />
+        android:textColor="#FFFBFB"
+        android:textSize="24sp" />
 
     <TextView
         android:id="@+id/score"
-        android:layout_width="262dp"
+        android:layout_width="120dp"
         android:layout_height="82dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="70dp"
+        android:layout_marginBottom="-82dp"
+        android:background="@drawable/dark"
         android:fontFamily="monospace"
+        android:onClick="puntuacionFinal"
         android:text="SCORE"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
-        android:textSize="30sp"
-        android:background="@drawable/dark"
+        android:textSize="30sp" />
 
-        android:onClick="puntuacionFinal" />
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="120dp"
+        android:layout_height="82dp"
+        android:layout_marginLeft="130dp"
+        android:layout_marginRight="60dp"
+        android:background="@drawable/dark"
+        android:fontFamily="monospace"
+        android:onClick="tiempoFinal"
+        android:text="TIME"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp" />
 
     <Button
         android:id="@+id/botJugar"
