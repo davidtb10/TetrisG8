@@ -77,6 +77,8 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this,GameOverActivity.class);
         //Mandamos la puntuacion a la ventana de game over
         intent.putExtra("puntuacion", start.getPuntuacion());
+        intent.putExtra("tiempo", start.getTiempoTranscurrido());
+
         startActivity(intent);
         finish();
     }
