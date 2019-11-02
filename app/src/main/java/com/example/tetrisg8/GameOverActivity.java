@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 public class GameOverActivity extends AppCompatActivity implements View.OnClickListener {
     TextView textViewPuntuacion;
