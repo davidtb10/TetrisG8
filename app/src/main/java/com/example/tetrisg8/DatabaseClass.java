@@ -9,9 +9,11 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DatabaseClass extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "ScoreRanks.db";
     public static final String TABLE_NAME = "student_table";
-    public static final String COL_1 = "ID";
+   public static final String COL_1 = "ID";
     public static final String COL_2 = "NAME";
     public static final String COL_3 = "SCORE";
+    public static final String COL_4 = "TIME";
+
     public static final int num = 10;
 
 
@@ -23,7 +25,7 @@ public class DatabaseClass extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table " + TABLE_NAME +" (ID INTEGER PRIMARY KEY AUTOINCREMENT,NAME TEXT,SCORE TEXT)");
+        db.execSQL("create table " + TABLE_NAME +" (ID INTEGER PRIMARY KEY AUTOINCREMENT,NAME TEXT,SCORE TEXT,TIME TEXT)");
     }
 
     @Override
@@ -32,11 +34,13 @@ public class DatabaseClass extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean insertData(String name,String score) {
+    public boolean insertData(String name,String score,String time) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL_2,name);
         contentValues.put(COL_3,score);
+        contentValues.put(COL_4,time);
+
 
 
 
