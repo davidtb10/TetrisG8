@@ -12,9 +12,10 @@ import android.widget.TextView;
 
 public class GameOverActivity extends AppCompatActivity implements View.OnClickListener {
     TextView textViewPuntuacion;
+    TextView textViewTiempo;
     DatabaseClass myDb;
     Button btnviewAll;
-    int cont=1;
+    
 
 
     @Override
@@ -24,8 +25,13 @@ public class GameOverActivity extends AppCompatActivity implements View.OnClickL
         //Recibimos la puntuación del main
         int puntuacion = getIntent().getExtras().getInt("puntuacion");
         //Mostramos la puntuación
+        int tiempo = getIntent().getExtras().getInt("tiempo");
+        DateFormat df = new SimpleDateFormat("mm:ss");
+        //Mostramos la puntuación
         textViewPuntuacion = (TextView) findViewById(R.id.score);
         textViewPuntuacion.setText(String.valueOf(puntuacion));
+        textViewTiempo = (TextView) findViewById(R.id.time);
+        textViewTiempo.setText(String.valueOf( df.format(tiempo)));
         Button botonSalir = (Button) this.findViewById(R.id.botSalir);
         botonSalir.setOnClickListener(this);
         Button botonJugar = (Button) this.findViewById(R.id.botJugar);
@@ -46,18 +52,20 @@ public class GameOverActivity extends AppCompatActivity implements View.OnClickL
                             showMessage("Top Scores", "Nothing found");
                             return;
                         }
-
+                       int cont=1;
                         StringBuffer buffer = new StringBuffer();
-                         while (res.moveToNext()) {
-                            buffer.append( cont+". ");
-                            buffer.append( res.getString(1) + "           ");
-                            buffer.append("    Score :" + res.getString(2) + "\n");
+                        while (res.moveToNext()) {
+                            buffer.append(cont+".");
+                            buffer.append("  Name :"+res.getString(1) + "\n");
+                            buffer.append("     Score :"+ res.getString(2) + "\n");
+                            buffer.append("     Time :"+res.getString(3) + "\n");
+
                             buffer.append("\n");
                             cont++;
                         }
 
                         // MUESTRA NOMBRES CON PUNTUACIONES
-                        showMessage("                   TOP SCORES              ", buffer.toString());
+                        showMessage("                    TOP SCORES              ", buffer.toString());
                     }
                 }
         );
