@@ -1,17 +1,21 @@
 package com.example.tetrisg8;
 
 
-import android.content.Context;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+
 import java.util.Timer;
 import java.util.TimerTask;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 //Clase que controla el funcionamiento del juego y de la partida
 
 public class FuncionamientoJuego {
     private int puntuacion;
+    private int lineasEliminadas;
     private Tablero tablero;
     private Pieza pieza, piezaSiguiente, piezaExtra;
     private GameView gameView;
@@ -23,7 +27,10 @@ public class FuncionamientoJuego {
     private String namePlayer;
     private DatabaseClass db;
     private boolean pendienteAcortar = false;
+    private int gamaColores;
+    SharedPreferences pref;
     DateFormat df;
+
 
     public FuncionamientoJuego(GameView gameView, FichaView fichaView, Tablero tab, String namePlayer,Context context) {
         this.gameView = gameView;
@@ -35,7 +42,6 @@ public class FuncionamientoJuego {
     }
 
     public void partida() {
-        final boolean pendiente = false;
         inicializarPartida();
         timer = new Timer();
         timer.schedule(new TimerTask() {
@@ -51,14 +57,14 @@ public class FuncionamientoJuego {
                         acortarTablero();
 
 
-                        puntuacion += tablero.lineasCompletas();
+                        lineasEliminadas = tablero.lineasCompletas();
+                        cambiarColorPiezas(lineasEliminadas);
+                        puntuacion += (30*lineasEliminadas);
                         mainActivity.actualizarPuntuacion();
 
                         fichaView.invalidate();
                         gameView.invalidate();
                         tiempoTranscurrido += periodo;
-
-
 
                     }
                 });
@@ -69,10 +75,15 @@ public class FuncionamientoJuego {
     public void inicializarPartida(){
         puntuacion = 0;
         tiempoTranscurrido = 0;
+        pref = PreferenceManager.getDefaultSharedPreferences(mainActivity);
+        gamaColores = Integer.parseInt(pref.getString("lista", "1"));
+        gameView.rellenarArray(gamaColores);
+        int[] colores = gameView.getArrayColoresAleatorios();
+        fichaView.rellenarArray(gamaColores, colores);
     }
 
     public void controlarPiezaNormal(){
-         df = new SimpleDateFormat("mm:ss");
+        df = new SimpleDateFormat("mm:ss");
         if (tablero.getEnjuego() == null) {  //Si es la primera pieza
             pieza = generarPieza(0); // Se genera una pieza aleatoria
             tablero.setEnjuego(pieza);
@@ -86,7 +97,6 @@ public class FuncionamientoJuego {
                 if (tablero.ocupadoPosPieza(pieza)) { //Comprueba si es el final de la partida comprobando si hay otra pieza en su posición
                     if(!namePlayer.isEmpty()){
                         db.insertData(namePlayer,String.valueOf(puntuacion),String.valueOf(df.format(tiempoTranscurrido)));
-
                     }
 
                     try {
@@ -108,7 +118,6 @@ public class FuncionamientoJuego {
     }
 
     public void controlarPiezaExtra(){
-       df = new SimpleDateFormat("mm:ss");
         int numPosiciones;
         //Se crea la pieza extra cada 30 segundos
         if (tablero.getPiezaExtra() == null) {
@@ -150,6 +159,19 @@ public class FuncionamientoJuego {
             }else{
                 pendienteAcortar = true;
             }
+
+        }
+    }
+
+    public void cambiarColorPiezas(int lineasEliminadas){
+        int colores[];
+        if(lineasEliminadas == 1){
+            colores = gameView.rellenarArrayColorFijo();
+            fichaView.rellenarArrayColorFijo(colores);
+
+        }else if(lineasEliminadas > 1){
+            colores = gameView.rellenarArrayColoresAleatorios();
+            fichaView.rellenarArrayColoresAleatorios(colores);
 
         }
     }
