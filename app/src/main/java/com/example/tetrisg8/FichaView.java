@@ -24,7 +24,10 @@ public class FichaView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        pintarPieza(canvas);
+        if(piezaSiguiente != null){
+            pintarPieza(canvas);
+        }
+
     }
 
     public void pintarPieza(Canvas canvas) {

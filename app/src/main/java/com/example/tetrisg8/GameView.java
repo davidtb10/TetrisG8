@@ -23,9 +23,12 @@ public class GameView extends View {
     protected void onDraw(Canvas canvas) { //Pinta la cuadrícula del tablero
         super.onDraw(canvas);
         pintarTablero(canvas);
-        pintarPieza(canvas);
-        pintarPiezaExtra(canvas);
-        pintarCuadricula(canvas);
+        if(tablero.getEnjuego() != null){
+            pintarPieza(canvas);
+            pintarPiezaExtra(canvas);
+            pintarCuadricula(canvas);
+        }
+
     }
 
     private void pintarTablero(Canvas canvas) {
