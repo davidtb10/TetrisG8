@@ -74,13 +74,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void pantallaGameOver() {
-        Intent intent = new Intent(this,GameOverActivity.class);
-        //Mandamos la puntuacion a la ventana de game over
+          Intent intent = new Intent(this,TakePhoto.class);
         intent.putExtra("puntuacion", start.getPuntuacion());
         intent.putExtra("tiempo", start.getTiempoTranscurrido());
-
+        //Mandamos la puntuacion a la ventana de game over
         startActivity(intent);
-        finish();
     }
 
     //Para el timer cuando se abre otro activity por encima
