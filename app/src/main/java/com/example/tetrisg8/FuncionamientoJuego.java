@@ -4,6 +4,7 @@ package com.example.tetrisg8;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.preference.PreferenceManager;
 
 import java.util.Timer;
@@ -28,8 +29,10 @@ public class FuncionamientoJuego {
     private DatabaseClass db;
     private boolean pendienteAcortar = false;
     private int gamaColores;
-    SharedPreferences pref;
-    DateFormat df;
+    private SharedPreferences pref;
+    private DateFormat df;
+    private MediaPlayer musica;
+    private int cancion = 1;
 
 
     public FuncionamientoJuego(GameView gameView, FichaView fichaView, Tablero tab, String namePlayer,Context context) {
@@ -51,7 +54,7 @@ public class FuncionamientoJuego {
                     @Override
                     public void run() {
 
-
+                        controlarMusica();
                         controlarPiezaNormal();
                         controlarPiezaExtra();
                         acortarTablero();
@@ -105,6 +108,7 @@ public class FuncionamientoJuego {
 
                     }
                     mainActivity.pantallaGameOver();
+                    stopMediaPlayer();
                 } else {
                     tablero.asignarPieza(pieza);
                     pieza = new Pieza(piezaSiguiente.getTipopieza(),tablero.getFilaInicial(), 0);
@@ -142,6 +146,7 @@ public class FuncionamientoJuego {
 
                     }
                     mainActivity.pantallaGameOver();
+                    stopMediaPlayer();
                 } else {
                     tablero.asignarPieza(piezaExtra);
                     piezaExtra = null;
@@ -193,28 +198,41 @@ public class FuncionamientoJuego {
         return pieza;
     }
 
-
-    /*public int actualizarPuntuacion(int puntuacion, Tablero tablero, Pieza pieza){ //le pasamos la puntuación actual
-        puntuacion = puntuacion + lineasCompletas(tablero, pieza)*30;
-        return puntuacion;
-    }*/
-
-
-    /*public void izquierda() {
-        if (tablero.ocupadoIzq(pieza)){
-            for (int i=0;i<4;i++){
-                pieza.getPieza()[i].setY(pieza.getPieza()[i].getY()-1);
+    public void controlarMusica(){
+        if(musica == null){
+            playMediaPlayer(1);
+        }else if (tiempoTranscurrido > 0 && tiempoTranscurrido % 20000 == 0) {
+            stopMediaPlayer();
+            if(cancion==4){
+                cancion=1;
+            }else{
+                cancion++;
             }
+            playMediaPlayer(cancion);
         }
-    }*/
+    }
 
-    /*public void derecha() {
-        if (tablero.ocupadoDcha(pieza)){
-            for (int i=0;i<4;i++){
-                pieza.getPieza()[i].setY(pieza.getPieza()[i].getY()+1);
-            }
+    public void  playMediaPlayer(int cancion){
+        switch (cancion){
+            case 1:
+                musica= MediaPlayer.create(mainActivity, R.raw.centralcity);
+                break;
+            case 2:
+                musica= MediaPlayer.create(mainActivity, R.raw.gameover);
+                break;
+            case 3:
+                musica= MediaPlayer.create(mainActivity, R.raw.majorloss);
+                break;
+            case 4:
+                musica= MediaPlayer.create(mainActivity, R.raw.neversurrender);
+                break;
         }
-    }*/
+        musica.start();
+    }
+
+    public void stopMediaPlayer(){
+        musica.stop();
+    }
 
     public int getPuntuacion() {
         return puntuacion;
