@@ -16,8 +16,12 @@
         <activity
             android:name=".Alert"
             android:screenOrientation="portrait" />
+        
         <activity
             android:name=".GameOverActivity"
+            android:screenOrientation="portrait" />
+         <activity
+            android:name=".TakePhoto"
             android:screenOrientation="portrait" />
         <activity
             android:name=".StartGame"
