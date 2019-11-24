@@ -2,6 +2,7 @@ package com.example.tetrisg8;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,7 +13,7 @@ import android.widget.TextView;
 //Ventana principal en la que se jugará la partida
 
 public class MainActivity extends AppCompatActivity {
-
+    static Activity ventanaTablero;
     private FuncionamientoJuego start;
     private Tablero tab = new Tablero();
     private GameView gameView;
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ventanaTablero = this;
         this.caja_score = (TextView) findViewById(R.id.scoreBoxContent);
         //to set score
         //this.caja_score.setText(String.valueOf());
@@ -74,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void pantallaGameOver() {
-          Intent intent = new Intent(this,TakePhoto.class);
+        Intent intent = new Intent(this,TakePhoto.class);
         intent.putExtra("puntuacion", start.getPuntuacion());
         intent.putExtra("tiempo", start.getTiempoTranscurrido());
         //Mandamos la puntuacion a la ventana de game over

@@ -2,6 +2,7 @@ package com.example.tetrisg8;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -11,15 +12,17 @@ import android.widget.ImageView;
 
 
 public class TakePhoto extends AppCompatActivity {
+    static Activity ventanaFoto;
     private FuncionamientoJuego start;
-    int puntuacion;
-    int tiempo;
-    ImageView fotoUusario;
+    private int puntuacion;
+    private int tiempo;
+    private ImageView fotoUusario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.click_photo);
+        ventanaFoto = this;
         fotoUusario=(ImageView)findViewById(R.id.fotoUsuario);
         //Para poder cerrar el activity desde otra ventana
         puntuacion = getIntent().getExtras().getInt("puntuacion");

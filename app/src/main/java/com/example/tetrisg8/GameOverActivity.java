@@ -38,6 +38,10 @@ public class GameOverActivity extends AppCompatActivity implements View.OnClickL
         botonSalir.setOnClickListener(this);
         Button botonJugar = (Button) this.findViewById(R.id.botJugar);
         botonJugar.setOnClickListener(this);
+        //Si la puntuación alcanza los 250 puntos mostramos el botón de reiniciar partida
+        if(puntuacion >= 250){
+            botonJugar.setVisibility(View.VISIBLE);
+        }
         myDb = new DatabaseClass(this);
         btnviewAll = (Button) findViewById(R.id.button_viewAll);
         viewAll();
@@ -94,13 +98,20 @@ public class GameOverActivity extends AppCompatActivity implements View.OnClickL
     public void onClick (View v){
             if (v.getId() == R.id.botSalir) {
                 StartGame.ventanaInicio.finish();
+                MainActivity.ventanaTablero.finish();
                 Alert.ventanaNombre.finish();
+                //TakePhoto.ventanaFoto.finish();
                 finish();
 
             } else {
-                Intent goToMain = new Intent(this, StartGame.class);
-                startActivity(goToMain);
-                finish();
+                if(v.getId() == R.id.botJugar){
+                    /*Intent pantallaInicial = new Intent(this, StartGame.class);
+                    startActivity(pantallaInicial);*/
+                    Alert.ventanaNombre.finish();
+                    MainActivity.ventanaTablero.finish();
+                    //TakePhoto.ventanaFoto.finish();
+                    finish();
+                }
             }
         }
     }
