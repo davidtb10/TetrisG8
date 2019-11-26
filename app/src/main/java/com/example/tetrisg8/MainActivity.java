@@ -107,6 +107,11 @@ public class MainActivity extends AppCompatActivity {
             tab.bajarPieza("normal", 1);
         }
     }
+
+    public void piezaRandom(View view){
+        Pieza piezaRand = start.generarPieza(0);
+        tab.setEnjuego(piezaRand);
+    }
 }
 
 

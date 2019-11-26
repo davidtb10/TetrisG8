@@ -90,14 +90,14 @@ public class FuncionamientoJuego {
         if (tablero.getEnjuego() == null) {  //Si es la primera pieza
             pieza = generarPieza(0); // Se genera una pieza aleatoria
             tablero.setEnjuego(pieza);
-            piezaSiguiente = generarPieza();
+            piezaSiguiente = generarPiezaSiguiente();
             tablero.setPiezaSiguiente(piezaSiguiente);
             fichaView.setPiezaSiguiente(piezaSiguiente);
         } else {
             if (tablero.posibleBajar("normal")) { //Si es posible bajar la pieza
                 tablero.bajarPieza("normal", 1);
             } else {
-                if (tablero.ocupadoPosPieza(pieza)) { //Comprueba si es el final de la partida comprobando si hay otra pieza en su posición
+                if (tablero.ocupadoPosPieza(tablero.getEnjuego())) { //Comprueba si es el final de la partida comprobando si hay otra pieza en su posición
                     if(!namePlayer.isEmpty()){
                         db.insertData(namePlayer,String.valueOf(puntuacion),String.valueOf(df.format(tiempoTranscurrido)));
                     }
@@ -110,10 +110,10 @@ public class FuncionamientoJuego {
                     mainActivity.pantallaGameOver();
                     stopMediaPlayer();
                 } else {
-                    tablero.asignarPieza(pieza);
+                    tablero.asignarPieza(tablero.getEnjuego());
                     pieza = new Pieza(piezaSiguiente.getTipopieza(),tablero.getFilaInicial(), 0);
                     tablero.setEnjuego(pieza);
-                    piezaSiguiente = generarPieza(); // Se genera una pieza aleatoria
+                    piezaSiguiente = generarPiezaSiguiente(); // Se genera una pieza aleatoria
                     tablero.setPiezaSiguiente(piezaSiguiente);
                     fichaView.setPiezaSiguiente(piezaSiguiente);
                 }
@@ -186,13 +186,15 @@ public class FuncionamientoJuego {
     }
 
 
+    //Genera una nueva pieza con el desplazamiento de n columnas respecto de las coordenadas de la pieza
     public Pieza generarPieza(int desplazamientoColumnas) {
         int tipoPieza = (int) Math.floor(Math.random() * 6 + 1); //función para generar un numero aleatorio del 1 al 7
         Pieza pieza = new Pieza(tipoPieza, tablero.getFilaInicial(), desplazamientoColumnas);
         return pieza;
     }
 
-    public Pieza generarPieza(){
+    //Genera una nueva pieza con sus propias coordenadas
+    public Pieza generarPiezaSiguiente(){
         int tipoPieza = (int) Math.floor(Math.random() * 6 + 1); //función para generar un numero aleatorio del 1 al 7
         Pieza pieza = new Pieza(tipoPieza);
         return pieza;

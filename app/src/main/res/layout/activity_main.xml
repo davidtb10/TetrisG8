@@ -151,6 +151,18 @@
 
 
         <Button
+            android:id="@+id/buttonPiezaRandom"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="24dp"
+            android:onClick="piezaRandom"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.638"
+            app:layout_constraintStart_toEndOf="@+id/buttonGirar2"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="CAMBIAR" />
+
+        <Button
             android:id="@+id/buttonDown"
             android:layout_width="60dp"
             android:layout_height="60dp"
