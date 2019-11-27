@@ -17,6 +17,8 @@ public class TakePhoto extends AppCompatActivity {
     private int puntuacion;
     private int tiempo;
     private ImageView fotoUusario;
+    private DatabaseClass db;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +30,8 @@ public class TakePhoto extends AppCompatActivity {
         puntuacion = getIntent().getExtras().getInt("puntuacion");
         //Mostramos la puntuación
         tiempo = getIntent().getExtras().getInt("tiempo");
+        db = new DatabaseClass(this);
+
     }
 
     public void foto(View view) {
@@ -46,8 +50,17 @@ public class TakePhoto extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==123 && resultCode==RESULT_OK){
             Bundle datosRec=data.getExtras();
-            Bitmap imagen= (Bitmap) datosRec.get("data");
-            fotoUusario.setImageBitmap(imagen);
+            imagen = (Bitmap) datosRec.get("data");
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            imagen.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            byte imageInByte[] = stream.toByteArray();
+            db.updateData(imageInByte);
+            Intent goToMain = new Intent(this, GameOverActivity.class);
+            goToMain.putExtra("puntuacion", puntuacion);
+            goToMain.putExtra("tiempo", tiempo);
+            goToMain.putExtra("foto", imagen);
+            startActivity(goToMain);
+            finish();
         }
     }
 }
