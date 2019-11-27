@@ -8,13 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="AlertDialogCustom" parent="Theme.AppCompat.Light.Dialog.Alert">
-        <item name="android:textColor">@color/colorWhite</item>
-        <item name="android:textColorPrimary">#FFFFFF</item>
-
-
-    </style>
-
+   
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
