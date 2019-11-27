@@ -13,6 +13,8 @@ public class DatabaseClass extends SQLiteOpenHelper {
     public static final String COL_2 = "NAME";
     public static final String COL_3 = "SCORE";
     public static final String COL_4 = "TIME";
+    public static final String COL_5 = "IMAGE";
+
 
     public static final int num = 10;
 
@@ -25,7 +27,7 @@ public class DatabaseClass extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table " + TABLE_NAME +" (ID INTEGER PRIMARY KEY AUTOINCREMENT,NAME TEXT,SCORE TEXT,TIME TEXT)");
+        db.execSQL("create table " + TABLE_NAME +" (ID INTEGER PRIMARY KEY AUTOINCREMENT,NAME TEXT,SCORE TEXT,TIME TEXT,IMAGE BLOB)");
     }
 
     @Override
@@ -44,11 +46,26 @@ public class DatabaseClass extends SQLiteOpenHelper {
 
 
 
+
         long result = db.insert(TABLE_NAME,null ,contentValues);
         if(result == -1)
             return false;
         else
             return true;
+    }
+    public boolean updateData (byte[] image)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(COL_5,image);
+        Cursor res = db.rawQuery("select ID from "+TABLE_NAME+" ORDER BY "+ COL_1 + " DESC LIMIT 1 ",null);
+        int id = 0;
+        if(res.moveToFirst()){
+            id = res.getInt(0);
+        }
+        db.update(TABLE_NAME,contentValues,"ID = "+id,null);
+        return true;
     }
 
     public Cursor getAllData() {
@@ -59,4 +76,3 @@ public class DatabaseClass extends SQLiteOpenHelper {
 
 
 }
-
