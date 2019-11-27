@@ -99,14 +99,12 @@
         android:layout_height="match_parent"
         android:layout_weight="5"
         android:background="@drawable/b3"
-
-
         >
 
 
         <Button
             android:id="@+id/buttonLeft"
-            android:layout_width="60dp"
+            android:layout_width="50dp"
             android:layout_height="60dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="24dp"
@@ -117,9 +115,9 @@
 
         <Button
             android:id="@+id/buttonRight"
-            android:layout_width="60dp"
+            android:layout_width="50dp"
             android:layout_height="60dp"
-            android:layout_marginStart="60dp"
+            android:layout_marginStart="48dp"
             android:background="@drawable/righticon"
             android:onClick="moveRight"
             app:layout_constraintStart_toEndOf="@+id/buttonLeft"
@@ -127,9 +125,10 @@
 
         <Button
             android:id="@+id/buttonGirar2"
-            android:layout_width="60dp"
+            android:layout_width="50dp"
             android:layout_height="60dp"
             android:layout_marginTop="24dp"
+            android:layout_marginStart="3dp"
             android:background="@drawable/girariconizq"
             android:onClick="rotarInverso"
             app:layout_constraintEnd_toEndOf="parent"
@@ -139,9 +138,10 @@
 
         <Button
             android:id="@+id/buttonGirar"
-            android:layout_width="60dp"
+            android:layout_width="50dp"
             android:layout_height="60dp"
             android:layout_marginTop="24dp"
+            android:layout_marginStart="4dp"
             android:background="@drawable/giraricon"
             android:onClick="rotateAction"
             app:layout_constraintEnd_toEndOf="parent"
@@ -152,19 +152,21 @@
 
         <Button
             android:id="@+id/buttonPiezaRandom"
-            android:layout_width="60dp"
+            android:layout_width="50dp"
             android:layout_height="60dp"
+            android:layout_marginStart="3dp"
             android:layout_marginTop="24dp"
+            android:background="@drawable/exchange"
             android:onClick="piezaRandom"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.508"
-            app:layout_constraintStart_toEndOf="@+id/buttonGirar2"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="CAMBIAR" />
+            app:layout_constraintEnd_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/buttonGirar"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/buttonDown"
-            android:layout_width="60dp"
+            android:layout_width="50dp"
             android:layout_height="60dp"
             android:layout_marginTop="24dp"
             android:background="@drawable/down3"
@@ -177,4 +179,3 @@
 
 
 </LinearLayout>
-
