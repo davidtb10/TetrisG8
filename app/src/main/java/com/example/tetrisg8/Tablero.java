@@ -45,10 +45,10 @@ public class Tablero {
         while (i < 8) {
             switch (tipoPieza) {
                 case "normal":
-                    this.enjuego.cuadrados[i] += celdasBajar;
+                    this.enjuego.getCuadrados()[i] += celdasBajar;
                     break;
                 case "extra":
-                    this.piezaExtra.cuadrados[i] += celdasBajar;
+                    this.piezaExtra.getCuadrados()[i] += celdasBajar;
                     break;
             }
             i += 2;
@@ -64,12 +64,12 @@ public class Tablero {
         while (esposible && i < 8) {
             switch (tipoPieza) {
                 case "normal":
-                    filaSiguiente = enjuego.cuadrados[i] + 1;
-                    esposible = (filaSiguiente < 20) && (tablero[filaSiguiente][enjuego.cuadrados[i + 1]] == 0);
+                    filaSiguiente = enjuego.getCuadrados()[i] + 1;
+                    esposible = (filaSiguiente < 20) && (tablero[filaSiguiente][enjuego.getCuadrados()[i + 1]] == 0);
                     break;
                 case "extra":
-                    filaSiguiente = piezaExtra.cuadrados[i] + 1;
-                    esposible = (filaSiguiente < 20) && (tablero[filaSiguiente][piezaExtra.cuadrados[i + 1]] == 0);
+                    filaSiguiente = piezaExtra.getCuadrados()[i] + 1;
+                    esposible = (filaSiguiente < 20) && (tablero[filaSiguiente][piezaExtra.getCuadrados()[i + 1]] == 0);
                     break;
             }
             i += 2;
@@ -83,8 +83,8 @@ public class Tablero {
         int filaSiguiente;
         int i = 0;
         while ((i < 8) && (numeroCasillas != 1)) {
-            filaSiguiente = piezaExtra.cuadrados[i] + 1;
-            if ((filaSiguiente < 19) && (tablero[filaSiguiente + 1][piezaExtra.cuadrados[i + 1]] == 0)) {
+            filaSiguiente = piezaExtra.getCuadrados()[i] + 1;
+            if ((filaSiguiente < 19) && (tablero[filaSiguiente + 1][piezaExtra.getCuadrados()[i + 1]] == 0)) {
                 numeroCasillas = 2;
             } else {
                 numeroCasillas = 1;
@@ -102,8 +102,8 @@ public class Tablero {
         int i = 0;
         //Comprueba si es posible (si existe la celda y si esta vacia)
         while (esposible && i < 8) {
-            columna = enjuego.cuadrados[i + 1] - 1;
-            esposible = (columna > -1 && columna < 11) && (tablero[enjuego.cuadrados[i]][columna] == 0);
+            columna = enjuego.getCuadrados()[i + 1] - 1;
+            esposible = (columna > -1 && columna < 11) && (tablero[enjuego.getCuadrados()[i]][columna] == 0);
             i += 2;
         }
 
@@ -111,7 +111,7 @@ public class Tablero {
             //Si ha sido posible realiza el cambio en la pieza en juego
             i = 1;
             while (i < 8) {
-                this.enjuego.cuadrados[i]--;
+                this.enjuego.getCuadrados()[i]--;
                 i += 2;
             }
         }
@@ -125,8 +125,8 @@ public class Tablero {
         int i = 0;
         //Comprueba si es posible (si existe la celda y si esta vacia)
         while (esposible && i < 8) {
-            columna = enjuego.cuadrados[i + 1] + 1;
-            esposible = (columna > -1 && columna < 10) && (tablero[enjuego.cuadrados[i]][columna] == 0);
+            columna = enjuego.getCuadrados()[i + 1] + 1;
+            esposible = (columna > -1 && columna < 10) && (tablero[enjuego.getCuadrados()[i]][columna] == 0);
             i += 2;
         }
 
@@ -134,7 +134,7 @@ public class Tablero {
             //Si ha sido posible realiza el cambio en la pieza en juego
             i = 1;
             while (i < 8) {
-                this.enjuego.cuadrados[i]++;
+                this.enjuego.getCuadrados()[i]++;
                 i += 2;
             }
         }
@@ -144,17 +144,17 @@ public class Tablero {
     //Rotar pieza
     public boolean rotar(int grados) {
         //Si es la pieza es cuadrada no se rota
-        if (enjuego.tipopieza == 4)
+        if (enjuego.getTipopieza() == 4)
             return false;
         //Coordenadas del ultimo cuadrado de la pieza
-        int fila = enjuego.cuadrados[6];
-        int columna = enjuego.cuadrados[7];
+        int fila = enjuego.getCuadrados()[6];
+        int columna = enjuego.getCuadrados()[7];
         //cuadrados representados como puntos en una matriz
         Matrix matriz = new Matrix();
         matriz.setRotate(grados, fila, columna);
         float[] puntos = new float[]{0, 0, 0, 0, 0, 0, 0, 0};
         for (int i = 0; i < 8; i++) {
-            puntos[i] = enjuego.cuadrados[i];
+            puntos[i] = enjuego.getCuadrados()[i];
         }
         matriz.mapPoints(puntos);
         //comprobar si es posible
@@ -170,7 +170,7 @@ public class Tablero {
         //si ha sido posible guarda las nuevas coordenadas en pieza en juego
         if (esposible) {
             for (int i = 0; i < 8; i++) {
-                enjuego.cuadrados[i] = (int) puntos[i];
+                enjuego.getCuadrados()[i] = (int) puntos[i];
             }
         }
         return esposible;
@@ -192,9 +192,9 @@ public class Tablero {
         return filaInicial;
     }
 
-    public int lineasCompletas() { //comprobamos todas las filas para ver si alguna esté completa y devuelve el número de filas completas
+    //comprobamos todas las filas para ver si alguna esté completa y devuelve el número de filas completas, eliminandolas
+    public int lineasCompletas() {
         int nLineasCompletas = 0;
-        boolean todasFilasEliminadas = true;
         boolean lineaCompleta;
 
 
@@ -215,6 +215,7 @@ public class Tablero {
         return nLineasCompletas;
 
     }
+
 
     public void bajarLineas(int filaEliminar) {
         int filaAuxEliminada[];

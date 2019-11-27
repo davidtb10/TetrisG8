@@ -2,9 +2,10 @@ package com.example.tetrisg8;
 
 
 public class Pieza {
-    protected int tipopieza; // Variable que determinará el tipo de pieza
+    private int tipopieza; // Variable que determinará el tipo de pieza
     //posiciones de los cuadrados que forman la pieza(xfila,ycolumna):X1,Y1,...,X4,Y4
-    protected int[] cuadrados;
+    private int[] cuadrados;
+
 
     //Si es una pieza extra se genera desplazada 3 columnas hacia la izquierda
 
@@ -65,9 +66,6 @@ public class Pieza {
         }
     }
 
-    public void setCuadrados(int[] cuadrados) {
-        this.cuadrados = cuadrados;
-    }
 
     public int[] getCuadrados() {
         return cuadrados;

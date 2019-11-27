@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -20,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private FichaView fichaView;
     private TextView caja_score;
     private String namePlayer;
+    private Button botonPiezaRandom;
 
 
     @Override
@@ -28,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ventanaTablero = this;
         this.caja_score = (TextView) findViewById(R.id.scoreBoxContent);
+        this.botonPiezaRandom = (Button) findViewById(R.id.buttonPiezaRandom);
         //to set score
         //this.caja_score.setText(String.valueOf());
         tab.inicializarTablero();
@@ -98,8 +101,8 @@ public class MainActivity extends AppCompatActivity {
         start.stopMediaPlayer();
     }
 
-    public void actualizarPuntuacion() {
-        caja_score.setText(String.valueOf(start.getPuntuacion()));
+    public void actualizarPuntuacion(int puntuacion) {
+        caja_score.setText(String.valueOf(puntuacion));
     }
 
     public void DownAction(View view) {
@@ -108,9 +111,25 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void activarBotonPiezaRandom(){
+        botonPiezaRandom.setVisibility(View.VISIBLE);
+    }
+
+    public void desactivarBotonPiezaRandom(){
+        botonPiezaRandom.setVisibility(View.INVISIBLE);
+    }
+
+    public boolean botonRandomActivado(){
+        return botonPiezaRandom.getVisibility() == View.VISIBLE;
+    }
+
+
     public void piezaRandom(View view){
         Pieza piezaRand = start.generarPieza(0);
         tab.setEnjuego(piezaRand);
+        desactivarBotonPiezaRandom();
+        start.setTiempoBotonDesactivado(0);
+        start.reducirPuntuacionPiezaRandom();
     }
 }
 

@@ -64,15 +64,15 @@ public class GameView extends View {
         int anchoCelda = this.getWidth() / 10;
         int altoCelda = this.getHeight() / 20;
         int color = 0;
-        color = colorCelda(tablero.getEnjuego().tipopieza);
+        color = colorCelda(tablero.getEnjuego().getTipopieza());
         p.setColor(color);
         int fila;
         int columna;
         int ite = 0;
         while (ite < 8) {
-            fila = tablero.getEnjuego().cuadrados[ite];
+            fila = tablero.getEnjuego().getCuadrados()[ite];
             ite++;
-            columna = tablero.getEnjuego().cuadrados[ite];
+            columna = tablero.getEnjuego().getCuadrados()[ite];
             ite++;
             canvas.drawRect(columna * anchoCelda, fila * altoCelda, columna * anchoCelda + anchoCelda, fila * altoCelda + altoCelda, p);
         }
@@ -83,15 +83,15 @@ public class GameView extends View {
             int anchoCelda = this.getWidth() / 10;
             int altoCelda = this.getHeight() / 20;
             int color = 0;
-            color = colorCelda(tablero.getPiezaExtra().tipopieza);
+            color = colorCelda(tablero.getPiezaExtra().getTipopieza());
             p.setColor(color);
             int fila;
             int columna;
             int ite = 0;
             while (ite < 8) {
-                fila = tablero.getPiezaExtra().cuadrados[ite];
+                fila = tablero.getPiezaExtra().getCuadrados()[ite];
                 ite++;
-                columna = tablero.getPiezaExtra().cuadrados[ite];
+                columna = tablero.getPiezaExtra().getCuadrados()[ite];
                 ite++;
                 canvas.drawRect(columna * anchoCelda, fila * altoCelda, columna * anchoCelda + anchoCelda, fila * altoCelda + altoCelda, p);
             }

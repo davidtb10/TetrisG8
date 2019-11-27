@@ -33,6 +33,7 @@ public class FuncionamientoJuego {
     private DateFormat df;
     private MediaPlayer musica;
     private int cancion = 1;
+    private int tiempoBotonDesactivado = -1;
 
 
     public FuncionamientoJuego(GameView gameView, FichaView fichaView, Tablero tab, String namePlayer,Context context) {
@@ -63,7 +64,9 @@ public class FuncionamientoJuego {
                         lineasEliminadas = tablero.lineasCompletas();
                         cambiarColorPiezas(lineasEliminadas);
                         puntuacion += (30*lineasEliminadas);
-                        mainActivity.actualizarPuntuacion();
+                        controlarBotonRandom();
+                        mainActivity.actualizarPuntuacion(puntuacion);
+
 
                         fichaView.invalidate();
                         gameView.invalidate();
@@ -236,11 +239,45 @@ public class FuncionamientoJuego {
         musica.stop();
     }
 
+    //Se controla la activación o desactivación del botón en función de la puntuación y de la limitación de usos por tiempo del botón
+    public void controlarBotonRandom(){
+        //Si el botón está desactivado
+        if(!mainActivity.botonRandomActivado()){
+            //Si se puede permitir la acción de cambiar la pieza y no tiene que esperar para poder usar el botón
+            if(puntuacion >= 20 && (tiempoBotonDesactivado == -1 || tiempoBotonDesactivado == 40)){
+                mainActivity.activarBotonPiezaRandom();
+                tiempoBotonDesactivado =-1;
+            }else{
+                //Si se está esperando para poder usar el botón se incrementa el tiempo
+                if(tiempoBotonDesactivado != -1 && tiempoBotonDesactivado < 40) {
+                    tiempoBotonDesactivado++;
+                }
+            }
+        }else{//Si el botón esta activado
+            //Si no se puede cambiar la pieza debido a la puntuación, o hay que esperar para poder usar el botón
+            if(puntuacion < 20 || (tiempoBotonDesactivado != -1 && tiempoBotonDesactivado < 40)){
+                mainActivity.desactivarBotonPiezaRandom();
+            }
+        }
+
+    }
+
+    public void reducirPuntuacionPiezaRandom(){
+        if(puntuacion >= 20) {
+            puntuacion -= 20;
+        }
+    }
+
     public int getPuntuacion() {
         return puntuacion;
     }
     public int getTiempoTranscurrido() {
         return tiempoTranscurrido;
     }
+
+    public void setTiempoBotonDesactivado(int tiempoBotonDesactivado) {
+        this.tiempoBotonDesactivado = tiempoBotonDesactivado;
+    }
+
 
 }

@@ -34,15 +34,15 @@ public class FichaView extends View {
         int anchoCelda = this.getWidth() / 5;
         int altoCelda = this.getHeight() / 10;
         int color = 0;
-        color = colorCelda(piezaSiguiente.tipopieza);
+        color = colorCelda(piezaSiguiente.getTipopieza());
         p.setColor(color);
         int fila;
         int columna;
         int ite = 0;
         while (ite < 8) {
-            fila = piezaSiguiente.cuadrados[ite];
+            fila = piezaSiguiente.getCuadrados()[ite];
             ite++;
-            columna = piezaSiguiente.cuadrados[ite];
+            columna = piezaSiguiente.getCuadrados()[ite];
             ite++;
             //Deja 8 celdas vacías por arriba para aparecer centrada
             canvas.drawRect(columna * anchoCelda, fila * altoCelda, columna * anchoCelda + anchoCelda, fila * altoCelda + altoCelda, p);
