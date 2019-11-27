@@ -10,6 +10,7 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.ImageView;
 
+import java.io.ByteArrayOutputStream;
 
 public class TakePhoto extends AppCompatActivity {
     static Activity ventanaFoto;
@@ -18,6 +19,7 @@ public class TakePhoto extends AppCompatActivity {
     private int tiempo;
     private ImageView fotoUusario;
     private DatabaseClass db;
+     Bitmap imagen;
 
 
     @Override
