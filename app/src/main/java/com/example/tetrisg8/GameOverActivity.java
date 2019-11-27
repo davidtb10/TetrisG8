@@ -87,7 +87,7 @@ public class GameOverActivity extends AppCompatActivity implements View.OnClickL
         //Impedimos que se pueda salir de la ventana al pulsar el botón de atrás del movil
     }
 
-    public void showMessage(String title, String Message) {
+    public void showMessage() {
         Cursor res = myDb.getAllData();
   cont=0;
 
