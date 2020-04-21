@@ -12,9 +12,14 @@ public class Tablero {
     private int filaInicial;
 
     public void inicializarTablero() {
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 17; i++) {
             for (int j = 0; j < 10; j++) {
                 tablero[i][j] = 0;
+            }
+        }
+        for (int i = 17; i < 20; i++) {
+            for (int j = 0; j < 10; j++) {
+                tablero[i][j] = (int) (Math.random()*7);
             }
         }
         filaInicial = 0;
